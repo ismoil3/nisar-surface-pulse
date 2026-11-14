@@ -14,6 +14,7 @@ export function ViewBar({ ds, s, set, cu, eventStory, onCuExit, onCuEnter }) {
   const xr = s.mode === "swipe" && s.xray;
   const layers = LAYERS.filter((l) => !l.expert && (!l.needsOptical || (hasPhotos && !xr)) && (!l.needsMotion || (ds.motion && s.mode === "single")));
   const pol = xr && s.pol === "photo" ? "rgb" : s.pol;
+  if (cu) return <div className="viewbar"><CloseupBar s={s} set={set} onExit={onCuExit} onPhotos={ds.event?.clear ? () => set({ mode: "swipe", pol: "photo", xray: false }) : null} /></div>;
   return (
     <div className="viewbar">
       <div className="vb-modes" role="tablist" aria-label={t("step1")}>
@@ -23,7 +24,7 @@ export function ViewBar({ ds, s, set, cu, eventStory, onCuExit, onCuEnter }) {
           </button>
         ))}
       </div>
-      {cu ? <CloseupBar s={s} set={set} onExit={onCuExit} onPhotos={ds.event?.clear ? () => set({ mode: "swipe", pol: "photo", xray: false }) : null} /> : s.mode !== "change" && !(eventStory && s.mode === "story") && (
+      {s.mode !== "change" && !(eventStory && s.mode === "story") && (
         <div className="vb-layers" role="tablist" aria-label={t("step2")}>
           {layers.map((l) => (
             <button key={l.id} role="tab" aria-selected={pol === l.id} className={pol === l.id ? "on" : ""} onClick={() => set({ pol: l.id })}>{t(l.label)}</button>
@@ -82,22 +83,14 @@ export function Dock({ ds, s, set, playing, togglePlay, which, setWhich, sound, 
   );
 }
 
-/** On the map in the 10 m close-up: before / compare / after, and the colour layers. */
+/** On the map in the 10 m close-up: before / compare / after, real photos, back. (The colour layers stay in the right panel.) */
 function CloseupBar({ s, set, onExit, onPhotos }) {
-  const tog = (k, label, sw) => (
-    <button className={`vb-tog${s[k] ? " on" : ""}`} onClick={() => set({ [k]: !s[k] })} aria-pressed={!!s[k]}><i style={{ background: sw }} />{t(label)}</button>
-  );
   return (
     <>
       <div className="vb-layers" role="tablist" aria-label={t("cuTitle")}>
         {CU_VIEWS.map(([id, label]) => (
           <button key={id} role="tab" aria-selected={s.cuView === id} className={s.cuView === id ? "on" : ""} onClick={() => set({ cuView: id })}>{t(label)}</button>
         ))}
-      </div>
-      <div className="vb-layers vb-togs">
-        {tog("cuFlood", "cuFloodShort", "linear-gradient(90deg,#288cff 50%,#ff4632 50%)")}
-        {tog("cuHidden", "cuHiddenShort", "#b4b4b4")}
-        {tog("cuSeason", "cuSeasonShort", "#ffcd00")}
       </div>
       {onPhotos && <button className="vb-exit" onClick={onPhotos}>📷 {t("cuPhotos")}</button>}
       <button className="vb-exit" onClick={onExit}>{t("cuExit")}</button>
@@ -115,13 +108,12 @@ export function EventDock({ ds, cu, onPick }) {
   const aset = new Set(cu ? cu.after_dates : ev.after.map((i) => d[i].date));
   const evAt = d.findIndex((x) => x.date > ev.date);
   return (
-    <div className="dock evdock" role="group" aria-label={t("date")}>
+    <div className="dock evdock" role="group" aria-label={t("date")} title={t("evdHint")}>
+      <div className="evd-key" aria-hidden="true">
+        <b><i className="mk-bef" />{t("evdBefore", { n: bset.size })}</b>
+        <b><i className="mk-aft" />{t("evdAfter", { n: aset.size })}</b>
+      </div>
       <div className="dock-main">
-        <div className="dock-date">
-          <b><i className="mk-bef" /> {t("evdBefore", { n: bset.size })}</b>
-          <b><i className="mk-aft" /> {t("evdAfter", { n: aset.size })}</b>
-          <span>{t("evdHint")}</span>
-        </div>
         <div className="dock-ticks">
           {d.map((x, i) => {
             const [day, mon] = fmtDate(x.date, true).split(" ");

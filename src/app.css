@@ -326,3 +326,10 @@ dialog h2 { font-size: 26px; font-weight: 800; }
 .evdock .dock-ticks button.evt { position: relative; }
 .evdock .dock-ticks button.evt::before { content: ""; position: absolute; left: -3px; top: -5px; bottom: 14px; width: 2px; border-radius: 2px; background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
 @media (max-width: 760px) { .evdock .dock-date span { display: none; } .vb-togs { display: none; } }
+
+/* compact flood timeline: key on the left, passes on the right, one line */
+.evdock { padding: 8px 12px; gap: 12px; }
+.evd-key { flex: none; display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
+.evd-key b { display: flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
+.evdock .dock-ticks small { font-size: 10px; }
+@media (max-width: 760px) { .evd-key { display: none; } }
