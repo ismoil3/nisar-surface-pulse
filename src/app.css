@@ -308,3 +308,21 @@ dialog h2 { font-size: 26px; font-weight: 800; }
 .cl-key .k-t { background: #ff8a3d; } .cl-key .k-p { background: #3ce1ff; height: 9px; width: 4px; } .cl-key .k-n { background: #c6ff3d; height: 8px; width: 3px; }
 .report-btn { margin-top: 12px; align-self: flex-start; }
 .dock-sound { padding: 8px 10px; font-size: 16px; line-height: 1; }
+
+/* ---------- flood: close-up bar and event timeline on the map ---------- */
+.vb-togs { gap: 4px; }
+.vb-tog { display: flex; align-items: center; gap: 6px; }
+.vb-tog i { width: 12px; height: 12px; border-radius: 3px; opacity: .35; }
+.vb-tog.on { color: var(--text) !important; background: #ffffff14 !important; }
+.vb-tog.on i { opacity: 1; }
+.vb-exit { border: 1px solid var(--line); background: var(--glass); color: var(--text); border-radius: 999px; padding: 9px 14px; font-weight: 600; cursor: pointer; backdrop-filter: blur(12px); }
+.vb-exit.go { background: var(--accent); color: #0b1200; border-color: var(--accent); }
+.evdock .dock-date b { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.evdock .dock-date span { flex-basis: 100%; font-size: 12px; }
+.evdock i.mk-bef, .evdock i.mk-aft { display: inline-block; width: 18px; height: 6px; border-radius: 3px; }
+.mk-bef { background: #9aa6c8; } .mk-aft { background: #3ce1ff; }
+.evdock .dock-ticks button.bef i { background: #9aa6c8; }
+.evdock .dock-ticks button.aft i { background: #3ce1ff; box-shadow: 0 0 8px #3ce1ff88; }
+.evdock .dock-ticks button.evt { position: relative; }
+.evdock .dock-ticks button.evt::before { content: ""; position: absolute; left: -3px; top: -5px; bottom: 14px; width: 2px; border-radius: 2px; background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+@media (max-width: 760px) { .evdock .dock-date span { display: none; } .vb-togs { display: none; } }

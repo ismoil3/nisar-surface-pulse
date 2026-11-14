@@ -21,7 +21,7 @@ import River from "./components/River.jsx";
 import Report from "./components/Report.jsx";
 import ClimateCard from "./components/ClimateCard.jsx";
 import { beat, levels, saveSound, unlockSound } from "./lib/pulse.js";
-import { ActTab, AnswerPanel, Dock, Guide, ViewBar, WhyTab } from "./components/Stage.jsx";
+import { ActTab, AnswerPanel, Dock, EventDock, Guide, ViewBar, WhyTab } from "./components/Stage.jsx";
 import { LayerHelp } from "./components/Controls.jsx";
 import { storyFor } from "./lib/stories.js";
 import { LANGS, fmtInt, initialLang, placeName, rich, saveLang, setLang, t, tr } from "./lib/i18n.jsx";
@@ -876,9 +876,9 @@ export default function App() {
               </nav>
               {ds && (
                 <div className="mapdock">
-                  <ViewBar ds={ds} s={s} set={set} cu={cu} eventStory={!!ds.event} />
+                  <ViewBar ds={ds} s={s} set={set} cu={cu} eventStory={!!ds.event} onCuExit={() => { set({ cu: false }); fitSite(); }} onCuEnter={ds.event?.closeup ? () => openCloseup() : null} />
                   {dock && <Dock ds={ds} s={s} set={(p) => { setPlaying(false); set(p); }} playing={playing} togglePlay={togglePlay} which={which} setWhich={setWhich} sound={sound} toggleSound={toggleSound} />}
-                  {cu && <button className="primary cu-back" onClick={() => { set({ cu: false }); fitSite(); }}>{t("cuExit")}</button>}
+                  {ds.event && (cu || eventStory) && <EventDock ds={ds} cu={cu} onPick={(i) => { setPlaying(false); set({ mode: "single", pol: "rgb", k: i }); if (cu) fitSite(); }} />}
                 </div>
               )}
               {outside && <div className="toast" role="status">{t("outside")}</div>}

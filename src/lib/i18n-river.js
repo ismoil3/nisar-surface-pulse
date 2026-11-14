@@ -60,6 +60,9 @@ export const RIVER = {
     repLimits: "Radar pictures are 60 m pixels averaged from 10–20 m NISAR data. Older passes are PROVISIONAL products, the newest are VALIDATED. We measured the difference between the two versions on one pass: about 0.6 dB, smaller than the changes reported here.",
     repSources: "Sources", repLink: "Interactive version",
     repSpot: "Slope, cm", repDam: "Dam area, cm", repLevel: "Rogun level, m (est.)", repHv: "Fields, HV", repHh: "Fields, HH",
+    cuFloodShort: "Flood colours", cuHiddenShort: "Hidden", cuSeasonShort: "Rice harvest", cuOpenShort: "10 m close-up",
+    evdBefore: "{n} passes before", evdAfter: "{n} passes after",
+    evdHint: "The map compares the average of all passes before the flood with the average after it. Click a pass to see it alone.",
     rClimate: "Weather",
   },
 
@@ -121,6 +124,9 @@ export const RIVER = {
     repLimits: "Радарные снимки — пиксели 60 м, усреднённые из данных NISAR 10–20 м. Старые пролёты — продукты PROVISIONAL, самые новые — VALIDATED. Мы измерили разницу между двумя версиями на одном пролёте: около 0,6 дБ, это меньше описанных здесь изменений.",
     repSources: "Источники", repLink: "Интерактивная версия",
     repSpot: "Склон, см", repDam: "Район плотины, см", repLevel: "Уровень Рогуна, м (оценка)", repHv: "Поля, HV", repHh: "Поля, HH",
+    cuFloodShort: "Цвета паводка", cuHiddenShort: "Скрытое", cuSeasonShort: "Уборка риса", cuOpenShort: "Крупный план 10 м",
+    evdBefore: "{n} пролётов до", evdAfter: "{n} пролётов после",
+    evdHint: "Карта сравнивает среднее всех пролётов до паводка со средним после него. Нажмите на пролёт, чтобы увидеть его отдельно.",
     rClimate: "Погода",
   },
 
@@ -182,6 +188,9 @@ export const RIVER = {
     repLimits: "Тасвирҳои радар пикселҳои 60 м мебошанд, ки аз маълумоти 10–20 м-и NISAR миёна гирифта шудаанд. Гузаришҳои кӯҳна маҳсулоти PROVISIONAL, навтаринҳо VALIDATED мебошанд. Мо фарқи ду версияро дар як гузариш чен кардем: тақрибан 0,6 дБ, ки аз тағйироти дар ин ҷо зикршуда хурдтар аст.",
     repSources: "Манбаъҳо", repLink: "Версияи интерактивӣ",
     repSpot: "Нишебӣ, см", repDam: "Атрофи сарбанд, см", repLevel: "Сатҳи Роғун, м (тахмин)", repHv: "Киштзор, HV", repHh: "Киштзор, HH",
+    cuFloodShort: "Рангҳои обхезӣ", cuHiddenShort: "Пинҳон", cuSeasonShort: "Ҳосили шолӣ", cuOpenShort: "Наздик-намо 10 м",
+    evdBefore: "{n} гузариш пеш", evdAfter: "{n} гузариш пас",
+    evdHint: "Харита миёнаи ҳамаи гузаришҳои пеш аз обхезиро бо миёнаи пас аз он муқоиса мекунад. Барои дидани як гузариш онро пахш кунед.",
     rClimate: "Обу ҳаво",
   },
 };

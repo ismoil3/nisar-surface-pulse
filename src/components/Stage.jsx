@@ -5,15 +5,15 @@ import { MODES, LAYERS } from "./Controls.jsx";
 import { fmtDate } from "../lib/nisar.js";
 import { t } from "../lib/i18n.jsx";
 import Actions from "./Actions.jsx";
+import { CU_VIEWS } from "./EventCard.jsx";
 
 /** View (what changed / film / before-after / signal change) and picture (radar / colour / photo / …), on the map. */
-export function ViewBar({ ds, s, set, cu, eventStory }) {
+export function ViewBar({ ds, s, set, cu, eventStory, onCuExit, onCuEnter }) {
   const modes = MODES.filter((m) => s.expert || !m.expert);
   const hasPhotos = ds.optical.some(Boolean);
   const xr = s.mode === "swipe" && s.xray;
   const layers = LAYERS.filter((l) => !l.expert && (!l.needsOptical || (hasPhotos && !xr)) && (!l.needsMotion || (ds.motion && s.mode === "single")));
   const pol = xr && s.pol === "photo" ? "rgb" : s.pol;
-  if (cu) return null;
   return (
     <div className="viewbar">
       <div className="vb-modes" role="tablist" aria-label={t("step1")}>
@@ -23,7 +23,7 @@ export function ViewBar({ ds, s, set, cu, eventStory }) {
           </button>
         ))}
       </div>
-      {s.mode !== "change" && !(eventStory && s.mode === "story") && (
+      {cu ? <CloseupBar s={s} set={set} onExit={onCuExit} /> : s.mode !== "change" && !(eventStory && s.mode === "story") && (
         <div className="vb-layers" role="tablist" aria-label={t("step2")}>
           {layers.map((l) => (
             <button key={l.id} role="tab" aria-selected={pol === l.id} className={pol === l.id ? "on" : ""} onClick={() => set({ pol: l.id })}>{t(l.label)}</button>
@@ -33,6 +33,7 @@ export function ViewBar({ ds, s, set, cu, eventStory }) {
           )}
         </div>
       )}
+      {!cu && eventStory && s.mode === "story" && onCuEnter && <button className="vb-exit go" onClick={onCuEnter}>🔍 {t("cuOpenShort")}</button>}
     </div>
   );
 }
@@ -77,6 +78,61 @@ export function Dock({ ds, s, set, playing, togglePlay, which, setWhich, sound, 
         </div>
       </div>
       {single && toggleSound && <button className={`dock-sound${sound ? " on" : ""}`} onClick={toggleSound} aria-pressed={sound} title={t("sndHint")} aria-label={t(sound ? "sndOn" : "sndOff")}>{sound ? "🔊" : "🔇"}</button>}
+    </div>
+  );
+}
+
+/** On the map in the 10 m close-up: before / compare / after, and the colour layers. */
+function CloseupBar({ s, set, onExit }) {
+  const tog = (k, label, sw) => (
+    <button className={`vb-tog${s[k] ? " on" : ""}`} onClick={() => set({ [k]: !s[k] })} aria-pressed={!!s[k]}><i style={{ background: sw }} />{t(label)}</button>
+  );
+  return (
+    <>
+      <div className="vb-layers" role="tablist" aria-label={t("cuTitle")}>
+        {CU_VIEWS.map(([id, label]) => (
+          <button key={id} role="tab" aria-selected={s.cuView === id} className={s.cuView === id ? "on" : ""} onClick={() => set({ cuView: id })}>{t(label)}</button>
+        ))}
+      </div>
+      <div className="vb-layers vb-togs">
+        {tog("cuFlood", "cuFloodShort", "linear-gradient(90deg,#288cff 50%,#ff4632 50%)")}
+        {tog("cuHidden", "cuHiddenShort", "#b4b4b4")}
+        {tog("cuSeason", "cuSeasonShort", "#ffcd00")}
+      </div>
+      <button className="vb-exit" onClick={onExit}>{t("cuExit")}</button>
+    </>
+  );
+}
+
+/**
+ * Timeline of a sudden event (flood): every pass, the ones averaged into "before" and "after", and the event day.
+ * The maps compare the two averages, so the timeline is shown, not dragged; a click opens that single pass.
+ */
+export function EventDock({ ds, cu, onPick }) {
+  const d = ds.m.dates, ev = ds.event;
+  const bset = new Set(cu ? cu.before_dates : ev.before.map((i) => d[i].date));
+  const aset = new Set(cu ? cu.after_dates : ev.after.map((i) => d[i].date));
+  const evAt = d.findIndex((x) => x.date > ev.date);
+  return (
+    <div className="dock evdock" role="group" aria-label={t("date")}>
+      <div className="dock-main">
+        <div className="dock-date">
+          <b><i className="mk-bef" /> {t("evdBefore", { n: bset.size })}</b>
+          <b><i className="mk-aft" /> {t("evdAfter", { n: aset.size })}</b>
+          <span>{t("evdHint")}</span>
+        </div>
+        <div className="dock-ticks">
+          {d.map((x, i) => {
+            const [day, mon] = fmtDate(x.date, true).split(" ");
+            const cls = bset.has(x.date) ? "bef" : aset.has(x.date) ? "aft" : "";
+            return (
+              <button key={x.date} className={`${cls}${i === evAt ? " evt" : ""}`} onClick={() => onPick(i)} title={fmtDate(x.date)}>
+                <i /><small>{day} {mon}</small>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

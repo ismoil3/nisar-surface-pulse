@@ -182,7 +182,7 @@ export const cornerBounds = (c) => [
   [Math.max(...c.map((p) => p[0])), Math.max(...c.map((p) => p[1]))],
 ];
 
-const CU_VIEWS = [["before", "cuBefore"], ["swipe", "cuSwipe"], ["after", "cuAfter"]];
+export const CU_VIEWS = [["before", "cuBefore"], ["swipe", "cuSwipe"], ["after", "cuAfter"]];
 
 /** The 10 m close-up of the lower valley: before/after pictures, the flood colours and where they are. */
 export function CloseupCard({ ds, s, set, story, onPlace, onExit }) {
