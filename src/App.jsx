@@ -191,14 +191,25 @@ export default function App() {
     () => (ds && s.mode === "change" ? changeProduct(ds, s.kA, s.kB, s.cpol, s.thr) : null),
     [ds, s.mode, s.kA, s.kB, s.cpol, s.thr]
   );
+  // flood site, before / after with real photos: the monsoon photos next to the radar passes are cloudy,
+  // so the clearest photo before and after the event is shown instead (clearly labelled; can be switched off)
+  const [pairOff, setPairOff] = useState(false);
+  const pairOn = !!(ds?.event?.clear && !cu && s.mode === "swipe" && s.pol === "photo" && !(s.mode === "swipe" && s.xray) && !pairOff);
+  useEffect(() => { if (s.mode !== "swipe" || s.pol !== "photo") setPairOff(false); }, [s.mode, s.pol]);
+  // two-date views need two different dates (a shared link or a date picked in "Watch it happen" can leave A = B)
+  useEffect(() => {
+    if (!ds || !["swipe", "change", "story"].includes(s.mode) || s.xray || s.kA !== s.kB) return;
+    const n0 = ds.m.dates.length, ev = ds.event;
+    setS((o) => ({ ...o, kA: ev ? ev.kBefore : 0, kB: ev ? ev.kAfter : n0 - 1 }));
+  }, [ds, s.mode, s.kA, s.kB, s.xray]);
   const swipe = useMemo(
-    () => (cu ? (s.cuView === "swipe" ? { url: cu.url.before, corners: cu.corners, water: null, opticalTiles: null } : null) : ds && xr ? {
+    () => (pairOn ? { url: null, water: null, opticalTiles: opticalTiles(ds.event.clear.before) } : cu ? (s.cuView === "swipe" ? { url: cu.url.before, corners: cu.corners, water: null, opticalTiles: null } : null) : ds && xr ? {
       url: null, water: null, opticalTiles: ds.optical[s.kB] ? opticalTiles(ds.optical[s.kB]) : null,
     } : ds && s.mode === "swipe" ? {
       url: radarUrl(ds, s.kA, s.pol), water: s.showWater ? ds.water[s.kA] : null,
       opticalTiles: s.pol === "photo" && ds.optical[s.kA] ? opticalTiles(ds.optical[s.kA]) : null,
     } : null),
-    [ds, cu, s.cuView, xr, s.mode, s.kA, s.kB, s.pol, s.showWater]
+    [ds, cu, s.cuView, xr, s.mode, s.kA, s.kB, s.pol, s.showWater, pairOn]
   );
   // the clearest photo of the whole series (for cloudy places, as a labelled reference)
   const clearIdx = useMemo(() => {
@@ -209,14 +220,15 @@ export default function App() {
   }, [ds]);
   const refOn = s.clearRef && clearIdx != null && s.mode === "single";
   const optK = refOn ? clearIdx : kMain;
-  const optMain = ds && !cu && s.mode !== "change" && !xr && s.pol === "photo" ? ds.optical[optK] : null;
+  const optMain = ds && !cu && s.mode !== "change" && !xr && s.pol === "photo" ? (pairOn ? ds.event.clear.after : ds.optical[optK]) : null;
   // the cloudiest photo currently on screen (to warn the visitor and offer the radar)
-  const cloudy = !ds || cu || s.mode === "change" || s.mode === "story" || xr || s.pol !== "photo" ? 0
+  const cloudy = !ds || cu || pairOn || s.mode === "change" || s.mode === "story" || xr || s.pol !== "photo" ? 0
     : Math.max(ds.optical[optK]?.cloud_pct ?? 0, s.mode === "swipe" ? ds.optical[s.kA]?.cloud_pct ?? 0 : 0);
   // cloud cover of the photo on each pass, and how many were cloudy (≥30%)
   const clouds = useMemo(() => ds && ds.optical.map((o) => o?.cloud_pct ?? null), [ds]);
   const nCloudy = clouds ? clouds.filter((c) => c != null && c >= 30).length : 0;
-  const opticalStack = useMemo(() => ds && ds.optical.map((o) => (o ? opticalTiles(o) : null)), [ds]);
+  // the two clearest photos before / after an event are kept after the per-date photos (index n and n + 1)
+  const opticalStack = useMemo(() => ds && [...ds.optical, ...(ds.event?.clear ? [ds.event.clear.before, ds.event.clear.after] : [])].map((o) => (o ? opticalTiles(o) : null)), [ds]);
   const frameReadyRef = useRef(null);
   const stats = useMemo(() => ds && areaStats(ds.m), [ds]);
   const story = useMemo(() => storyFor(ds?.id, lang), [ds, lang]);
@@ -666,7 +678,15 @@ export default function App() {
   const fitSite = () => ds && setView({ bounds: siteBounds(ds), n: Date.now() });
   const fmt = (i) => fmtDate(m.dates[i].date);
   const cuLegend = cu && s.cuFlood ? <> · <span className="sw flood" /> {t("cuWetShort")} · <span className="sw rock" /> {t("cuDebrisShort")}</> : null;
-  const badge = !ds ? null : cu ? (
+  const badge = !ds ? null : pairOn ? (
+    <>
+      <div className="ab">
+        <span>◀ 📷 <b>{fmtDate(ds.event.clear.before.date, true)}</b> · ☁️ {ds.event.clear.before.cloud_pct}%</span>
+        <span>📷 <b>{fmtDate(ds.event.clear.after.date, true)}</b> · ☁️ {ds.event.clear.after.cloud_pct}% ▶</span>
+      </div>
+      <div>{tr("pairNote", { ev: fmtDate(ds.event.date, true) })} <button className="link" onClick={() => setPairOff(true)}>{t("pairOff")}</button></div>
+    </>
+  ) : cu ? (
     s.cuView === "swipe"
       ? <><div className="ab"><span>◀ {t("cuBefore")}</span><span>{t("cuAfter")} ▶</span></div><div>{t("cuBadge", { px: cu.pixel_m })}{cuLegend}</div></>
       : <><b>{t(s.cuView === "before" ? "cuBefore" : "cuAfter")}</b> · {t("cuBadge", { px: cu.pixel_m })}{cuLegend}</>
@@ -850,7 +870,7 @@ export default function App() {
               wdiffCorners={cu?.corners ?? mo?.corners}
               extras={cuExtras}
               opticalStack={opticalStack}
-              opticalIndex={optMain ? optK : null}
+              opticalIndex={optMain ? (pairOn ? ds.optical.length + 1 : optK) : null}
               frameReadyRef={frameReadyRef}
               view={view}
               context={ds && s.showContext ? ds.context : null}
@@ -877,7 +897,7 @@ export default function App() {
               {ds && (
                 <div className="mapdock">
                   <ViewBar ds={ds} s={s} set={set} cu={cu} eventStory={!!ds.event} onCuExit={() => { set({ cu: false }); fitSite(); }} onCuEnter={ds.event?.closeup ? () => openCloseup() : null} />
-                  {dock && <Dock ds={ds} s={s} set={(p) => { setPlaying(false); set(p); }} playing={playing} togglePlay={togglePlay} which={which} setWhich={setWhich} sound={sound} toggleSound={toggleSound} />}
+                  {dock && !pairOn && <Dock ds={ds} s={s} set={(p) => { setPlaying(false); setPairOff(true); set(p); }} playing={playing} togglePlay={togglePlay} which={which} setWhich={setWhich} sound={sound} toggleSound={toggleSound} />}
                   {ds.event && (cu || eventStory) && <EventDock ds={ds} cu={cu} onPick={(i) => { setPlaying(false); set({ mode: "single", pol: "rgb", k: i }); if (cu) fitSite(); }} />}
                 </div>
               )}

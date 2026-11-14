@@ -177,8 +177,12 @@ async function loadEvent(m, base) {
       closeup = { ...c, url: Object.fromEntries(Object.entries(c.layers).map(([k, f]) => [k, abs(cb + f)])) };
     } catch { closeup = null; }
   }
+  // optional: the clearest optical photo before and after the event (scripts/find-clear-pair.mjs)
+  let clear = null;
+  try { const r = await fetch(base + "clear_pair.json"); if (r.ok) clear = await r.json(); } catch { clear = null; }
+  if (!clear?.before || !clear?.after) clear = null;
   return {
-    ...ev, series, before, after, closeup,
+    ...ev, series, before, after, closeup, clear,
     kBefore: pair[0] >= 0 ? pair[0] : before.at(-1) ?? 0,
     kAfter: pair[1] >= 0 ? pair[1] : after[0] ?? m.dates.length - 1,
     overlay: ev.flood_map_png ? abs(base + ev.flood_map_png) : ev.change_png ? abs(base + ev.change_png) : null,

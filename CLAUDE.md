@@ -14,6 +14,7 @@ Science checked against NASA resources: [docs/NASA_RESOURCES.md](docs/NASA_RESOU
 - React 18.3.1 + Vite 5.4.11, maplibre-gl 4.7.1, chart.js 4.4.1, react-router-dom 6.28.0 (added 2026-11-14 with the user's OK). No other runtime dependencies.
 - `npm run dev`, then Cmd+Shift+R in the browser. `npm run build` must pass before finishing any change.
 - Data scripts: `npm run optical -- <site>`, `npm run context -- <site>`, `npm run insar -- <site>`, `sh scripts/rgb-webp.sh <site>`.
+- `node scripts/find-clear-pair.mjs <event site> [from]` → `clear_pair.json` (clearest HLS photo before and after the event, scored on the close-up area; used by the photo before / after on event sites).
 - `node scripts/find-climate.mjs` → `public/data/climate.json` (NASA POWER daily T and rain for 3 grid cells; a single-day rain outlier is moved to `suspect`, never silently changed). `scripts/river_profile.py --osm data-raw/river/osm.json --dem data-raw/dem` → `public/data/river/profile.json`.
 - New NISAR dates (Python venv with numpy h5py pillow fsspec aiohttp pyproj tifffile imagecodecs scipy scikit-image): `scripts/nisar_gcov.py` (pictures, `--check` against existing PNGs), `scripts/nisar_water.py` (lake outlines, `--calibrate` first), `scripts/nisar_farm.py`. Always reproduce an existing date before adding new ones, and report the agreement.
 

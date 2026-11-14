@@ -63,6 +63,7 @@ export const RIVER = {
     cuFloodShort: "Flood colours", cuHiddenShort: "Hidden", cuSeasonShort: "Rice harvest", cuOpenShort: "10 m close-up",
     evdBefore: "{n} passes before", evdAfter: "{n} passes after",
     evdHint: "The map compares the average of all passes before the flood with the average after it. Click a pass to see it alone.",
+    pairNote: "Clearest photos of the valley before and after the flood of {ev} (NASA HLS, searched from March to November); the monsoon photos next to the radar passes are mostly cloud.", pairOff: "show the photos next to the radar dates", cuPhotos: "Real photos",
     rClimate: "Weather",
   },
 
@@ -127,6 +128,7 @@ export const RIVER = {
     cuFloodShort: "Цвета паводка", cuHiddenShort: "Скрытое", cuSeasonShort: "Уборка риса", cuOpenShort: "Крупный план 10 м",
     evdBefore: "{n} пролётов до", evdAfter: "{n} пролётов после",
     evdHint: "Карта сравнивает среднее всех пролётов до паводка со средним после него. Нажмите на пролёт, чтобы увидеть его отдельно.",
+    pairNote: "Самые ясные фото долины до и после паводка {ev} (NASA HLS, поиск с марта по ноябрь); фото муссона рядом с датами радара почти все в облаках.", pairOff: "показать фото рядом с датами радара", cuPhotos: "Настоящие фото",
     rClimate: "Погода",
   },
 
@@ -191,6 +193,7 @@ export const RIVER = {
     cuFloodShort: "Рангҳои обхезӣ", cuHiddenShort: "Пинҳон", cuSeasonShort: "Ҳосили шолӣ", cuOpenShort: "Наздик-намо 10 м",
     evdBefore: "{n} гузариш пеш", evdAfter: "{n} гузариш пас",
     evdHint: "Харита миёнаи ҳамаи гузаришҳои пеш аз обхезиро бо миёнаи пас аз он муқоиса мекунад. Барои дидани як гузариш онро пахш кунед.",
+    pairNote: "Софтарин аксҳои водӣ пеш ва пас аз обхезии {ev} (NASA HLS, ҷустуҷӯ аз март то ноябр); аксҳои муссон дар наздикии санаҳои радар қариб ҳама абрнок мебошанд.", pairOff: "аксҳои наздик ба санаҳои радарро нишон диҳед", cuPhotos: "Аксҳои воқеӣ",
     rClimate: "Обу ҳаво",
   },
 };

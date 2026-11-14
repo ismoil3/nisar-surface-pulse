@@ -1,0 +1,20 @@
+{
+ "area": "closeup",
+ "searched": [
+  "2026-03-01",
+  "2026-11-12"
+ ],
+ "event": "2026-08-26",
+ "before": {
+  "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+  "date": "2026-05-24",
+  "cloud_pct": 2,
+  "days_from_event": -94
+ },
+ "after": {
+  "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+  "date": "2026-09-21",
+  "cloud_pct": 2,
+  "days_from_event": 26
+ }
+}

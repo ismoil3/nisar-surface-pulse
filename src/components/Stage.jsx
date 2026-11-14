@@ -23,7 +23,7 @@ export function ViewBar({ ds, s, set, cu, eventStory, onCuExit, onCuEnter }) {
           </button>
         ))}
       </div>
-      {cu ? <CloseupBar s={s} set={set} onExit={onCuExit} /> : s.mode !== "change" && !(eventStory && s.mode === "story") && (
+      {cu ? <CloseupBar s={s} set={set} onExit={onCuExit} onPhotos={ds.event?.clear ? () => set({ mode: "swipe", pol: "photo", xray: false }) : null} /> : s.mode !== "change" && !(eventStory && s.mode === "story") && (
         <div className="vb-layers" role="tablist" aria-label={t("step2")}>
           {layers.map((l) => (
             <button key={l.id} role="tab" aria-selected={pol === l.id} className={pol === l.id ? "on" : ""} onClick={() => set({ pol: l.id })}>{t(l.label)}</button>
@@ -83,7 +83,7 @@ export function Dock({ ds, s, set, playing, togglePlay, which, setWhich, sound, 
 }
 
 /** On the map in the 10 m close-up: before / compare / after, and the colour layers. */
-function CloseupBar({ s, set, onExit }) {
+function CloseupBar({ s, set, onExit, onPhotos }) {
   const tog = (k, label, sw) => (
     <button className={`vb-tog${s[k] ? " on" : ""}`} onClick={() => set({ [k]: !s[k] })} aria-pressed={!!s[k]}><i style={{ background: sw }} />{t(label)}</button>
   );
@@ -99,6 +99,7 @@ function CloseupBar({ s, set, onExit }) {
         {tog("cuHidden", "cuHiddenShort", "#b4b4b4")}
         {tog("cuSeason", "cuSeasonShort", "#ffcd00")}
       </div>
+      {onPhotos && <button className="vb-exit" onClick={onPhotos}>📷 {t("cuPhotos")}</button>}
       <button className="vb-exit" onClick={onExit}>{t("cuExit")}</button>
     </>
   );
