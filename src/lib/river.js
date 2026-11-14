@@ -59,10 +59,13 @@ export async function loadRiver(sites) {
     return {
       date: d.date, validated: validated(d.granule),
       nurek: row.nurek_km2 ?? null, rogun, level, other,
+      nurekFlag: d.reservoirs?.nurek?.flag ?? null, nurekAdj: d.reservoirs?.nurek?.area_km2_adj ?? null,
       hv: f?.hv_median_db ?? null,
       pamir: weatherBefore(clim?.points.pamir, d.date), valley: weatherBefore(clim?.points.valley, d.date),
     };
   });
   // July to September in the valley: how hot and how dry the growing season was
-  return { profile, clim, steps, farm_km2: farm.m.farmland.farmland_km2, valleyDry: weatherRange(clim?.points.valley, "2026-07-01", "2026-09-30") };
+  // the second orbit's own first and last level, so a rise is never read across two orbits
+  const o2l = (o2?.dates ?? []).filter((x) => x.level_m_est != null && !x.flag);
+  return { o2: o2l.length ? { l0: o2l[0].level_m_est, l1: o2l.at(-1).level_m_est, d0: o2l[0].date, d1: o2l.at(-1).date } : null, profile, clim, steps, farm_km2: farm.m.farmland.farmland_km2, valleyDry: weatherRange(clim?.points.valley, "2026-07-01", "2026-09-30") };
 }

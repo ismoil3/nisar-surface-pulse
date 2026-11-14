@@ -569,6 +569,11 @@ export function inWater(geo, [x, y]) {
 
 // ---------- formatting ----------
 /** Date in the current interface language (see i18n.jsx). */
+/** "Fell sharply" farmland as text: a range when the newest passes come from another processing version. */
+export function harvestRange(f) {
+  const lo = f.harvested_km2_min, hi = f.harvested_km2, c = (x) => x.toFixed(1), pc = (x) => ((x / f.farmland_km2) * 100).toFixed(1);
+  return lo != null ? { km: `${Math.round(lo)}–${Math.round(hi)}`, pct: `${pc(lo)}–${pc(hi)}` } : { km: c(hi), pct: pc(hi) };
+}
 export const fmtDate = (iso, short) => fmtDateL(iso, short);
 export const signed = (x, dp = 1) => (x >= 0 ? "+" : "−") + Math.abs(x).toFixed(dp);
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DATA_ROOT, fmtDate } from "../lib/nisar.js";
+import { DATA_ROOT, fmtDate, harvestRange } from "../lib/nisar.js";
 import { storyFor } from "../lib/stories.js";
 import { getLang, t, tr } from "../lib/i18n.jsx";
 
@@ -18,7 +18,8 @@ export async function summarize({ id, m }) {
   if (m.dates.some((d) => d.reservoirs)) {
     out.kind = "water";
     out.res = Object.keys(m.dates.find((d) => d.reservoirs).reservoirs).map((r) => {
-      const v = m.dates.map((d) => d.reservoirs?.[r]?.area_km2 ?? null);
+      // a value flagged by the data check (e.g. rough water after rain) is not used for the season's change
+      const v = m.dates.map((d) => (d.reservoirs?.[r]?.flag ? null : d.reservoirs?.[r]?.area_km2 ?? null));
       const ok = v.filter((x) => x != null);
       return { r, series: v, a: ok[0], b: ok.at(-1) };
     });
@@ -69,8 +70,7 @@ function alerts(S, story) {
       out.push({ lvl: "warn", site: s.id, text: tr("alFlood", { place: story(s.id).cuPlaces?.[top.place] ?? top.place, w: top.wet_km2.toFixed(2), d: top.debris_km2.toFixed(2) }) });
     }
     if (s.m.farmland) {
-      const pct = (s.m.farmland.harvested_km2 / s.m.farmland.farmland_km2) * 100;
-      out.push({ lvl: "info", site: s.id, text: tr("alHarvest", { pct: pct.toFixed(1), b: fmtDate(s.m.dates.at(-1).date, true) }) });
+            out.push({ lvl: "info", site: s.id, text: tr("alHarvest", { pct: harvestRange(s.m.farmland).pct, b: fmtDate(s.m.dates.at(-1).date, true) }) });
     }
   }
   return out;
@@ -119,7 +119,7 @@ export default function Dashboard({ open, onClose, sites, onOpenSite }) {
                         <div><b>+{f1(Math.max(...s.farm.hv_median_db) - s.farm.hv_median_db[0])} {t("uDb")}</b><small>{t("dashCrops", { km: Math.round(s.m.farmland.farmland_km2) })}</small><Spark values={s.farm.hv_median_db} color="#a3e635" /></div>
                       )}
                       {s.farm && (
-                        <div><b>{f1(s.m.farmland.harvested_km2)} km²</b><small>{t("dashHarvest")}</small></div>
+                        <div><b>{harvestRange(s.m.farmland).km} km²</b><small>{t("dashHarvest")}</small></div>
                       )}
                       {s.closeup && (
                         <>

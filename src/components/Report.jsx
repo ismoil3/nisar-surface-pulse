@@ -1,7 +1,7 @@
 // One-page report for people who decide: the main sentence, the pictures, the numbers pass by pass,
 // why it changed, how sure we are and the sources. Light page made for paper; "Save as PDF" is the browser's print.
 import { useEffect, useState } from "react";
-import { DATA_ROOT, fmtDate } from "../lib/nisar.js";
+import { DATA_ROOT, fmtDate, harvestRange } from "../lib/nisar.js";
 import { STORY_ROUTES, routeOf } from "../lib/routes.js";
 import { storyFor } from "../lib/stories.js";
 import { loadClimate, loadRiver } from "../lib/river.js";
@@ -76,7 +76,7 @@ export default function Report({ sites, slug, lang, chooseLang, onBack }) {
   const d = m.dates, sh = (x) => fmtDate(x, true), labels = d.map((x) => sh(x.date));
   const motion = route.slug === "motion" ? D.sum.motion : null;
   const pt = motion ? null : climatePoint(D.clim, site.id);
-  let head, pics, charts = null, table = null, title = story.name || m.name;
+  let head, pics, charts = null, table = null, extraSure = null, title = story.name || m.name;
 
   if (motion) {
     title = t("lpMotionTitle");
@@ -89,15 +89,17 @@ export default function Report({ sites, slug, lang, chooseLang, onBack }) {
     table = { head: [t("repDate"), t("repSpot"), t("repDam")], rows: motion.dates.map((x, i) => [sh(x), sgn(spot[i]), sgn(dam[i])]) };
   } else if (route.slug === "water" && D.riv) {
     const S = D.riv.steps, nk = S.map((x) => x.nurek), pk = Math.max(...nk), ip = nk.indexOf(pk), lv = S.filter((x) => x.level != null);
-    head = tr("repWater", { a: num(nk[0]), pk: num(pk), dpk: sh(S[ip].date), b: num(nk.at(-1)), d1: sh(S.at(-1).date), l0: lv[0].level, l1: lv.at(-1).level });
+    const ok = [...S].reverse().find((x) => x.nurek != null && !x.nurekFlag), fl = S.find((x) => x.nurekFlag), l12 = lv.filter((x) => !x.other), o2 = D.riv.o2;
+    head = tr("repWater", { a: num(nk[0]), pk: num(pk), dpk: sh(S[ip].date), b: num(ok.nurek), d1: sh(ok.date), l0: l12[0].level, l1: l12.at(-1).level, m0: o2?.l0 ?? "–", m1: o2?.l1 ?? "–", dm: o2 ? sh(o2.d1) : "–" });
+    if (fl) extraSure = tr("rvS2flag", { d: sh(fl.date), v: num(fl.nurek), adj: num(fl.nurekAdj) });
     pics = [[base + d[0].rgb, fmtDate(d[0].date)], [base + d.at(-1).rgb, fmtDate(d.at(-1).date)]];
     charts = <><Mini title={`${t("res_nurek")}, ${t("uKm2")}`} values={nk} labels={labels} /><Mini title={t("repLevel")} values={S.map((x) => x.level)} labels={labels} color="#0e7490" digits={0} /></>;
     table = { head: [t("repDate"), `${t("res_nurek")}, ${t("uKm2")}`, `${t("res_rogun")}, ${t("uKm2")}`, t("repLevel"), t("repStatus")],
-      rows: S.map((x) => [sh(x.date), num(x.nurek), num(x.rogun) + (x.other ? " *" : ""), x.level ?? "–", t(x.validated ? "repVal" : "repProv")]),
+      rows: S.map((x) => [sh(x.date), num(x.nurek) + (x.nurekFlag ? " †" : ""), num(x.rogun) + (x.other ? " *" : ""), x.level ?? "–", t(x.validated ? "repVal" : "repProv")]),
       foot: S.some((x) => x.other) ? `* ${t("rvOther", { d: S.filter((x) => x.other).map((x) => sh(x.other)).join(", ") })}` : null };
   } else if (m.farmland && D.sum.farm) {
     const f = D.sum.farm, hv = f.hv_median_db, hh = f.hh_median_db, fl = m.farmland;
-    head = tr("repCrops", { km: Math.round(fl.farmland_km2), d: sgn(Math.max(...hv) - hv[0]), d0: sh(d[0].date), d1: sh(fl.harvested_by ?? d.at(-1).date), h: num(fl.harvested_km2), pct: num((fl.harvested_km2 / fl.farmland_km2) * 100) });
+    head = tr("repCrops", { km: Math.round(fl.farmland_km2), d: sgn(Math.max(...hv) - hv[0]), d0: sh(d[0].date), d1: sh(fl.harvested_by ?? d.at(-1).date), h: harvestRange(fl).km, pct: harvestRange(fl).pct });
     pics = [[base + d[0].rgb, fmtDate(d[0].date)], [base + d.at(-1).rgb, fmtDate(d.at(-1).date)]];
     charts = <><Mini title={`${t("repHv")}, ${t("uDb")}`} values={hv} labels={labels} color="#3f7d0a" digits={2} /><Mini title={`${t("repHh")}, ${t("uDb")}`} values={hh} labels={labels} color="#475569" digits={2} /></>;
     table = { head: [t("repDate"), `HV, ${t("uDb")}`, `HH, ${t("uDb")}`, t("repStatus")], rows: d.map((x, i) => [sh(x.date), num(hv[i], 2), num(hh[i], 2), t(validated(x.granule) ? "repVal" : "repProv")]) };
@@ -155,7 +157,7 @@ export default function Report({ sites, slug, lang, chooseLang, onBack }) {
 
         <div className="rep-cols">
           <section><h2>{t("repDo")}</h2><ul>{(story.actions ?? []).map(([ic, who, x]) => <li key={who}><b>{who}.</b> {x}</li>)}</ul></section>
-          <section><h2>{t("repSure")}</h2><ul>{sure.map((x) => <li key={x}>{x}</li>)}{!motion && <li>{t("repLimits")}</li>}</ul></section>
+          <section><h2>{t("repSure")}</h2><ul>{extraSure && <li>† {extraSure}</li>}{sure.map((x) => <li key={x}>{x}</li>)}{!motion && <li>{t("repLimits")}</li>}</ul></section>
         </div>
 
         <footer className="rep-foot">

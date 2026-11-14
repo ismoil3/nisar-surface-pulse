@@ -163,7 +163,7 @@
   }
  ],
  "sources": {
-  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "radar": "NISAR L2 GCOV (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1: experimental release X05026 to 2026-09-12, PROVISIONAL P05023 from 2026-09-24, VALIDATED P05036 from 2026-10-30",
   "dem": null
  },
  "event": {

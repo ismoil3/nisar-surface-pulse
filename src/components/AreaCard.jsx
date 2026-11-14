@@ -87,7 +87,7 @@ export default function AreaCard({ m, stats, kMain, kA, showA, onPick, note }) {
           return (
             <p key={r} className="insight newest">
               {tr("areaAfter", { name: resName(r), d: day(ib), list: pts.map(([v, i]) => `${v.toFixed(1)} (${day(i)})`).join(" → ") })}
-              {last < prev && <> {t("areaAfterDown")}</>}
+              {ds[pts.at(-1)[1]].reservoirs?.[r]?.flag ? <> {tr("areaAfterRough", { adj: ds[pts.at(-1)[1]].reservoirs[r].area_km2_adj?.toFixed(1) ?? "–" })}</> : last < prev && <> {t("areaAfterDown")}</>}
             </p>
           );
         })}

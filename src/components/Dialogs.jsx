@@ -102,6 +102,7 @@ export function AboutDialog({ open, onClose, m, story, insar, closeup, motion })
         <li>{t("l3", { px: m.pixel_m })}</li>
         <li>{t("lRes", { px: m.pixel_m })}</li>
         {hasGap && <li>{t("lGap")}</li>}
+        {m.dates.some((d) => /_X\d{5}_/.test(d.granule ?? "")) && <li>{tr("lExperimental", { n: m.dates.filter((d) => /_X\d{5}_/.test(d.granule ?? "")).length, d: fmtDate(m.dates.filter((d) => /_X\d{5}_/.test(d.granule ?? "")).at(-1).date) })}</li>}
         {m.dates.some((d) => d.validated) && <li>{tr("lValidated", { n: m.dates.filter((d) => d.validated).length, d: fmtDate(m.dates.find((d) => d.validated).date) })}</li>}
         {notes.map((d) => <li key={d.date}>{fmtDate(d.date)}: {tNote(d.note)}.</li>)}
       </ul>

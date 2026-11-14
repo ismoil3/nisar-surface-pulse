@@ -26,7 +26,7 @@ import { LayerHelp } from "./components/Controls.jsx";
 import { storyFor } from "./lib/stories.js";
 import { LANGS, fmtInt, initialLang, placeName, rich, saveLang, setLang, t, tr } from "./lib/i18n.jsx";
 import { placeList } from "./components/StoryCard.jsx";
-import { areaStats, changeProduct, fmtDate, loadDataset, lonLatToPixel, probeSites, opticalTiles, placesNearWater, polCompare, radarUrl, signed, siteBounds, waterDiff, PITCH_KM2 } from "./lib/nisar.js";
+import { harvestRange, areaStats, changeProduct, fmtDate, loadDataset, lonLatToPixel, probeSites, opticalTiles, placesNearWater, polCompare, radarUrl, signed, siteBounds, waterDiff, PITCH_KM2 } from "./lib/nisar.js";
 
 const DEFAULTS = {
   mode: "story", pol: "hh", cpol: "hh", k: 0, kA: 0, kB: 0, thr: 3,
@@ -309,7 +309,7 @@ export default function App() {
           apply: () => { set({ mode: "swipe", xray: false, pol: "rgb", kA: 0, kB: P }); setView({ ...fit, n: 3 }); } },
         { title: t("f4title"), text: t("f4text"),
           apply: () => { set({ mode: "single", pol: "rgb", k: P }); if (spot) { setPoint(spot); setOutside(false); setView({ center: spot, zoom: 12.5, n: 4 }); } } },
-        { title: t("f5title"), text: t("f5text", { a: day(P), h: Math.round(f.harvested_km2), pct: ((f.harvested_km2 / f.farmland_km2) * 100).toFixed(1), b: day(L) }),
+        { title: t("f5title"), text: t("f5text", { a: day(P), h: harvestRange(f).km, pct: harvestRange(f).pct, b: day(L) }),
           apply: () => { set({ mode: "change", expert: true, cpol: "hv", kA: P, kB: L, thr: 3 }); setView({ ...fit, n: 5 }); } },
         { title: t("f6title"), text: story.tourWhy,
           apply: () => { set({ mode: "single", expert: true, pol: "hv", k: P }); setView({ ...fit, n: 6 }); } },

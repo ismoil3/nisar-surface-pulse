@@ -156,6 +156,9 @@
   "method": "Farmland = slope < 2 deg (Copernicus DEM), median HH between -16 and -4 dB. Harvested = HV fell at least 3 dB from its summer peak by the last date. Hypothesis test, not a crop map.",
   "interpretation": "Over 696 km2 of flat farmland the median HV rose by about 1.3 dB from late June to early September (-18.6 to -17.4 dB) and HH by about 1.1 dB, consistent with crops (mainly cotton) growing taller and denser. The signal stays high through 13 Oct: cotton in Khatlon is picked by hand from September to November and the plants stay in the field, so no large harvest drop is expected yet. Only 25 km2 (3.6%) show an HV drop of 3 dB or more; treat these as candidate early-harvested or cleared fields, not a confirmed harvest map. No acquisition on 2 Aug (gap 21 Jul to 14 Aug).",
   "harvested_km2_team": 25.1,
-  "harvested_by": "2026-11-06"
+  "harvested_by": "2026-11-06",
+  "harvested_km2_min": 27.9,
+  "harvested_km2_mid": 40.9,
+  "harvested_note": "The last two passes are VALIDATED products (P05036), the summer peak is PROVISIONAL (P05023). Adding 0.2 dB (the HV offset we measured between the versions) to the new passes gives 40.9 km2, adding 0.6 dB (the HH offset) gives 27.9 km2; 13 Oct, same version as the peak: 26.3 km2. 17 km2 of the 54 are single 60 m pixels."
  }
 }

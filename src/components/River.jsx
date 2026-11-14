@@ -144,7 +144,10 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
   // inset: Rogun enlarged
   const IX = (km) => 835 + ((km - 10) / (rd.km + 2 - 10)) * 330, IY = (z) => 66 + ((1230 - z) / (1230 - 985)) * 150;
   const insetBed = P.pts.filter(([km]) => km >= 10 && km <= rd.km + 2);
-  const released = k > 0 && s.nurek != null && S[k - 1].nurek != null && s.nurek < S[k - 1].nurek - 0.5;
+  const rough = !!s.nurekFlag;
+  const lastOk = [...S].reverse().find((x) => x.nurek != null && !x.nurekFlag), flagged = S.find((x) => x.nurekFlag);
+  // a level from the second orbit is compared with that orbit's own first level
+  const base = s.other && D.o2 ? D.o2.l0 : level0, l12 = S.filter((x) => x.level != null && !x.other);
   const fieldKm = P.frames.vakhsh[1] - 12, fieldZ = P.pts.reduce((a, p) => (Math.abs(p[0] - fieldKm) < Math.abs(a[0] - fieldKm) ? p : a))[1];
   const dams = P.marks.filter((m) => m.kind === "dam" && !["rogun", "nurek"].includes(m.id));
 
@@ -243,7 +246,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
               <text x={X((nk.from_km + nk.to_km) / 2)} y={Y(nk.level_m) - 28} textAnchor="middle" className="v">{num(nurek)} {t("uKm2")}</text>
               <text x={X(fieldKm)} y={Y(fieldZ) - 58} textAnchor="middle" className="t g">{t("rvFields")}</text>
               <text x={X(fieldKm)} y={Y(fieldZ) - 40} textAnchor="middle" className="v g">HV {num(hv, 2)} {t("uDb")}</text>
-              {released && <text x={X(nd.km) + 18} y={Y(760)} className="note">↓ {t("rvReleased")}</text>}
+              {rough && <text x={X(nd.km) + 18} y={Y(760)} className="note">≈ {t("rvRough")}</text>}
             </g>
             {/* Nurek fullness meter (area, because its level cannot be read from the elevation map) */}
             <g transform={`translate(${X((nk.from_km + nk.to_km) / 2) - 45}, ${Y(nk.level_m) - 18})`} className="rv-meter" aria-hidden="true">
@@ -271,7 +274,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
                 <polygon points={`${IX(rd.km) - 4},${IY(level + 14)} ${IX(rd.km) + 4},${IY(level + 14)} ${IX(rd.km) + 22},216 ${IX(rd.km) - 12},216`} className="idam" />
               </g>
               <text x="849" y="88" className="it">🔍 {t("rvInset")}</text>
-              <text x="849" y="108" className="iv">{Math.round(level).toLocaleString("ru-RU")} {t("rvMUnit")} <tspan className="d">{level0 != null ? `${sgn(level - level0, 0)} ${t("rvMUnit")}` : ""}</tspan></text>
+              <text x="849" y="108" className="iv">{Math.round(level).toLocaleString("ru-RU")} {t("rvMUnit")} <tspan className="d">{base != null ? `${sgn(level - base, 0)} ${t("rvMUnit")}` : ""}</tspan></text>
               {level0 != null && <text x="849" y={IY(level0) + 14} className="ig">{t("rvStart", { d: fmtDate(s0.date, true) })}</text>}
             </g>
 
@@ -312,7 +315,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
           <span className="lp-chip">① {t("rvStep1")}</span>
           <h3>{t("res_rogun")}</h3>
           <p className="rv-big">{s.level != null ? Math.round(s.level).toLocaleString("ru-RU") : "–"}<small>{t("rvMUnit")}</small></p>
-          <p className="rv-sub">{s.level != null && level0 != null ? tr("rvC1", { d: sgn(s.level - level0, 0), a: num(s.rogun), d0: fmtDate(s0.date, true) }) : t("rvNoData")}</p>
+          <p className="rv-sub">{s.level != null && level0 != null ? tr("rvC1", { d: sgn(s.level - base, 0), a: num(s.rogun), d0: fmtDate(s.other && D.o2 ? D.o2.d0 : s0.date, true) }) : t("rvNoData")}</p>
           <Spark values={S.map((x) => x.level)} k={k} color="#3ce1ff" onPick={(i) => { setPlaying(false); go(i); }} />
           <button className="rv-link" onClick={() => onOpen("water", "mode=story")}>{t("rvSeeMap")} →</button>
         </article>
@@ -320,7 +323,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
           <span className="lp-chip">② {t("rvStep2")}</span>
           <h3>{t("res_nurek")}</h3>
           <p className="rv-big">{num(s.nurek)}<small>{t("uKm2")}</small></p>
-          <p className="rv-sub">{tr("rvC2", { d: sgn(s.nurek - S[first].nurek), pk: num(nkHi), dpk: fmtDate(S[peak].date, true), d0: fmtDate(S[first].date, true) })}</p>
+          <p className="rv-sub">{tr("rvC2", { d: sgn(s.nurek - S[first].nurek), pk: num(nkHi), dpk: fmtDate(S[peak].date, true), d0: fmtDate(S[first].date, true) })}{rough && <> {t("rvRough")}.</>}</p>
           <Spark values={nks} k={k} color="#7aa7ff" onPick={(i) => { setPlaying(false); go(i); }} />
           <button className="rv-link" onClick={() => onOpen("water", "mode=single&pol=rgb")}>{t("rvSeeMap")} →</button>
         </article>
@@ -350,8 +353,8 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
         <p className="lp-k">{t("rvSayK")}</p>
         <h2>{t("rvSayT")}</h2>
         <ol className="rv-list">
-          <li><b>{t("rvS1h")}</b><span>{tr("rvS1", { t: summer ? sgn(summer.pam) : "–", a: num(S[first].nurek), b: num(nkHi), l0: level0, l1: Math.max(...S.map((x) => x.level ?? 0)) })}</span></li>
-          <li><b>{t("rvS2h")}</b><span>{tr("rvS2", { pk: num(nkHi), dpk: fmtDate(S[peak].date, true), b: num(S.at(-1).nurek), d1: fmtDate(S.at(-1).date, true), t: S.at(-1).pamir ? sgn(S.at(-1).pamir.t) : "–" })}</span></li>
+          <li><b>{t("rvS1h")}</b><span>{tr("rvS1", { t: summer ? sgn(summer.pam) : "–", a: num(S[first].nurek), b: num(nkHi), l0: level0, l1: l12.at(-1)?.level, m0: D.o2?.l0 ?? "–", m1: D.o2?.l1 ?? "–", dm: D.o2 ? fmtDate(D.o2.d1, true) : "–" })}</span></li>
+          <li><b>{t("rvS2h")}</b><span>{tr("rvS2", { pk: num(nkHi), dpk: fmtDate(S[peak].date, true), b: num(lastOk.nurek), d1: fmtDate(lastOk.date, true), t: S.at(-1).pamir ? sgn(S.at(-1).pamir.t) : "–" })}{flagged && <> {tr("rvS2flag", { d: fmtDate(flagged.date, true), v: num(flagged.nurek), adj: num(flagged.nurekAdj) })}</>}</span></li>
           <li><b>{t("rvS3h")}</b><span>{tr("rvS3", { km: Math.round(D.farm_km2), d: sgn(hvHi - s0.hv, 1), p: dry ? num(dry.p, 0) : "–", tt: dry ? num(dry.t, 0) : "–" })}</span></li>
         </ol>
         <div className="lp-honest rv-honest">

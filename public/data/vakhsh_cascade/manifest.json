@@ -235,7 +235,10 @@
    "reservoirs": {
     "nurek": {
      "area_km2": 85.08,
-     "method": "app (scripts/nisar_water.py)"
+     "method": "app (scripts/nisar_water.py)",
+     "flag": "rough_water",
+     "area_km2_adj": 88.1,
+     "flag_note": "Pass after rain: the lake core is 2.8 dB and the shore land 2.4 dB brighter in HH than on 25 Oct. With both thresholds raised by 2 dB the outline is 88.1 km2 (25 Oct: 88.1). The lower area is probably rough water, not a lower lake."
     },
     "rogun": {
      "area_km2": null,

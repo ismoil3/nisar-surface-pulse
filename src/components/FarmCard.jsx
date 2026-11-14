@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import LineChart from "./LineChart.jsx";
 import Actions from "./Actions.jsx";
-import { fmtDate } from "../lib/nisar.js";
+import { fmtDate, harvestRange } from "../lib/nisar.js";
 import { getLang, t, tr } from "../lib/i18n.jsx";
 
 const f1 = (x) => (x == null ? "–" : x.toFixed(1));
@@ -84,8 +84,8 @@ export default function FarmCard({ ds, story, kMain, onPick, onGrowth, onHarvest
           <em>{t("farmRiseEm")}</em>
         </div>
         <div className="cut">
-          <b>{f1(f.harvested_km2)} km²</b>
-          <small>{t("farmCut", { pct: pct != null ? pct.toFixed(1) : "–" })}</small>
+          <b>{harvestRange(f).km} km²</b>
+          <small>{t("farmCut", { pct: pct != null ? harvestRange(f).pct : "–" })}</small>
           <em>{t("farmCutEm")}</em>
         </div>
       </div>

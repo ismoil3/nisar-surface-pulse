@@ -211,7 +211,7 @@ export const STORIES = {
       ],
     },
     // where the dam facts in this story come from (shown in "About the data")
-    facts: "Nurek: 300 m, built 1972–1980 (Structurae, Wikipedia); share of electricity (World Bank, ADB). Rogun: planned 335 m, up to 42,000 people resettled (World Bank expert panel 2014; AIIB project documents).",
+    facts: "Nurek: 300 m, built 1961–1980, first power in 1972 (Structurae, Wikipedia); share of electricity (World Bank, ADB). Rogun: planned 335 m, up to 42,000 people resettled (World Bank expert panel 2014; AIIB project documents).",
     media: [],
   },
   vakhsh: {
@@ -252,7 +252,7 @@ export const STORIES = {
       ],
       caveats: [
         "This is a test of an idea, not a crop map: 'farmland' here simply means flat land (slope under 2°) with a typical field echo.",
-        "By 6 November 54 km² (7.8%) show a big HV drop, twice as much as on 13 October (about 25 km²): the harvest is starting to show. They are still candidates for harvested or cleared fields, not confirmed on the ground.",
+        "By 6 November between 28 and 54 km² (4–8%) show a big HV drop; on 13 October it was about 25 km². The range is wide because the two newest passes come from a newer data version that reads 0.2–0.6 dB lower, and a third of the higher number is single pixels. So the harvest may be starting to show, but we cannot say it doubled. These are candidates, not confirmed on the ground.",
         "The rise of about 1 dB is small but consistent: the middle half of all fields (the green band) rose together.",
         "There is no pass between 21 July and 14 August (the NISAR data gap).",
       ],
@@ -294,7 +294,7 @@ export const STORIES = {
       ],
       caveats: [
         "Это проверка идеи, а не карта посевов: «поля» здесь — просто ровная земля (уклон меньше 2°) с типичным для поля эхом.",
-        "К 6 ноября 54 км² (7,8%) показывают сильное падение HV — вдвое больше, чем 13 октября (около 25 км²): уборка начинает быть заметной. Это по-прежнему кандидаты на убранные или расчищенные поля, не подтверждённые на месте.",
+        "К 6 ноября сильное падение HV показывают от 28 до 54 км² (4–8%); 13 октября было около 25 км². Разброс большой, потому что два последних пролёта взяты из более новой версии данных, которая даёт значения на 0,2–0,6 дБ ниже, а треть большего числа — одиночные пиксели. Возможно, уборка становится заметной, но сказать, что площадь удвоилась, нельзя. Это кандидаты, не подтверждённые на месте.",
         "Рост примерно на 1 дБ небольшой, но согласованный: средняя половина всех полей (зелёная полоса) росла вместе.",
         "С 21 июля по 14 августа пролётов нет (пробел в данных NISAR).",
       ],
@@ -336,7 +336,7 @@ export const STORIES = {
       ],
       caveats: [
         "Ин санҷиши фикр аст, на харитаи зироат: «киштзор» дар ин ҷо танҳо замини ҳамвор (нишебӣ камтар аз 2°) бо акси садои маъмулии майдон мебошад.",
-        "То 6 ноябр 54 км² (7,8%) пастшавии калони HV-ро нишон медиҳанд — ду баробар зиёдтар аз 13 октябр (тақрибан 25 км²): ҳосилғундорӣ намоён шуданро сар мекунад. Онҳо ҳанӯз номзадҳои майдонҳои ғундошта ё тозашуда мебошанд, на тасдиқшуда дар ҷой.",
+        "То 6 ноябр аз 28 то 54 км² (4–8%) пастшавии калони HV-ро нишон медиҳанд; 13 октябр тақрибан 25 км² буд. Фарқ калон аст, чунки ду гузариши охирин аз версияи навтари маълумот мебошанд, ки 0,2–0,6 дБ пасттар нишон медиҳад, ва сеяки рақами калонтар пикселҳои танҳо мебошанд. Шояд ҳосилғундорӣ намоён шуда истода бошад, аммо гуфта наметавонем, ки масоҳат ду баробар шуд. Инҳо номзадҳоянд, на тасдиқшуда дар ҷой.",
         "Афзоиши тақрибан 1 дБ хурд, вале мувофиқ аст: нисфи мобайнии ҳамаи майдонҳо (рахи сабз) якҷоя баланд шуд.",
         "Аз 21 июл то 14 август гузариш нест (холигии маълумоти NISAR).",
       ],

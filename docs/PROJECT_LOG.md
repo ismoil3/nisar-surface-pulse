@@ -36,6 +36,13 @@ Last updated: 2026-11-13.
 | Human impact, personal context | "We are from Tajikistan", resettlement, electricity, villages near water |
 
 ## Key decisions
+- **2026-11-14: data audit (every date, every headline number). Three corrections.**
+  - Checked for all 35 pictures: granule name matches date / track / frame, 12-day spacing (24 days only across NISAR's gap), files exist, ≥ 99.8% valid pixels; lake outlines rasterize to the stated areas within 0.3 km²; optical photos within ±6 days.
+  - **Nurek on 6 Nov (85.1 km²) is probably rough water, not a lower lake.** That pass followed rain (POWER: 12 mm in three days): the always-water core is 2.8 dB and the shore land 2.4 dB brighter in HH than on 25 Oct. With both thresholds raised by 2 dB the outline is 88.1 km² (25 Oct: 88.1). The value is flagged (`reservoirs.nurek.flag`, `area_km2_adj`) and no text says "released" any more.
+  - **"Harvested area doubled" was not supported.** The 3 dB test compares VALIDATED passes with a PROVISIONAL summer peak. Adding +0.2 dB (the HV offset we measured) gives 40.9 km², +0.6 dB gives 27.9 km²; 13 Oct was 26.3 km²; 17 of the 54 km² are single pixels. The app now shows 28–54 km² (`farmland.harvested_km2_min`).
+  - **Nepal's first 8 passes are from the experimental release (X05026), not PROVISIONAL** as the manifest said (X = eXperimental in NASA's CRID list). ASF has PROVISIONAL versions for 20 Jun–12 Sep; we streamed the 19 Aug one (`scripts/nisar_gcov.py --check`, 2 min) and it is identical on our grid after the 0 dB clip, so the team's pictures and flood maps stand. About now says so. 8 Jun exists only as X05026.
+  - Rogun's rise is no longer read across two orbits (track 12: 1115 → 1128 m; track 84: 1118 → 1131 m). Nurek dates corrected to 1961–1980 (first power 1972).
+  - Seen, not an error: the whole Rogun–Nurek frame is about 2 dB brighter on 13 Oct and 6 Nov (wet ground after rain). Change maps that use these dates show wide brightening that is weather.
 - **2026-11-14: four signature features, so the project is not a copy of the other teams' ideas** (we read 16 competing READMEs; before/after sliders, timelines and "honest limits" are everywhere).
   - **"One river, one pulse" (`#/river`, River.jsx):** the long profile of the Vakhsh, 256.5 km, 1179 → 368 m. `scripts/river_profile.py` chains 18 OSM ways (joins with gaps 0.74, 0.3, 0.07 km), samples the Copernicus DEM (lowest value within 90 m, non-rising downstream; this changed the raw DEM by < 0.3 m for 95% of points) and snaps six dams. The lakes and the fields share the same track-12 passes, so one timeline moves the Rogun level, the Nurek area and the crop HV median.
   - **Nurek level cannot be estimated:** the DEM shows Nurek as a flat lake at 900 m with 89 km²; our areas (74–90 km²) are mostly below that, so the shoreline was under water when the DEM was flown. We show Nurek's area only and draw its bottom as a guess (dashed). Rogun's level works because the DEM predates the filling.
@@ -128,9 +135,7 @@ Last updated: 2026-11-13.
 ## Open questions and team to-dos
 1. **Ahmad's photos/video:** put the files in `public/team/` and list them in `media` in `src/lib/stories.js`.
 2. **Native speakers** should read the Russian and Tajik text. Words to check: "наворбардорӣ", "тафсилоти тасвир", "Парвоз дар гирд".
-3. **Nepal granules:**
-   - The first pass (2026-06-08) predates the PROVISIONAL start (2026-06-17), and the first six granules carry `X05026`.
-   - Ask the data teammate what that means.
+3. **Nepal granules (answered 2026-11-14):** `X05026` = experimental release; PROVISIONAL versions exist for 20 Jun–12 Sep and the one we checked is identical. Optional: restream the other six (`data-raw/nepal_p_urls.txt`, 2 min each) to confirm all of them.
 4. **InSAR (done 2026-11-14, preliminary):** confirm the creeping slope (38.7634 N, 69.9185 E) from a second orbit (e.g. the descending track 020 / frame 069) and decide what the small patches next to the dam site are.
 5. **Validated data:** NISAR VALIDATED products exist from 2026-10-21. New passes would lengthen the series.
 6. **Possible extra validation:** compare the lake areas with NASA OPERA DSWx (30 m water maps; needs an Earthdata login).
