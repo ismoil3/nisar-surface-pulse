@@ -1,0 +1,52 @@
+/* ================= One-page report (light, made for A4 paper) ================= */
+.rep { position: fixed; inset: 0; z-index: 60; overflow: auto; background: #e9edf5; color: #131a2b; font: 13px/1.45 Onest, system-ui, sans-serif; }
+.rep-wait { padding: 30vh 16px; text-align: center; }
+.rep-bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 16px; background: #04060b; color: #eef2ff; }
+.rep-bar button, .rep-bar a { border: 1px solid #ffffff30; background: #ffffff10; color: #eef2ff; border-radius: 999px; padding: 7px 14px; font: 600 13px Onest, sans-serif; cursor: pointer; text-decoration: none; }
+.rep-bar .on { background: #eef2ff; color: #04060b; }
+.rep-bar .go { margin-left: auto; background: #c6ff3d; color: #0b1200; border-color: #c6ff3d; }
+.rep-tabs, .rep-langs { display: flex; gap: 6px; flex-wrap: wrap; }
+.rep-page { width: 210mm; max-width: 100%; min-height: 297mm; margin: 18px auto 40px; padding: 12mm 13mm; background: #fff; box-shadow: 0 20px 60px -20px #0b142a66; box-sizing: border-box; }
+.rep h1 { font: 800 27px/1.1 Geologica, Onest, sans-serif; margin: 2px 0 4px; color: #0a1020; letter-spacing: -.01em; text-transform: none; }
+.rep h2 { font: 700 12px Onest, sans-serif; letter-spacing: .09em; text-transform: uppercase; color: #0b63ce; margin: 12px 0 4px; }
+.rep p { margin: 0 0 6px; }
+.rep-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-end; border-bottom: 3px solid #0a1020; padding-bottom: 8px; }
+.rep-k { font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 11px; color: #0b63ce; }
+.rep-meta, .rep-made { color: #55607a; font-size: 12px; }
+.rep-made { text-align: right; white-space: nowrap; }
+.rep-lead { background: #f1f6ff; border-left: 4px solid #0b63ce; padding: 8px 12px; margin: 10px 0 4px; }
+.rep-lead h2 { margin-top: 0; }
+.rep-lead p { font-size: 15.5px; line-height: 1.4; margin: 0; }
+.rep-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 9mm; }
+.rep-pics { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.rep-pics.n1 { grid-template-columns: 1fr; }
+.rep-pics figure, .rep-mini { margin: 0; }
+.rep-pics div { position: relative; aspect-ratio: 1.25; overflow: hidden; border-radius: 6px; background: #0a1020; }
+.rep-pics img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rep-pics figcaption, .rep-mini figcaption { font-size: 11px; color: #55607a; margin-top: 2px; }
+.rep-mini figcaption { font-weight: 700; color: #131a2b; }
+.rep-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.rep-mini svg { width: 100%; height: auto; display: block; }
+.rep-mini .ax { font-size: 13px; fill: #55607a; }
+.rep table { width: 100%; border-collapse: collapse; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.rep th { text-align: left; font-weight: 700; border-bottom: 1.5px solid #0a1020; padding: 3px 4px; vertical-align: bottom; font-size: 10.5px; }
+.rep td { border-bottom: 1px solid #e3e8f2; padding: 2.5px 4px; }
+.rep ul { margin: 0; padding-left: 16px; }
+.rep li { margin-bottom: 3px; }
+.rep-small { font-size: 10.5px; color: #55607a; }
+.rep-foot { margin-top: 10px; border-top: 1px solid #c9d2e3; padding-top: 6px; font-size: 10.5px; color: #55607a; }
+.rep-foot p { margin: 0 0 2px; word-break: break-word; }
+.rep .cl-chart { max-width: 100%; }
+.rep .cl-chart .temp { stroke: #d9480f; } .rep .cl-chart .rain { fill: #0b63ce; } .rep .cl-chart .pass { stroke: #3f7d0a; }
+.rep .cl-chart .ax { fill: #55607a; } .rep .cl-chart .ax.t { fill: #d9480f; } .rep .cl-chart .ax.p { fill: #0b63ce; }
+.rep .cl-chart .zero { stroke: #c9d2e3; }
+@media (max-width: 700px) { .rep-cols { grid-template-columns: 1fr; } .rep-page { padding: 16px; } .rep-head { flex-direction: column; align-items: flex-start; } .rep-made { text-align: left; white-space: normal; } }
+@page { size: A4; margin: 0; }
+@media print {
+  html.rep-on, html.rep-on body { background: #fff !important; height: auto !important; overflow: visible !important; }
+  html.rep-on .shell, .rep-bar { display: none !important; }
+  .rep { position: static; overflow: visible; background: #fff; }
+  /* one sheet: lay the page out wider and shrink it, so every language fits on a single A4 */
+  .rep-page { margin: 0; box-shadow: none; zoom: .78; width: calc(210mm / .78); min-height: 0; }
+  .rep * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

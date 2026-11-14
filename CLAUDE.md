@@ -14,10 +14,11 @@ Science checked against NASA resources: [docs/NASA_RESOURCES.md](docs/NASA_RESOU
 - React 18.3.1 + Vite 5.4.11, maplibre-gl 4.7.1, chart.js 4.4.1, react-router-dom 6.28.0 (added 2026-11-14 with the user's OK). No other runtime dependencies.
 - `npm run dev`, then Cmd+Shift+R in the browser. `npm run build` must pass before finishing any change.
 - Data scripts: `npm run optical -- <site>`, `npm run context -- <site>`, `npm run insar -- <site>`, `sh scripts/rgb-webp.sh <site>`.
+- `node scripts/find-climate.mjs` → `public/data/climate.json` (NASA POWER daily T and rain for 3 grid cells; a single-day rain outlier is moved to `suspect`, never silently changed). `scripts/river_profile.py --osm data-raw/river/osm.json --dem data-raw/dem` → `public/data/river/profile.json`.
 - New NISAR dates (Python venv with numpy h5py pillow fsspec aiohttp pyproj tifffile imagecodecs scipy scikit-image): `scripts/nisar_gcov.py` (pictures, `--check` against existing PNGs), `scripts/nisar_water.py` (lake outlines, `--calibrate` first), `scripts/nisar_farm.py`. Always reproduce an existing date before adding new ones, and report the agreement.
 
 ## Design (2026-11-14 redesign)
-- Routes (HashRouter, because `base: "./"` must work on GitHub Pages): `#/` landing, `#/map/<water|motion|crops|flood>?<view>` map (`src/lib/routes.js`). Old `#site=…` links are converted in `main.jsx`.
+- Routes (HashRouter, because `base: "./"` must work on GitHub Pages): `#/` landing, `#/map/<water|motion|crops|flood>?<view>` map (`src/lib/routes.js`), `#/river` the Vakhsh long profile ("one river, one pulse", `River.jsx`, the project's signature view), `#/report/<story>` printable one-page report (`Report.jsx`, light A4, must stay on ONE page in every language: check with CDP `Page.printToPDF`). Old `#site=…` links are converted in `main.jsx`.
 - Map page = layout A (chosen by the user): full map; story chips top-left; view bar + timeline dock at the bottom; right "answer" panel with tabs What changed / Why / Can we trust it / What to do / Lab; one step-by-step **Guide** (replaced the old tour + scroll story); place answers float next to the click; phone = bottom sheet. Parts in `src/components/Stage.jsx`.
 - App look lives in `src/app.css`, loaded after `src/styles.css` (tokens: ink #04060b, accent lime #c6ff3d). Timeline dock on the map in "Watch it happen".
 - Fonts: **Geologica** (headings) + **Onest** (text). Both render Tajik ҳ ҷ ӣ ӯ қ ғ. Unbounded, Rubik and Manrope do NOT (they fall back to a serif); `document.fonts.check` wrongly says they do, so check a screenshot before changing fonts.
@@ -37,6 +38,8 @@ Science checked against NASA resources: [docs/NASA_RESOURCES.md](docs/NASA_RESOU
 4. **Be honest about limits:** data are PROVISIONAL; 60 m pixels averaged from 10–20 m; NISAR data gap 2026-07-27..08-10; in Nepal most brightening is seasonal; at 60 m the sure flood signal is about 0.3 km² of mud near Betrawati, the 10 m close-up shows 1.9 km² wetter channel vs 0.8 km² in the quiet test (~2.5×); farmland "harvested" 25 km² are candidates only.
 5. **Pixel geometry:** the radar grid is regular in UTM (`epsg_source`). Use `toPixF` / `pixelToLonLat` in nisar.js (exact UTM); never go back to a lon/lat affine fit (it was off by up to 12 px).
 6. Dam facts and their sources live in `STORIES.vakhsh_cascade.facts`; do not add numbers without a source.
+8. **River page and weather:** Rogun's level is a DEM estimate (±10 m). Nurek's level is NOT known (the DEM already shows a lake at 900 m, our areas are mostly below its 89 km²): show its area only. POWER values are a ~50 km model cell, not a station; the link between lakes, power and fields is our reading, not a flow measurement. Text for these features: `src/lib/i18n-river.js`.
+9. Sound (`src/lib/pulse.js`) stays off until the visitor turns it on.
 7. New Map/UI features must be checked in a real browser (see below), in at least one non-English language.
 
 ## Browser verification

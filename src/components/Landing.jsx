@@ -102,7 +102,33 @@ function Echo({ kind }) {
   );
 }
 
-export default function Landing({ sites, lang, chooseLang, onOpen, onTour }) {
+/** Small static side view of the Vakhsh (the full, moving one is the "river" page). */
+function RiverTeaser({ onRiver }) {
+  const [P, setP] = useState(null);
+  useEffect(() => { fetch(`${DATA_ROOT}river/profile.json`).then((r) => r.json()).then(setP).catch(() => {}); }, []);
+  if (!P) return null;
+  const X = (km) => 10 + (km / P.length_km) * 580, Y = (z) => 16 + ((1260 - z) / 960) * 200;
+  const dam = (id) => P.marks.find((m) => m.id === id), nk = P.nurek_dem, rd = dam("rogun"), below = P.pts.find((p) => p[0] > dam("nurek").km + 1.5)[1];
+  const bed = P.pts.map(([km, z]) => (km >= nk.from_km && km <= nk.to_km ? [km, nk.level_m - (nk.level_m - below - 30) * Math.pow((km - nk.from_km) / (nk.to_km - nk.from_km), 1.25)] : [km, z]));
+  const line = bed.map(([km, z]) => `${X(km).toFixed(1)},${Y(z).toFixed(1)}`).join(" ");
+  const lake = (a, b, lv) => `M${X(a)},${Y(lv)} L${X(b)},${Y(lv)} ` + bed.filter(([km, z]) => km >= a && km <= b && z <= lv).reverse().map(([km, z]) => `L${X(km)},${Y(z)}`).join(" ") + " Z";
+  const f = P.frames.vakhsh, plants = [];
+  for (let km = f[0] + 4; km < f[1] - 1; km += 4) plants.push([X(km), Y(P.pts.reduce((a, p) => (Math.abs(p[0] - km) < Math.abs(a[0] - km) ? p : a))[1])]);
+  return (
+    <button className="lp-river-pic" onClick={onRiver} aria-label={t("lpRiverBtn")}>
+      <svg viewBox="0 0 600 240" aria-hidden="true">
+        <defs><linearGradient id="lr-w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3ce1ff" /><stop offset="1" stopColor="#1668c9" /></linearGradient></defs>
+        <path d={lake(14, rd.km, 1131)} fill="url(#lr-w)" /><path d={lake(nk.from_km, nk.to_km, nk.level_m)} fill="url(#lr-w)" />
+        <polygon points={`10,232 ${line} 590,232`} fill="#18213c" /><polyline points={line} fill="none" stroke="#8fa0cf" strokeWidth="1.4" />
+        <polyline points={line} className="rv-flow on" />
+        {plants.map(([x, y], i) => <path key={i} d={`M${x},${y} v-13 M${x},${y - 6} l-3.5,-3 M${x},${y - 9} l3.5,-3`} stroke="#c6ff3d" strokeWidth="1.5" fill="none" strokeLinecap="round" />)}
+      </svg>
+      <div className="steps"><span><b>① {t("res_rogun")}</b>{t("rvStep1")}</span><span><b>② {t("res_nurek")}</b>{t("rvStep2")}</span><span><b>③ {t("rvFields")}</b>{t("rvStep3")}</span></div>
+    </button>
+  );
+}
+
+export default function Landing({ sites, lang, chooseLang, onOpen, onTour, onRiver }) {
   const root = useRef(null);
   const [sum, setSum] = useState(null);
   useEffect(() => { if (sites && !sum) Promise.all(sites.map(summarize)).then(setSum).catch(() => setSum([])); }, [sites, sum]);
@@ -150,6 +176,7 @@ export default function Landing({ sites, lang, chooseLang, onOpen, onTour }) {
           <div className="lp-ctas">
             <button className="lp-btn" onClick={() => onOpen("water", "mode=story")}>{t("lpStart")} →</button>
             <button className="lp-btn ghost" onClick={onTour}>▶ {t("lpTour")}</button>
+            <button className="lp-btn ghost" onClick={onRiver}>〰 {t("lpRiverK")}</button>
           </div>
         </div>
         <p className="lp-beam-cap" aria-hidden="true">{t("lpBeamCap")}</p>
@@ -192,6 +219,17 @@ export default function Landing({ sites, lang, chooseLang, onOpen, onTour }) {
             </button>
           ))}
         </div>
+      </section>
+
+      {/* ---------- one river, one pulse ---------- */}
+      <section className="lp-sec lp-river">
+        <div>
+          <p className="lp-k" data-reveal>{t("lpRiverK")}</p>
+          <h2 data-reveal>{t("lpRiverT")}</h2>
+          <p className="lp-lead" data-reveal>{rich(t("lpRiverS", { km: 257 }))}</p>
+          <button className="lp-btn" data-reveal onClick={onRiver}>{t("lpRiverBtn")} →</button>
+        </div>
+        <div data-reveal><RiverTeaser onRiver={onRiver} /></div>
       </section>
 
       {/* ---------- before / after ---------- */}

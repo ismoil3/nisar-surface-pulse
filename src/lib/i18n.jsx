@@ -4,6 +4,7 @@
 // **double asterisks** mark bold text; render such strings with rich().
 import { Fragment } from "react";
 import { EXTRA } from "./i18n-extra.js";
+import { RIVER } from "./i18n-river.js";
 
 export const LANGS = [
   { id: "en", label: "EN", name: "English" },
@@ -684,7 +685,7 @@ const DICT = {
   },
 };
 
-for (const l of Object.keys(EXTRA)) Object.assign(DICT[l], EXTRA[l]);
+for (const l of Object.keys(EXTRA)) Object.assign(DICT[l], EXTRA[l], RIVER[l]);
 
 function dniRu(n) {
   const a = n % 10, b = n % 100;

@@ -291,3 +291,20 @@ dialog h2 { font-size: 26px; font-weight: 800; }
 .dock-ticks .vdot { color: var(--accent); font-size: 8px; margin-right: 3px; vertical-align: 1px; }
 
 .insight.newest { border-left: 3px solid var(--accent); padding-left: 10px; }
+
+/* ---------- weather card (NASA POWER) ---------- */
+.cl-chart { width: 100%; height: auto; display: block; margin: 6px 0 2px; }
+.cl-chart .temp { fill: none; stroke: #ff8a3d; stroke-width: 1.6; stroke-linejoin: round; }
+.cl-chart .rain { fill: #3ce1ff; opacity: .8; }
+.cl-chart .pass { stroke: #c6ff3d; stroke-width: 2; }
+.cl-chart .zero { stroke: #ffffff30; stroke-dasharray: 2 4; }
+.cl-chart .event { stroke: #f59e0b; stroke-dasharray: 4 4; }
+.cl-chart .evt { fill: #f59e0b; font-size: 9.5px; font-weight: 600; }
+.cl-chart .ax { fill: #7d8ab0; font-size: 9.5px; }
+.cl-chart .ax.t { fill: #ff8a3d; } .cl-chart .ax.p { fill: #3ce1ff; }
+.cl-key { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+.cl-key i { display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-left: 8px; }
+.cl-key i:first-child { margin-left: 0; }
+.cl-key .k-t { background: #ff8a3d; } .cl-key .k-p { background: #3ce1ff; height: 9px; width: 4px; } .cl-key .k-n { background: #c6ff3d; height: 8px; width: 3px; }
+.report-btn { margin-top: 12px; align-self: flex-start; }
+.dock-sound { padding: 8px 10px; font-size: 16px; line-height: 1; }

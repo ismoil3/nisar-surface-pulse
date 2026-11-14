@@ -47,6 +47,7 @@ export function AboutDialog({ open, onClose, m, story, insar, closeup, motion })
     ["rDates", t("vDates", { n: m.dates.length, a: fmtDate(m.dates[0].date), b: fmtDate(m.dates.at(-1).date) })],
     ["rDem", m.sources.dem ?? (m.event?.valley_definition ? "Copernicus DEM" : null)],
     ["rOptical", t("vOptical")],
+    ["rClimate", "NASA POWER (MERRA-2 / GEOS-IT), power.larc.nasa.gov"],
     ["rOsm", "© OpenStreetMap contributors (ODbL), via Overpass API"],
     ["rTerrain", "Mapzen / AWS Terrain Tiles"],
     ["rFacts", story.facts],

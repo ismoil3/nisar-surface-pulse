@@ -41,7 +41,7 @@ export function ViewBar({ ds, s, set, cu, eventStory }) {
  * Timeline under the map. One date: play + pick a date. Two dates: two markers, "From" (hollow) and "To" (filled);
  * the small switch says which one a click moves.
  */
-export function Dock({ ds, s, set, playing, togglePlay, which, setWhich }) {
+export function Dock({ ds, s, set, playing, togglePlay, which, setWhich, sound, toggleSound }) {
   const d = ds.m.dates;
   const single = s.mode === "single";
   const xray = s.mode === "swipe" && s.xray; // camera vs radar: one pass, so one date
@@ -76,6 +76,7 @@ export function Dock({ ds, s, set, playing, togglePlay, which, setWhich }) {
           })}
         </div>
       </div>
+      {single && toggleSound && <button className={`dock-sound${sound ? " on" : ""}`} onClick={toggleSound} aria-pressed={sound} title={t("sndHint")} aria-label={t(sound ? "sndOn" : "sndOff")}>{sound ? "🔊" : "🔇"}</button>}
     </div>
   );
 }
@@ -143,10 +144,11 @@ export function AnswerPanel({ tab, setTab, content, head }) {
 }
 
 /** "Why" tab: the physical drivers, the human side, and what the radar cannot see. */
-export function WhyTab({ story, method }) {
+export function WhyTab({ story, method, extra }) {
   return (
     <div className="stack-l">
       <section className="card"><h2>{t("qWhy")}</h2><p>{story.why}</p>{story.human && <p>{story.human}</p>}</section>
+      {extra}
       <section className="card"><h2>{t("qMiss")}</h2><ul className="caveats">{story.notSeen.map(([h, x]) => <li key={h}><b>{h}.</b> {x}</li>)}</ul></section>
       {method && <section className="card"><h2>{t("qHow")}</h2><p>{method}</p></section>}
     </div>
@@ -154,10 +156,12 @@ export function WhyTab({ story, method }) {
 }
 
 /** "What to do" tab: why it matters, one action per audience, and what NISAR could do next. */
-export function ActTab({ story }) {
+export function ActTab({ story, onReport }) {
   return (
     <div className="stack-l">
-      <section className="card story"><h2>{t("qMatters")}</h2><p>{story.matters}</p><Actions story={story} /></section>
+      <section className="card story"><h2>{t("qMatters")}</h2><p>{story.matters}</p><Actions story={story} />
+        {onReport && <button className="primary report-btn" onClick={onReport}>📄 {t("repBtn")}</button>}
+      </section>
       <section className="card"><h2>{t("qFuture")}</h2>
         <ul className="future">{story.future.map(([ic, h, x]) => <li key={h}><span aria-hidden="true">{ic}</span><div><b>{h}.</b> {x}</div></li>)}</ul>
       </section>

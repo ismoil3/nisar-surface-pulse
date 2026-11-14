@@ -14,8 +14,13 @@ import Actions from "./components/Actions.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import Landing from "./components/Landing.jsx";
 import "./landing.css";
+import "./river.css";
 import { Link, useLocation, useNavigate, useNavigationType } from "react-router-dom";
 import { STORY_ROUTES, routeOf, slugFor } from "./lib/routes.js";
+import River from "./components/River.jsx";
+import Report from "./components/Report.jsx";
+import ClimateCard from "./components/ClimateCard.jsx";
+import { beat, levels, saveSound, unlockSound } from "./lib/pulse.js";
 import { ActTab, AnswerPanel, Dock, Guide, ViewBar, WhyTab } from "./components/Stage.jsx";
 import { LayerHelp } from "./components/Controls.jsx";
 import { storyFor } from "./lib/stories.js";
@@ -83,7 +88,7 @@ export default function App() {
   const navType = useNavigationType();
   const slug = location.pathname.startsWith("/map/") ? location.pathname.slice(5) : null;
   const route = routeOf(slug);
-  const screen = route ? "app" : "landing";
+  const screen = route ? "app" : location.pathname === "/river" ? "river" : location.pathname.startsWith("/report/") ? "report" : "landing";
   const [nav, setNav] = useState(0);      // bumps to re-apply the view from the URL for the same site
   const applying = useRef(false);         // true while a view from the URL is being applied (URL sync waits)
   const [applied, setApplied] = useState(0); // bumps when that is done, so the URL sync runs once more
@@ -246,6 +251,34 @@ export default function App() {
     }, 150);
     return () => clearInterval(t);
   }, [playing, ds, n, s.pol]);
+  // "hear the pulse": one heartbeat per pass while the film plays or a date is picked;
+  // loudness = how much of the picture changed since the previous pass (mean |change| of the HH echo)
+  const [sound, setSound] = useState(false);
+  const beats = useMemo(() => {
+    if (!ds) return null;
+    const ch = ds.raw.hh.map((img, k) => {
+      if (!k || !img || !ds.raw.hh[k - 1]) return null;
+      const prev = ds.raw.hh[k - 1];
+      let sum = 0, cnt = 0;
+      for (let i = 0; i < img.length; i += 37) if (img[i] && prev[i]) { sum += Math.abs(img[i] - prev[i]); cnt++; }
+      return cnt ? sum / cnt : null;
+    });
+    const hi = Math.max(...ch.filter((x) => x != null), 1e-9);
+    // tone: the site's main number (lake area or the crops' HV echo), where there is one
+    const main = ds.m.dates.map((d, i) => d.water_km2 ?? ds.farm?.series?.hv_median_db?.[i] ?? null);
+    return { str: ch.map((x) => (x == null ? 0.3 : 0.15 + 0.85 * (x / hi))), lvl: main.some((x) => x != null) ? levels(main) : null };
+  }, [ds]);
+  const toggleSound = useCallback(() => {
+    setSound((on) => {
+      if (!on && !unlockSound()) return on;
+      saveSound(!on);
+      return !on;
+    });
+  }, []);
+  useEffect(() => {
+    if (sound && beats && screen === "app" && s.mode === "single") beat(beats.str[s.k], beats.lvl?.[s.k] ?? null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s.k, sound]);
   const togglePlay = useCallback(() => {
     setS((o) => (o.mode === "single" ? o : { ...o, mode: "single" }));
     setPlaying((p) => !p);
@@ -776,8 +809,10 @@ export default function App() {
 
   return (
     <>
-      {screen === "landing" && <Landing sites={sites} lang={lang} chooseLang={chooseLang} onOpen={enterApp} onTour={enterTour} />}
-      <div className="shell" aria-hidden={screen === "landing" || undefined}>
+      {screen === "landing" && <Landing sites={sites} lang={lang} chooseLang={chooseLang} onOpen={enterApp} onTour={enterTour} onRiver={() => navigate("/river")} />}
+      {screen === "river" && <River sites={sites} lang={lang} chooseLang={chooseLang} onHome={toLanding} onOpen={enterApp} onReport={(sl) => navigate(`/report/${sl}`)} />}
+      {screen === "report" && <Report sites={sites} slug={location.pathname.slice(8)} lang={lang} chooseLang={chooseLang} onBack={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))} />}
+      <div className="shell" aria-hidden={screen !== "app" || undefined}>
         <header className="topbar">
           <Link to="/" className="brand" title={t("lpHome")} onClick={(e) => { e.preventDefault(); toLanding(); }}>
             <i className="pulse" aria-hidden="true" />
@@ -836,7 +871,7 @@ export default function App() {
               {ds && (
                 <div className="mapdock">
                   <ViewBar ds={ds} s={s} set={set} cu={cu} eventStory={!!ds.event} />
-                  {dock && <Dock ds={ds} s={s} set={(p) => { setPlaying(false); set(p); }} playing={playing} togglePlay={togglePlay} which={which} setWhich={setWhich} />}
+                  {dock && <Dock ds={ds} s={s} set={(p) => { setPlaying(false); set(p); }} playing={playing} togglePlay={togglePlay} which={which} setWhich={setWhich} sound={sound} toggleSound={toggleSound} />}
                   {cu && <button className="primary cu-back" onClick={() => { set({ cu: false }); fitSite(); }}>{t("cuExit")}</button>}
                 </div>
               )}
@@ -856,9 +891,9 @@ export default function App() {
               ? <Guide chapters={chapters} idx={guideIdx} onStep={goGuide} onClose={closeTour} />
               : <AnswerPanel tab={tab} setTab={(x) => { setTab(x); setSheet(true); }} head={answerHead} content={{
                   what: whatTab,
-                  why: <WhyTab story={story} method={ds.farm ? tr("farmMethod") : mo ? tr("moMethod", { n: mo.pairs.length, px: mo.pixel_m, coh: mo.coherence_min }) : tr("howText")} />,
+                  why: <WhyTab story={story} method={ds.farm ? tr("farmMethod") : mo ? tr("moMethod", { n: mo.pairs.length, px: mo.pixel_m, coh: mo.coherence_min }) : tr("howText")} extra={!mo && <ClimateCard id={ds.id} m={m} />} />,
                   trust: trustTab,
-                  act: <ActTab story={story} />,
+                  act: <ActTab story={story} onReport={() => navigate(`/report/${mo ? "motion" : route0?.slug ?? "water"}`)} />,
                   lab: labTab,
                 }} />)}
           </aside>
