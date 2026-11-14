@@ -97,5 +97,23 @@
       "offset_days": 3,
       "cloud_pct": 12
     }
+  },
+  {
+    "date": "2026-10-30",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-10-29",
+      "offset_days": -1,
+      "cloud_pct": 21
+    }
+  },
+  {
+    "date": "2026-11-11",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-11-05",
+      "offset_days": -6,
+      "cloud_pct": 26
+    }
   }
 ]

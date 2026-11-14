@@ -43,6 +43,10 @@ Last updated: 2026-11-13.
   - Lakes outlined on only some dates are left out of two-date comparisons (`commonLakes` in nisar.js), so a missing Rogun outline never shows as "water gone".
   - VALIDATED passes (CRID ≥ P05036) are marked ◆ on the timeline and explained in About.
   - Full granules are in `data-raw/` (gitignored); aria2 is installed (`data-raw/aria_all.sh`), but the line is ~4–5 MB/s, so the site footprints are also cached as `data-raw/cache/*.npz`.
+- **2026-11-14: Nepal extended to 11 Nov; processing-version check.**
+  - Nepal 18 Oct rebuilt from the full granule: 100 % of pixels identical to the team's PNGs after 8-bit encoding (their no-data rule = no valid source pixel; script changed to match). 30 Oct and 11 Nov (VALIDATED) added: 13 dates. The flood map and its numbers stay the team's (6 before / 5 after).
+  - `scripts/nisar_crid_check.py`: the 30 Oct pass exists as UR/P05023 and PR/P05036. Same 20 x 20 km window: at 600 m the new version is −0.6 dB (HH) and −0.2 dB (HV); best whole-pixel shift 2 px (20 m) east-west; at 10 m per pixel r is only 0.48 (speckle + shift). The old one is an urgent-response product, so part of the shift is its rapid orbit.
+  - Consequences: Nurek's fall 88.0 → 85.1 km² is against the direction of the version bias (darker HH would add water), so it is not a software effect. The farmland HH step after 13 Oct (−0.4 dB) is about the version offset and must not be read as real.
 - **2026-11-14: old files moved to the Trash** (`~/.Trash/nasa-app-old-20261114-1658/`): integrated zips, `data-archive/`, `README_for_Ismoil.md`, `Tour.jsx`, `StoryScroll.jsx`.
 - **2026-11-14: map page rebuilt as layout A after a UX review** (answer first, one guide instead of tour + story, four stories as chips, place card next to the click, expert tools in a Lab tab, phone bottom sheet). Routes via react-router-dom (HashRouter): `#/map/water`, `/motion`, `/crops`, `/flood`; back/forward works.
 - **2026-11-14: full redesign.**

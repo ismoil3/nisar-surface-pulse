@@ -363,7 +363,7 @@ export const STORIES = {
       welcome: () =>
         "On 26 August 2026 a rock-and-ice avalanche high in the Himalaya sent a flood down the Bhote Koshi–Trishuli river in Nepal. It was monsoon season and clouds hid the valleys from cameras. The NASA–ISRO radar satellite NISAR flew over every 12 days and saw what the flood left behind.",
       intro: () =>
-        "The Bhote Koshi comes down from Tibet through a deep gorge at Rasuwagadhi, then joins the Trishuli near Betrawati. Villages, a main road to China and several hydropower plants sit on the narrow valley floor. NISAR passed here 6 times before the flood and 5 times after it.",
+        "The Bhote Koshi comes down from Tibet through a deep gorge at Rasuwagadhi, then joins the Trishuli near Betrawati. Villages, a main road to China and several hydropower plants sit on the narrow valley floor. NISAR passed here 6 times before the flood and 7 times after it, up to 11 November. The flood map compares the 6 passes before with the first 5 after.",
       why: "When a mass of rock and ice falls into a mountain valley, it can dam the river or melt into a sudden flood. The water rushes down the gorge carrying mud, sand and boulders. Where the valley widens, near Betrawati, the flood slows and drops its load: smooth mud and sand that send the radar signal away, so the riverbed turns darker and stays dark.",
       matters:
         "Floods like this hit roads, bridges, power plants and homes within minutes, usually when clouds make satellite photos useless. Radar sees through clouds, so a map of what changed can be made after the very next pass, for rescue teams and for engineers who need to know which parts of the valley were hit.",
@@ -406,7 +406,7 @@ export const STORIES = {
       welcome: () =>
         "26 августа 2026 года высоко в Гималаях обвал скал и льда вызвал паводок на реке Бхоте-Коси — Тришули в Непале. Шёл сезон муссонов, и облака скрывали долины от фотокамер. Радарный спутник NASA–ISRO NISAR пролетал здесь каждые 12 дней и увидел, что оставил после себя паводок.",
       intro: () =>
-        "Бхоте-Коси спускается из Тибета через глубокое ущелье у Расувагадхи и сливается с Тришули у Бетравати. На узком дне долины стоят сёла, главная дорога в Китай и несколько ГЭС. NISAR пролетел здесь 6 раз до паводка и 5 раз после него.",
+        "Бхоте-Коси спускается из Тибета через глубокое ущелье у Расувагадхи и сливается с Тришули у Бетравати. На узком дне долины стоят сёла, главная дорога в Китай и несколько ГЭС. NISAR пролетел здесь 6 раз до паводка и 7 раз после него, до 11 ноября. Карта паводка сравнивает 6 пролётов до с первыми 5 после.",
       why: "Когда масса камня и льда обрушивается в горную долину, она может перегородить реку или растаять во внезапный паводок. Вода несётся по ущелью, неся грязь, песок и валуны. Там, где долина расширяется, у Бетравати, поток замедляется и сбрасывает груз: гладкая грязь и песок отражают радарный сигнал в сторону, поэтому русло темнеет и остаётся тёмным.",
       matters:
         "Такие паводки за минуты бьют по дорогам, мостам, ГЭС и домам — обычно тогда, когда из-за облаков спутниковые фото бесполезны. Радар видит сквозь облака, поэтому карту изменений можно сделать уже после следующего пролёта — для спасателей и инженеров, которым нужно знать, какие участки долины пострадали.",
@@ -449,7 +449,7 @@ export const STORIES = {
       welcome: () =>
         "26 августи соли 2026 дар баландии Ҳимолой фурӯ рехтани санг ва ях дар дарёи Бхоте-Коси — Тришулӣ дар Непал обхезӣ ба вуҷуд овард. Фасли муссон буд ва абрҳо водиҳоро аз камераҳо пинҳон мекарданд. Моҳвораи радарии NASA–ISRO бо номи NISAR ҳар 12 рӯз аз ин ҷо гузашт ва дид, ки обхезӣ чӣ боқӣ гузошт.",
       intro: () =>
-        "Бхоте-Коси аз Тибет тавассути дараи чуқури Расувагадҳӣ поён мефарояд ва назди Бетравати ба Тришулӣ ҳамроҳ мешавад. Дар қаъри танги водӣ деҳаҳо, роҳи асосӣ ба Чин ва якчанд нерӯгоҳи барқи обӣ ҷойгиранд. NISAR дар ин ҷо 6 бор пеш аз обхезӣ ва 5 бор пас аз он гузашт.",
+        "Бхоте-Коси аз Тибет тавассути дараи чуқури Расувагадҳӣ поён мефарояд ва назди Бетравати ба Тришулӣ ҳамроҳ мешавад. Дар қаъри танги водӣ деҳаҳо, роҳи асосӣ ба Чин ва якчанд нерӯгоҳи барқи обӣ ҷойгиранд. NISAR дар ин ҷо 6 бор пеш аз обхезӣ ва 7 бор пас аз он, то 11 ноябр, гузашт. Харитаи обхезӣ 6 гузариши пешро бо 5 гузариши аввали пас муқоиса мекунад.",
       why: "Вақте ки тӯдаи санг ва ях ба водии кӯҳӣ меафтад, он метавонад дарёро банд кунад ё ба обхезии ногаҳонӣ табдил ёбад. Об аз дара бо худ лой, рег ва харсанг мебарад. Дар ҷое ки водӣ васеъ мешавад, назди Бетравати, ҷараён суст шуда, борашро мепартояд: лой ва реги ҳамвор сигнали радарро ба тараф мебаранд, барои ҳамин маҷро торик мешавад ва торик мемонад.",
       matters:
         "Чунин обхезиҳо дар чанд дақиқа ба роҳҳо, пулҳо, нерӯгоҳҳо ва хонаҳо зарба мезананд — одатан вақте ки аз сабаби абр аксҳои моҳвораӣ бефоидаанд. Радар аз байни абр мебинад, бинобар ин харитаи тағйиротро пас аз гузариши навбатӣ барои наҷотдиҳандагон ва муҳандисоне, ки бояд донанд кадом қисми водӣ зарар дид, тайёр кардан мумкин аст.",
