@@ -89,7 +89,7 @@ def cut(h, m, freq="frequencyA"):
         n = np.sum(np.isfinite(blk), axis=(1, 3))
         s = np.nansum(blk, axis=(1, 3))
         with np.errstate(invalid="ignore", divide="ignore"):
-            mean = np.where(n >= (f * f + 1) // 2, s / n, np.nan)  # need at least half of the 20 m pixels
+            mean = np.where(n >= 1, s / n, np.nan)  # like the team's packages: no data only where no source pixel is valid
         out[pol[:2]] = mean.astype(np.float32)
     return out, {"factor": f, "grid_shift_px": [round(shift[0], 3), round(shift[1], 3)], "pixel_m": px}
 

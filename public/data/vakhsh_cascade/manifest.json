@@ -215,7 +215,7 @@
    "water_km2": null,
    "reservoirs": {
     "nurek": {
-     "area_km2": 88.03,
+     "area_km2": 88.02,
      "method": "app (scripts/nisar_water.py)"
     },
     "rogun": {
@@ -234,7 +234,7 @@
    "water_km2": null,
    "reservoirs": {
     "nurek": {
-     "area_km2": 85.11,
+     "area_km2": 85.08,
      "method": "app (scripts/nisar_water.py)"
     },
     "rogun": {
