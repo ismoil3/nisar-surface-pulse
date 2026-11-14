@@ -1,0 +1,247 @@
+{
+ "id": "nepal",
+ "name": "Bhote Koshi–Trishuli flood",
+ "region": "Rasuwa, Nepal",
+ "center": [
+  85.3,
+  28.15
+ ],
+ "corners": [
+  [
+   84.989545,
+   28.416534
+  ],
+  [
+   85.601901,
+   28.4242
+  ],
+  [
+   85.608919,
+   27.882736
+  ],
+  [
+   84.999632,
+   27.875241
+  ]
+ ],
+ "corners_order": "top-left, top-right, bottom-right, bottom-left ([lon, lat]) - MapLibre image source",
+ "image_size_px": [
+  1000,
+  1000
+ ],
+ "pixel_m": 60.0,
+ "epsg_source": 32645,
+ "track": 98,
+ "frame": 16,
+ "direction": "ASCENDING",
+ "mode": "4005",
+ "encoding": {
+  "bands": "PNG gray+alpha, 8-bit",
+  "nodata": "alpha = 0",
+  "db_min": -35.0,
+  "db_max": 0.0,
+  "formula": "dB = db_min + (value - 1) * (db_max - db_min) / 254",
+  "rgb": "R = HH [-25,0] dB, G = HV [-32,-8] dB, B = HH-HV [0,15] dB (display only)"
+ },
+ "dates": [
+  {
+   "date": "2026-06-08",
+   "hh": "2026-06-08_HH.png",
+   "hv": "2026-06-08_HV.png",
+   "rgb": "2026-06-08_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_022_098_A_016_4005_DHDH_A_20260608T233922_20260608T233956_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-06-20",
+   "hh": "2026-06-20_HH.png",
+   "hv": "2026-06-20_HV.png",
+   "rgb": "2026-06-20_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_023_098_A_016_4005_DHDH_A_20260620T233921_20260620T233956_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-07-02",
+   "hh": "2026-07-02_HH.png",
+   "hv": "2026-07-02_HV.png",
+   "rgb": "2026-07-02_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_024_098_A_016_4005_DHDH_A_20260702T233920_20260702T233955_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-07-14",
+   "hh": "2026-07-14_HH.png",
+   "hv": "2026-07-14_HV.png",
+   "rgb": "2026-07-14_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_025_098_A_016_4005_DHDH_A_20260714T233920_20260714T233954_X05026_F_F_J_001"
+  },
+  {
+   "date": "2026-07-26",
+   "hh": "2026-07-26_HH.png",
+   "hv": "2026-07-26_HV.png",
+   "rgb": "2026-07-26_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_026_098_A_016_4005_DHDH_A_20260726T233919_20260726T233954_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-08-19",
+   "hh": "2026-08-19_HH.png",
+   "hv": "2026-08-19_HV.png",
+   "rgb": "2026-08-19_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_028_098_A_016_4005_DHDH_A_20260819T233918_20260819T233953_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-08-31",
+   "hh": "2026-08-31_HH.png",
+   "hv": "2026-08-31_HV.png",
+   "rgb": "2026-08-31_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_029_098_A_016_4005_DHDH_A_20260831T233918_20260831T233952_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-09-12",
+   "hh": "2026-09-12_HH.png",
+   "hv": "2026-09-12_HV.png",
+   "rgb": "2026-09-12_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_030_098_A_016_4005_DHDH_A_20260912T233918_20260912T233952_X05026_N_F_J_001"
+  },
+  {
+   "date": "2026-09-24",
+   "hh": "2026-09-24_HH.png",
+   "hv": "2026-09-24_HV.png",
+   "rgb": "2026-09-24_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_031_098_A_016_4005_DHDH_A_20260924T233918_20260924T233952_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-10-06",
+   "hh": "2026-10-06_HH.png",
+   "hv": "2026-10-06_HV.png",
+   "rgb": "2026-10-06_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_032_098_A_016_4005_DHDH_A_20261006T233918_20261006T233952_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-10-18",
+   "hh": "2026-10-18_HH.png",
+   "hv": "2026-10-18_HV.png",
+   "rgb": "2026-10-18_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_033_098_A_016_4005_DHDH_A_20261018T233918_20261018T233952_P05023_N_F_J_001"
+  }
+ ],
+ "sources": {
+  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "dem": null
+ },
+ "event": {
+  "name": "Bhote Koshi–Trishuli rock-ice avalanche and flood",
+  "date": "2026-08-26",
+  "before_dates": [
+   "2026-06-08",
+   "2026-06-20",
+   "2026-07-02",
+   "2026-07-14",
+   "2026-07-26",
+   "2026-08-19"
+  ],
+  "after_dates": [
+   "2026-08-31",
+   "2026-09-12",
+   "2026-09-24",
+   "2026-10-06",
+   "2026-10-18"
+  ],
+  "change_png": "change_before_vs_after.png",
+  "control_png": "change_control.png",
+  "closest_pair": [
+   "2026-08-19",
+   "2026-08-31"
+  ],
+  "closest_pair_png": "change_2026-08-19_2026-08-31.png",
+  "timeseries": "flood_timeseries.csv",
+  "threshold_db": 3.0,
+  "brighter_km2": 2.9,
+  "darker_km2": 3.2,
+  "control_brighter_km2": 12.8,
+  "control_darker_km2": 15.6,
+  "places": {
+   "Rasuwagadhi": [
+    85.377,
+    28.276
+   ],
+   "Timure": [
+    85.37,
+    28.258
+   ],
+   "Syabrubesi": [
+    85.344,
+    28.162
+   ],
+   "Dhunche": [
+    85.3,
+    28.11
+   ],
+   "Betrawati": [
+    85.18,
+    27.97
+   ]
+  },
+  "legend": "Red = radar signal rose ≥3 dB (debris, broken ground, landslides). Blue = fell ≥3 dB (new water, smooth mud). Change = mean of all dates after vs mean of all dates before. Control = early vs late dates before the flood.",
+  "valley_change_png": "change_valleys_before_vs_after.png",
+  "valley_control_png": "change_valleys_control.png",
+  "valley_brighter_km2": 1.0,
+  "valley_darker_km2": 1.0,
+  "valley_control_brighter_km2": 0.0,
+  "valley_control_darker_km2": 0.6,
+  "polarization_test": [
+   {
+    "pol": "HH",
+    "flood_km2": 8.5,
+    "control_km2": 0.3,
+    "signal_to_noise": 28.7
+   },
+   {
+    "pol": "HV",
+    "flood_km2": 1.3,
+    "control_km2": 1.5,
+    "signal_to_noise": 0.9
+   }
+  ],
+  "valley_definition": "Copernicus DEM: < 40 m above the lowest point within ~1.5 km and below 2,500 m",
+  "flood_map_png": "flood_map_HH_valleys.png",
+  "flood_map_note": "Blue near Betrawati = flood deposits. Red further south = mostly seasonal (see interpretation).",
+  "hh_valley_brighter_km2": 7.5,
+  "hh_valley_darker_km2": 1.0,
+  "hh_valley_control_brighter_km2": 0.0,
+  "hh_valley_control_darker_km2": 0.3,
+  "interpretation": {
+   "flood_signal": {
+    "where": "Betrawati, Bhote Koshi–Trishuli confluence",
+    "lon": 85.174,
+    "lat": 27.966,
+    "change_db": -4.3,
+    "area_km2": 0.27,
+    "meaning": "HH dropped ~4 dB right after 26 Aug and stayed low: mud/debris deposits from the flood"
+   },
+   "seasonal_signal": "Brightening (+4 dB) south of Betrawati also occurs on rivers outside the flood path: post-monsoon falling water exposing gravel bars, not the flood",
+   "limitation": "The steep upper gorge (Rasuwagadhi–Syabrubesi) is hidden by radar layover/shadow at 60 m",
+   "polarization": "HH showed riverbed change far better than HV in valley floors"
+  },
+  "closeup": "closeup/closeup.json"
+ }
+}

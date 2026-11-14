@@ -1,0 +1,122 @@
+{
+ "name": "Bhote Koshi–Trishuli flood: lower valley close-up",
+ "corners": [
+  [
+   84.94548,
+   27.99997
+  ],
+  [
+   85.219937,
+   28.003798
+  ],
+  [
+   85.223919,
+   27.760085
+  ],
+  [
+   84.950075,
+   27.756295
+  ]
+ ],
+ "pixel_m": 10.0,
+ "image_size_px": [
+  2700,
+  2701
+ ],
+ "before_dates": [
+  "2026-06-08",
+  "2026-06-20",
+  "2026-07-02",
+  "2026-07-14",
+  "2026-07-26",
+  "2026-08-19"
+ ],
+ "after_dates": [
+  "2026-08-31",
+  "2026-09-12",
+  "2026-09-24",
+  "2026-10-06",
+  "2026-10-18"
+ ],
+ "layers": {
+  "before": "before.webp",
+  "after": "after.webp",
+  "flood": "flood.png",
+  "seasonal": "seasonal.png",
+  "hidden": "hidden.png"
+ },
+ "stats_km2": {
+  "brighter_km2": 4.605,
+  "darker_km2": 1.936,
+  "control_brighter_km2": 0.0,
+  "control_darker_km2": 0.77,
+  "flood_darker_km2": 1.94,
+  "flood_brighter_km2": 0.27,
+  "seasonal_brighter_km2": 4.34,
+  "flood_total_km2": 2.2
+ },
+ "places": {
+  "Betrawati": [
+   85.18,
+   27.97
+  ],
+  "Trishuli Bazar (Bidur)": [
+   85.15,
+   27.915
+  ],
+  "Devighat": [
+   85.136,
+   27.892
+  ],
+  "Galchhi": [
+   85.0,
+   27.796
+  ]
+ },
+ "zones_by_place": [
+  {
+   "place": "Betrawati",
+   "lonlat": [
+    85.18,
+    27.97
+   ],
+   "wet_km2": 0.43,
+   "debris_km2": 0.0
+  },
+  {
+   "place": "Trishuli Bazar (Bidur)",
+   "lonlat": [
+    85.15,
+    27.915
+   ],
+   "wet_km2": 0.29,
+   "debris_km2": 0.0
+  },
+  {
+   "place": "Devighat",
+   "lonlat": [
+    85.136,
+    27.892
+   ],
+   "wet_km2": 0.78,
+   "debris_km2": 0.22
+  },
+  {
+   "place": "Galchhi",
+   "lonlat": [
+    85.0,
+    27.796
+   ],
+   "wet_km2": 0.44,
+   "debris_km2": 0.05
+  }
+ ],
+ "method": "Mean of all dates before vs mean of all dates after (averaging removes speckle), HH polarization, 3×3 smoothing, change ≥3 dB, only on valley floors (<40 m above the lowest point within 1.5 km, Copernicus DEM), excluding layover/shadow and anything that also changed between early and late pre-flood dates (control). Patches smaller than 0.02 km² removed. Rougher patches count as flood only within 400 m of the smoother/wetter flooded channel; the rest are labelled seasonal (paddy drainage and harvest).",
+ "story_en": "NISAR compared 6 radar images before and 5 after the flood of 26 Aug 2026. Along the Trishuli river from Betrawati to Galchhi it shows the flood's path: 1.9 km² of river channel became wider and filled with wet sand and mud (blue), and 0.3 km² next to it became rougher with debris (red). Farther from the river, 4.3 km² of fields also changed, but that is the rice harvest of the monsoon season, so we show it separately and do not count it.",
+ "why_not_obvious_en": "A flood in a narrow Himalayan gorge does not leave a big lake for a radar to see: the water passes in hours, NISAR returns every 12 days, the river is only a few pixels wide, and steep walls hide parts of the valley. What remains are scars: debris, eroded banks and new channels. That is what this layer shows.",
+ "sources": {
+  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "dem": "Copernicus DEM GLO-30 (ESA/Copernicus)"
+ },
+ "note": "10 m close-up of the lower valley (Betrawati to Galchhi) from the data team's nepal_lower package. Before/after are means of all passes; colours: cyan = smoother/wetter channel (HH down >=3 dB), orange = rougher debris (HH up >=3 dB), grey = layover/shadow, yellow = seasonal (rice harvest, not counted)."
+}

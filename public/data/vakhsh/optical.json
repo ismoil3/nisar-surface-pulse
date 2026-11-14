@@ -1,0 +1,101 @@
+[
+  {
+    "date": "2026-06-27",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-06-27",
+      "offset_days": 0,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-07-09",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-07-09",
+      "offset_days": 0,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-07-21",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-07-20",
+      "offset_days": -1,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-08-14",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-08-14",
+      "offset_days": 0,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-08-26",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-08-28",
+      "offset_days": 2,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-09-07",
+      "offset_days": 0,
+      "cloud_pct": 5
+    }
+  },
+  {
+    "date": "2026-09-19",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-09-17",
+      "offset_days": -2,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-10-01",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-10-02",
+      "offset_days": 1,
+      "cloud_pct": 9
+    }
+  },
+  {
+    "date": "2026-10-13",
+    "optical": {
+      "layer": "HLS_S30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-10-12",
+      "offset_days": -1,
+      "cloud_pct": 6
+    }
+  },
+  {
+    "date": "2026-10-25",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-10-25",
+      "offset_days": 0,
+      "cloud_pct": 0
+    }
+  },
+  {
+    "date": "2026-11-06",
+    "optical": {
+      "layer": "HLS_L30_Nadir_BRDF_Adjusted_Reflectance",
+      "date": "2026-11-02",
+      "offset_days": -4,
+      "cloud_pct": 3
+    }
+  }
+]

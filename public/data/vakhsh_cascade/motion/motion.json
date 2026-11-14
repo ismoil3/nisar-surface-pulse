@@ -1,0 +1,127 @@
+{
+ "id": "rogun_insar",
+ "name": "Rogun: ground motion from NISAR InSAR (GUNW)",
+ "track": 12,
+ "frame": 21,
+ "corners": [
+  [
+   69.688836,
+   38.866252
+  ],
+  [
+   70.034594,
+   38.863701
+  ],
+  [
+   70.030703,
+   38.593391
+  ],
+  [
+   69.686245,
+   38.595918
+  ]
+ ],
+ "corners_order": "TL, TR, BR, BL [lon, lat]",
+ "image_size_px": [
+  375,
+  375
+ ],
+ "pixel_m": 80.0,
+ "dates": [
+  "2026-06-27",
+  "2026-07-09",
+  "2026-07-21",
+  "2026-08-14",
+  "2026-08-26",
+  "2026-09-07",
+  "2026-09-19",
+  "2026-10-01",
+  "2026-10-13"
+ ],
+ "pairs": [
+  {
+   "from": "2026-06-27",
+   "to": "2026-07-09",
+   "valid_pct": 92.3,
+   "ref_noise_cm": 0.29
+  },
+  {
+   "from": "2026-07-09",
+   "to": "2026-07-21",
+   "valid_pct": 96.6,
+   "ref_noise_cm": 0.13
+  },
+  {
+   "from": "2026-07-21",
+   "to": "2026-08-14",
+   "valid_pct": 93.0,
+   "ref_noise_cm": 0.21
+  },
+  {
+   "from": "2026-08-14",
+   "to": "2026-08-26",
+   "valid_pct": 97.2,
+   "ref_noise_cm": 0.06
+  },
+  {
+   "from": "2026-08-26",
+   "to": "2026-09-07",
+   "valid_pct": 95.6,
+   "ref_noise_cm": 0.09
+  },
+  {
+   "from": "2026-09-07",
+   "to": "2026-09-19",
+   "valid_pct": 95.4,
+   "ref_noise_cm": 0.1
+  },
+  {
+   "from": "2026-09-19",
+   "to": "2026-10-01",
+   "valid_pct": 92.9,
+   "ref_noise_cm": 0.22
+  },
+  {
+   "from": "2026-10-01",
+   "to": "2026-10-13",
+   "valid_pct": 95.1,
+   "ref_noise_cm": 0.14
+  }
+ ],
+ "layers": {
+  "coherence": "coherence.png",
+  "significant": "significant.png"
+ },
+ "colour_scale": {
+  "cmap": "RdBu_r",
+  "min_cm": -3.0,
+  "max_cm": 3.0,
+  "meaning": "cumulative line-of-sight change since the first date; blue and red are opposite directions along the radar line of sight"
+ },
+ "reference": {
+  "lon": 69.9611,
+  "lat": 38.6441,
+  "note": "stable, coherent ground set to 0"
+ },
+ "spots": [
+  {
+   "name": "Spot 1",
+   "lon": 69.9185,
+   "lat": 38.7634,
+   "area_km2": 0.36,
+   "total_cm": 11.6
+  }
+ ],
+ "wavelength_cm": 24.39,
+ "ionosphere_removed": true,
+ "coherence_min": 0.3,
+ "caveats": "Line-of-sight motion, not purely vertical. Tropospheric delay in high mountains is NOT removed and can mimic 1-3 cm of motion that follows topography; treat single-pair signals with caution. Water, snow and layover are masked. Unwrapping errors are possible in low-coherence areas. Sign convention follows the GUNW product.",
+ "sources": {
+  "radar": "NISAR L2 GUNW (NASA/JPL/ISRO, ASF DAAC)"
+ },
+ "display_tip": "Show coherence.png as the base, displacement_significant.png on top (colour only where |motion| ≥ 3 cm, same RdBu scale -12..+12 cm), a marker for each spot and the time-series chart. Do not show displacement_los.png as 'motion': its ±2 cm pattern follows the terrain and is not real movement.",
+ "story": "NISAR InSAR, 2026-06-27 to 2026-10-13 (8 pairs, ionosphere removed): no measurable motion at the Rogun dam beyond about ±3 cm. One 0.36 km² slope 38.7634 N, 69.9185 E moved steadily, +11.6 cm along the radar line of sight (about 1.4 cm every 12 days). Preliminary: to be confirmed with a second orbit and on the ground.",
+ "status": "preliminary",
+ "timeseries": "timeseries.csv",
+ "note": "From the team's InSAR package (rogun_insar). displacement_los.png left out on purpose: its ±2 cm pattern follows the terrain (troposphere), not real motion."
+}

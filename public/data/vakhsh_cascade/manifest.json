@@ -1,0 +1,282 @@
+{
+ "id": "vakhsh_cascade",
+ "name": "Rogun → Nurek (Vakhsh cascade)",
+ "region": "Vakhsh river, Tajikistan",
+ "center": [
+  69.675,
+  38.575
+ ],
+ "corners": [
+  [
+   69.236713,
+   38.921752
+  ],
+  [
+   70.119795,
+   38.916621
+  ],
+  [
+   70.109134,
+   38.226612
+  ],
+  [
+   69.234459,
+   38.231618
+  ]
+ ],
+ "corners_order": "top-left, top-right, bottom-right, bottom-left ([lon, lat]) - MapLibre image source",
+ "image_size_px": [
+  1276,
+  1276
+ ],
+ "pixel_m": 60.0,
+ "epsg_source": 32642,
+ "track": 12,
+ "frame": 21,
+ "direction": "ASCENDING",
+ "mode": "2005",
+ "encoding": {
+  "bands": "PNG gray+alpha, 8-bit",
+  "nodata": "alpha = 0",
+  "db_min": -35.0,
+  "db_max": 0.0,
+  "formula": "dB = db_min + (value - 1) * (db_max - db_min) / 254",
+  "rgb": "R = HH [-25,0] dB, G = HV [-32,-8] dB, B = HH-HV [0,15] dB (display only)"
+ },
+ "dates": [
+  {
+   "date": "2026-06-27",
+   "hh": "2026-06-27_HH.png",
+   "hv": "2026-06-27_HV.png",
+   "rgb": "2026-06-27_RGB.webp",
+   "water": "water_2026-06-27.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_024_012_A_021_2005_DHDH_M_20260627T003206_20260627T003240_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 74.34
+    },
+    "rogun": {
+     "area_km2": 13.9,
+     "level_m_est": 1115
+    }
+   }
+  },
+  {
+   "date": "2026-07-09",
+   "hh": "2026-07-09_HH.png",
+   "hv": "2026-07-09_HV.png",
+   "rgb": "2026-07-09_RGB.webp",
+   "water": "water_2026-07-09.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_025_012_A_021_2005_DHDH_M_20260709T003205_20260709T003240_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 80.37
+    },
+    "rogun": {
+     "area_km2": 13.33,
+     "level_m_est": 1113
+    }
+   }
+  },
+  {
+   "date": "2026-07-21",
+   "hh": "2026-07-21_HH.png",
+   "hv": "2026-07-21_HV.png",
+   "rgb": "2026-07-21_RGB.webp",
+   "water": "water_2026-07-21.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_026_012_A_021_2005_DHDH_M_20260721T003204_20260721T003239_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 81.83
+    },
+    "rogun": {
+     "area_km2": 14.61,
+     "level_m_est": 1116
+    }
+   }
+  },
+  {
+   "date": "2026-08-14",
+   "hh": "2026-08-14_HH.png",
+   "hv": "2026-08-14_HV.png",
+   "rgb": "2026-08-14_RGB.webp",
+   "water": "water_2026-08-14.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_028_012_A_021_2005_DHDH_M_20260814T003203_20260814T003238_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 86.89
+    },
+    "rogun": {
+     "area_km2": 15.58,
+     "level_m_est": 1118
+    }
+   }
+  },
+  {
+   "date": "2026-08-26",
+   "hh": "2026-08-26_HH.png",
+   "hv": "2026-08-26_HV.png",
+   "rgb": "2026-08-26_RGB.webp",
+   "water": "water_2026-08-26.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_029_012_A_021_2005_DHDH_M_20260826T003203_20260826T003238_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 87.26
+    },
+    "rogun": {
+     "area_km2": 17.95,
+     "level_m_est": 1124
+    }
+   }
+  },
+  {
+   "date": "2026-09-07",
+   "hh": "2026-09-07_HH.png",
+   "hv": "2026-09-07_HV.png",
+   "rgb": "2026-09-07_RGB.webp",
+   "water": "water_2026-09-07.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_030_012_A_021_2005_DHDH_M_20260907T003203_20260907T003237_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 88.64
+    },
+    "rogun": {
+     "area_km2": 20.13,
+     "level_m_est": 1128
+    }
+   }
+  },
+  {
+   "date": "2026-09-19",
+   "hh": "2026-09-19_HH.png",
+   "hv": "2026-09-19_HV.png",
+   "rgb": "2026-09-19_RGB.webp",
+   "water": "water_2026-09-19.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_031_012_A_021_2005_DHDH_M_20260919T003203_20260919T003238_P05023_F_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 88.69
+    },
+    "rogun": {
+     "area_km2": 20.15,
+     "level_m_est": 1128
+    }
+   }
+  },
+  {
+   "date": "2026-10-01",
+   "hh": "2026-10-01_HH.png",
+   "hv": "2026-10-01_HV.png",
+   "rgb": "2026-10-01_RGB.webp",
+   "water": "water_2026-10-01.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_032_012_A_021_2005_DHDH_M_20261001T003203_20261001T003238_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 88.73
+    },
+    "rogun": {
+     "area_km2": 19.24,
+     "level_m_est": 1127
+    }
+   }
+  },
+  {
+   "date": "2026-10-13",
+   "hh": "2026-10-13_HH.png",
+   "hv": "2026-10-13_HV.png",
+   "rgb": "2026-10-13_RGB.webp",
+   "water": "water_2026-10-13.geojson",
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_033_012_A_021_2005_DHDH_M_20261013T003203_20261013T003238_P05023_N_F_J_001",
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 89.72
+    },
+    "rogun": {
+     "area_km2": 20.0,
+     "level_m_est": 1128
+    }
+   }
+  },
+  {
+   "date": "2026-10-25",
+   "hh": "2026-10-25_HH.png",
+   "hv": "2026-10-25_HV.png",
+   "rgb": "2026-10-25_RGB.webp",
+   "water": "water_2026-10-25.geojson",
+   "water_km2": null,
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 88.03,
+     "method": "app (scripts/nisar_water.py)"
+    },
+    "rogun": {
+     "area_km2": null,
+     "note": "second_orbit"
+    }
+   },
+   "granule": "NISAR_L2_PR_GCOV_034_012_A_021_2005_DHDH_M_20261025T003203_20261025T003238_P05036_N_F_J_001"
+  },
+  {
+   "date": "2026-11-06",
+   "hh": "2026-11-06_HH.png",
+   "hv": "2026-11-06_HV.png",
+   "rgb": "2026-11-06_RGB.webp",
+   "water": "water_2026-11-06.geojson",
+   "water_km2": null,
+   "reservoirs": {
+    "nurek": {
+     "area_km2": 85.11,
+     "method": "app (scripts/nisar_water.py)"
+    },
+    "rogun": {
+     "area_km2": null,
+     "note": "second_orbit"
+    }
+   },
+   "granule": "NISAR_L2_PR_GCOV_035_012_A_021_2005_DHDH_M_20261106T003204_20261106T003238_P05036_N_F_J_001"
+  }
+ ],
+ "sources": {
+  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "dem": "Copernicus DEM GLO-30 (ESA/Copernicus)"
+ },
+ "notes": "One box with both reservoirs. Each water_<date>.geojson is a FeatureCollection with up to two features (properties.reservoir = Nurek / Rogun). Per-date areas are in dates[].reservoirs. Nurek: dark in HH+HV, elevation 850–920 m, connected to a point in the lake. Rogun: dark in HH+HV inside the valley below 1,170 m upstream of the dam; level_m_est from the pre-filling Copernicus DEM (estimate, ~10 m uncertainty). null = reservoir not fully covered that date.",
+ "story": {
+  "nurek": {
+   "from": "2026-06-27",
+   "to": "2026-10-13",
+   "area_from_km2": 74.3,
+   "area_to_km2": 89.7,
+   "change_km2": 15.4,
+   "change_pct": 20.7,
+   "max_km2": 89.7,
+   "new_water_km2": 15.4
+  },
+  "rogun": {
+   "from": "2026-06-27",
+   "to": "2026-10-13",
+   "area_from_km2": 13.9,
+   "area_to_km2": 20.0,
+   "change_km2": 6.1,
+   "change_pct": 43.9,
+   "max_km2": 20.1,
+   "new_water_km2": 8.5,
+   "level_from_m_est": 1115,
+   "level_to_m_est": 1128
+  },
+  "text": "Nurek grew from 74.3 to 89.7 km² (+21%) between 2026-06-27 and 2026-10-13. Rogun grew from 13.9 to 20.0 km² (+44%), water level ≈ 1115 → 1128 m (DEM estimate, ±10 m). Both seen on the same NISAR passes, so the numbers are directly comparable.",
+  "interpretation": "Both reservoirs filled during summer 2026. Nurek's seasonal refill: +15.4 km2 of new water, almost all of it along the shallow edges of the lake. Rogun: the new reservoir pushed about 8 km2 of new water up the Vakhsh valley (cyan), and the estimated level rose about 13 m, mostly between mid-August and early September. The small orange patches (2.1 km2) are at the far upstream end, in the river channel above the reservoir: in late June the river was wide with snow- and glacier-melt water, by October it is narrower. This is the river, not the reservoir shrinking.",
+  "cross_check": "Consistent with our separate single-reservoir runs: Nurek 72.1 to 88.1 km2 (+22%, own box); Rogun 15.1 to 19.9 km2, level about 1118 to 1128 m (track 84, a different orbit). Two orbits, the same result."
+ },
+ "motion": "motion/motion.json",
+ "orbit2": "orbit84.json"
+}

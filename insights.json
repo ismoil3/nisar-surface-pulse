@@ -1,0 +1,44 @@
+{
+  "section_title": "What this means — insights",
+  "revisit": "NISAR passed over our sites every 12 days in June–October 2026 (one pass missing on 2 Aug), day or night, through clouds.",
+  "headline_numbers": [
+    {"label": "Rogun reservoir", "value": "+44%", "detail": "13.9 → 20.0 km² of water, 27 Jun → 13 Oct 2026; level ≈ 1,115 → 1,128 m (radar + terrain estimate, ±10 m)", "source": "vakhsh_cascade manifest.story"},
+    {"label": "Nurek reservoir", "value": "+21%", "detail": "74.3 → 89.7 km², seasonal refill, same orbit as Rogun", "source": "vakhsh_cascade manifest.story"},
+    {"label": "Rogun dam", "value": "stable", "detail": "no measurable motion beyond about ±3 cm (InSAR, 8 pairs, ionosphere removed)", "source": "rogun_insar manifest.story"},
+    {"label": "Vakhsh cotton fields", "value": "+1.3 dB", "detail": "696 km² of farmland grew denser June → September (HV radar signal)", "source": "vakhsh manifest.farmland"},
+    {"label": "Nepal flood path", "value": "see nepal_lower manifest", "detail": "km² of river channel changed along the Trishuli, Betrawati → Galchhi", "source": "nepal_lower manifest.stats_km2.flood_total_km2"}
+  ],
+  "audiences": [
+    {
+      "who": "Water and energy managers",
+      "insight": "Both reservoirs on the Vakhsh can be measured every 12 days from space, in any weather. In summer 2026 Rogun gained a third of its area, with the biggest jump between mid-August and early September; Nurek refilled by about a fifth.",
+      "action": "Track filling against the operating plan without waiting for clear skies; compare area and estimated level with gauge readings."
+    },
+    {
+      "who": "Emergency services and dam safety",
+      "insight": "The Rogun dam showed no measurable movement (within ±3 cm). One small slope (0.36 km²) above the reservoir moved steadily, about 12 cm along the radar line of sight in 3.5 months.",
+      "action": "Put that slope on the field-inspection list. In Nepal, the radar shows exactly which stretch of the river and which villages the flood reached, days later, through monsoon clouds."
+    },
+    {
+      "who": "Farmers and agriculture planners",
+      "insight": "The radar follows crop growth in the Vakhsh valley through the season and flags fields that changed early.",
+      "action": "Use the 12-day signal to see where crops are growing or already cleared, field by field, without cloud gaps."
+    },
+    {
+      "who": "Teachers and students",
+      "insight": "One river, two stories: people building a new reservoir (Rogun) and a natural disaster reshaping a valley (Nepal), both seen by the same satellite.",
+      "action": "Use the before/after slider and the timeline as a ready classroom example of how humans and nature change the land."
+    },
+    {
+      "who": "People living downstream",
+      "insight": "Changes upstream — a filling reservoir, a moving slope, a flood path — show up on the map weeks before they are obvious on the ground.",
+      "action": "Check your area on the map; the data is open and updated every 12 days."
+    }
+  ],
+  "natural_vs_human": {
+    "human": "Rogun and Nurek: dams filling a mountain valley (Tajikistan)",
+    "natural": "Bhote Koshi–Trishuli flood of 26 Aug 2026, triggered by an ice and rock avalanche (Nepal)",
+    "rhythm": "Seasonal: Nurek refills every summer and is drawn down in winter; crops grow and are harvested; monsoon floods"
+  },
+  "caveats": "Level, InSAR and harvest results are estimates from provisional NISAR data; see each manifest for method and uncertainty."
+}

@@ -1,0 +1,161 @@
+{
+ "id": "vakhsh",
+ "name": "Vakhsh Valley farmland",
+ "region": "Khatlon, Tajikistan",
+ "center": [
+  68.85,
+  37.9
+ ],
+ "corners": [
+  [
+   68.621674,
+   38.07983
+  ],
+  [
+   69.077764,
+   38.080414
+  ],
+  [
+   69.077385,
+   37.719892
+  ],
+  [
+   68.623515,
+   37.719316
+  ]
+ ],
+ "corners_order": "top-left, top-right, bottom-right, bottom-left ([lon, lat]) - MapLibre image source",
+ "image_size_px": [
+  666,
+  666
+ ],
+ "pixel_m": 60.0,
+ "epsg_source": 32642,
+ "track": 12,
+ "frame": 21,
+ "direction": "ASCENDING",
+ "mode": "2005",
+ "encoding": {
+  "bands": "PNG gray+alpha, 8-bit",
+  "nodata": "alpha = 0",
+  "db_min": -35.0,
+  "db_max": 0.0,
+  "formula": "dB = db_min + (value - 1) * (db_max - db_min) / 254",
+  "rgb": "R = HH [-25,0] dB, G = HV [-32,-8] dB, B = HH-HV [0,15] dB (display only)"
+ },
+ "dates": [
+  {
+   "date": "2026-06-27",
+   "hh": "2026-06-27_HH.png",
+   "hv": "2026-06-27_HV.png",
+   "rgb": "2026-06-27_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_024_012_A_021_2005_DHDH_M_20260627T003206_20260627T003240_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-07-09",
+   "hh": "2026-07-09_HH.png",
+   "hv": "2026-07-09_HV.png",
+   "rgb": "2026-07-09_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_025_012_A_021_2005_DHDH_M_20260709T003205_20260709T003240_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-07-21",
+   "hh": "2026-07-21_HH.png",
+   "hv": "2026-07-21_HV.png",
+   "rgb": "2026-07-21_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_026_012_A_021_2005_DHDH_M_20260721T003204_20260721T003239_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-08-14",
+   "hh": "2026-08-14_HH.png",
+   "hv": "2026-08-14_HV.png",
+   "rgb": "2026-08-14_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_028_012_A_021_2005_DHDH_M_20260814T003203_20260814T003238_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-08-26",
+   "hh": "2026-08-26_HH.png",
+   "hv": "2026-08-26_HV.png",
+   "rgb": "2026-08-26_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_029_012_A_021_2005_DHDH_M_20260826T003203_20260826T003238_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-09-07",
+   "hh": "2026-09-07_HH.png",
+   "hv": "2026-09-07_HV.png",
+   "rgb": "2026-09-07_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_030_012_A_021_2005_DHDH_M_20260907T003203_20260907T003237_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-09-19",
+   "hh": "2026-09-19_HH.png",
+   "hv": "2026-09-19_HV.png",
+   "rgb": "2026-09-19_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_031_012_A_021_2005_DHDH_M_20260919T003203_20260919T003238_P05023_F_F_J_001"
+  },
+  {
+   "date": "2026-10-01",
+   "hh": "2026-10-01_HH.png",
+   "hv": "2026-10-01_HV.png",
+   "rgb": "2026-10-01_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_032_012_A_021_2005_DHDH_M_20261001T003203_20261001T003238_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-10-13",
+   "hh": "2026-10-13_HH.png",
+   "hv": "2026-10-13_HV.png",
+   "rgb": "2026-10-13_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_033_012_A_021_2005_DHDH_M_20261013T003203_20261013T003238_P05023_N_F_J_001"
+  },
+  {
+   "date": "2026-10-25",
+   "hh": "2026-10-25_HH.png",
+   "hv": "2026-10-25_HV.png",
+   "rgb": "2026-10-25_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_034_012_A_021_2005_DHDH_M_20261025T003203_20261025T003238_P05036_N_F_J_001"
+  },
+  {
+   "date": "2026-11-06",
+   "hh": "2026-11-06_HH.png",
+   "hv": "2026-11-06_HV.png",
+   "rgb": "2026-11-06_RGB.webp",
+   "water": null,
+   "water_km2": null,
+   "granule": "NISAR_L2_PR_GCOV_035_012_A_021_2005_DHDH_M_20261106T003204_20261106T003238_P05036_N_F_J_001"
+  }
+ ],
+ "sources": {
+  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "dem": "Copernicus DEM GLO-30 (ESA/Copernicus), used for the slope<2 deg farmland mask"
+ },
+ "farmland": {
+  "file": "farmland_timeseries.csv",
+  "summary_png": "farmland_summary.png",
+  "farmland_km2": 695.7,
+  "harvested_km2": 54.1,
+  "method": "Farmland = slope < 2 deg (Copernicus DEM), median HH between -16 and -4 dB. Harvested = HV fell at least 3 dB from its summer peak by the last date. Hypothesis test, not a crop map.",
+  "interpretation": "Over 696 km2 of flat farmland the median HV rose by about 1.3 dB from late June to early September (-18.6 to -17.4 dB) and HH by about 1.1 dB, consistent with crops (mainly cotton) growing taller and denser. The signal stays high through 13 Oct: cotton in Khatlon is picked by hand from September to November and the plants stay in the field, so no large harvest drop is expected yet. Only 25 km2 (3.6%) show an HV drop of 3 dB or more; treat these as candidate early-harvested or cleared fields, not a confirmed harvest map. No acquisition on 2 Aug (gap 21 Jul to 14 Aug).",
+  "harvested_km2_team": 25.1,
+  "harvested_by": "2026-11-06"
+ }
+}
