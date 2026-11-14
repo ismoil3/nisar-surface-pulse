@@ -41,6 +41,9 @@ export async function summarize({ id, m }) {
   return out;
 }
 
+/** Which story and place a dashboard tile opens. */
+const TILE = { water: ["water", "mode=story&f=lakes"], crops: ["crops", "mode=story"], flood: ["flood", "mode=story&cu=1&cv=swipe&f=flood"] };
+
 /** Tiny line chart as inline SVG. */
 function Spark({ values, color = "#22d3ee", band }) {
   const v = values.map((x, i) => [i, x]).filter(([, x]) => x != null);
@@ -62,15 +65,15 @@ function alerts(S, story) {
   for (const s of S) {
     const name = story(s.id).name || s.m.name;
     const spot = s.motion?.spots?.[0];
-    if (spot && spot.total_cm >= 3) out.push({ lvl: "warn", site: s.id, text: tr("alSlope", { name, cm: spot.total_cm.toFixed(1), n: s.motion.pairs.length }) });
+    if (spot && spot.total_cm >= 3) out.push({ lvl: "warn", go: ["motion", "mode=single&pol=motion&f=slope"], text: tr("alSlope", { name, cm: spot.total_cm.toFixed(1), n: s.motion.pairs.length }) });
     for (const r of s.res ?? []) if (r.a && r.b && (r.b - r.a) / r.a > 0.1)
-      out.push({ lvl: "info", site: s.id, text: tr("alLake", { lake: t(`res_${r.r}`), pct: Math.round(((r.b - r.a) / r.a) * 100), b: f1(r.b) }) });
+      out.push({ lvl: "info", go: ["water", `mode=story&f=${r.r}`], text: tr("alLake", { lake: t(`res_${r.r}`), pct: Math.round(((r.b - r.a) / r.a) * 100), b: f1(r.b) }) });
     if (s.closeup) {
       const top = [...s.closeup.zones_by_place].sort((a, b) => b.wet_km2 + b.debris_km2 - a.wet_km2 - a.debris_km2)[0];
-      out.push({ lvl: "warn", site: s.id, text: tr("alFlood", { place: story(s.id).cuPlaces?.[top.place] ?? top.place, w: top.wet_km2.toFixed(2), d: top.debris_km2.toFixed(2) }) });
+      out.push({ lvl: "warn", go: ["flood", `mode=story&cu=1&cv=swipe&f=${encodeURIComponent("place:" + top.place)}`], text: tr("alFlood", { place: story(s.id).cuPlaces?.[top.place] ?? top.place, w: top.wet_km2.toFixed(2), d: top.debris_km2.toFixed(2) }) });
     }
     if (s.m.farmland) {
-            out.push({ lvl: "info", site: s.id, text: tr("alHarvest", { pct: harvestRange(s.m.farmland).pct, b: fmtDate(s.m.dates.at(-1).date, true) }) });
+            out.push({ lvl: "info", go: ["crops", "mode=story"], text: tr("alHarvest", { pct: harvestRange(s.m.farmland).pct, b: fmtDate(s.m.dates.at(-1).date, true) }) });
     }
   }
   return out;
@@ -129,7 +132,7 @@ export default function Dashboard({ open, onClose, sites, onOpenSite }) {
                       )}
                       {s.m.event && <div><b>{fmtDate(s.m.event.date, true)}</b><small>{t("dashEvent")}</small></div>}
                     </div>
-                    <button className="primary" onClick={() => { onOpenSite(s.id); onClose(); }}>{t("dashOpen")}</button>
+                    <button className="primary" onClick={() => { onOpenSite(...TILE[s.kind]); onClose(); }}>{t("dashOpen")}</button>
                   </section>
                 );
               })}
@@ -139,7 +142,7 @@ export default function Dashboard({ open, onClose, sites, onOpenSite }) {
               {alerts(S, story).map((a, i) => (
                 <li key={i} className={a.lvl}>
                   <span aria-hidden="true">{a.lvl === "warn" ? "⚠️" : "ℹ️"}</span>
-                  <div>{a.text} <button className="link" onClick={() => { onOpenSite(a.site); onClose(); }}>{t("dashOpen")}</button></div>
+                  <div>{a.text} <button className="link" onClick={() => { onOpenSite(...a.go); onClose(); }}>{t("dashOpen")}</button></div>
                 </li>
               ))}
             </ul>

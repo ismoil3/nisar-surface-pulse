@@ -368,6 +368,51 @@ export function pixelToLonLat(ds, x, y) {
   return [lon, lat];
 }
 
+/** [[w, s], [e, n]] around every coordinate of some GeoJSON features (null when there are none). */
+function featureBounds(features) {
+  let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity;
+  const walk = (c) => { if (typeof c[0] === "number") { w = Math.min(w, c[0]); e = Math.max(e, c[0]); s = Math.min(s, c[1]); n = Math.max(n, c[1]); } else c.forEach(walk); };
+  features.forEach((f) => f.geometry && walk(f.geometry.coordinates));
+  return w < e ? [[w, s], [e, n]] : null;
+}
+const cornersBounds = (c) => [[Math.min(...c.map((p) => p[0])), Math.min(...c.map((p) => p[1]))], [Math.max(...c.map((p) => p[0])), Math.max(...c.map((p) => p[1]))]];
+
+/**
+ * Where the map should look when a story is opened from the landing page, the river page, the dashboard or a report.
+ * focus: "lakes" | "rogun" | "nurek" (lake outlines of the newest date that has them), "slope" (the creeping slope),
+ * "motion" (the InSAR area), "dam" (Rogun dam), "flood" (the 10 m close-up), "place:<name>" (a close-up village).
+ * Returns a camera request for MapView ({ bounds } or { center, zoom }) or null (= the whole picture).
+ */
+export function focusView(ds, focus) {
+  if (!ds || !focus) return null;
+  if (focus === "lakes" || focus === "rogun" || focus === "nurek") {
+    for (let k = ds.water.length - 1; k >= 0; k--) {
+      const fs = (ds.water[k]?.features ?? []).filter((f) => focus === "lakes" || (f.properties?.reservoir ?? "").toLowerCase() === focus);
+      const b = fs.length && featureBounds(fs);
+      if (b) return { bounds: b };
+    }
+    return null;
+  }
+  if (focus === "slope" && ds.motion?.spots?.[0]) { const sp = ds.motion.spots[0]; return { center: [sp.lon, sp.lat], zoom: 12.2, point: [sp.lon, sp.lat] }; }
+  if (focus === "motion" && ds.motion) return { bounds: cornersBounds(ds.motion.corners) };
+  if (focus === "dam") { const d = ds.context?.dams?.find((x) => /rogun/i.test(x.name ?? "")); return d ? { center: d.lonlat, zoom: 13 } : null; }
+  const cu = ds.event?.closeup;
+  if (focus === "flood" && cu) return { bounds: cornersBounds(cu.corners) };
+  if (focus.startsWith("place:") && cu) {
+    const z = cu.zones_by_place?.find((x) => x.place === focus.slice(6));
+    return z ? { center: z.lonlat, zoom: 12.8 } : { bounds: cornersBounds(cu.corners) };
+  }
+  return null;
+}
+
+/** The focus a story opens with when the link does not name one. */
+export function defaultFocus(slug, view) {
+  if (slug === "motion") return "slope";
+  if (slug === "flood") return view?.cu ? "flood" : null;
+  if (slug === "water") return "lakes";
+  return null;
+}
+
 export function siteBounds(ds) {
   const xs = ds.m.corners.map((c) => c[0]), ys = ds.m.corners.map((c) => c[1]);
   return [[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]];

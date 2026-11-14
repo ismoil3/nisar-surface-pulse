@@ -234,7 +234,7 @@ export default function MapView({ popup, ds, mainUrl, radarCorners, changeUrl, w
   useEffect(() => {
     const map = mapRef.current;
     if (!loaded || !view) return;
-    if (view.bounds) map.fitBounds(view.bounds, { padding: 30, duration: view.duration ?? 1200 });
+    if (view.bounds) map.fitBounds(view.bounds, { padding: view.duration ? 60 : 30, maxZoom: 14, duration: view.duration ?? 1200 });
     else map.flyTo({ center: view.center, zoom: view.zoom ?? 12, duration: view.duration ?? 1600, essential: true });
   }, [loaded, view]);
   useEffect(() => { if (ready) setGeo(mapRef.current, "waterA", waterA); }, [ready, waterA]);

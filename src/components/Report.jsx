@@ -111,7 +111,7 @@ export default function Report({ sites, slug, lang, chooseLang, onBack }) {
   }
   const weather = pt && climateFinding(pt, m);
   const sure = motion ? [t("moC1"), t("moC2"), t("moC5")] : (story.caveats ?? []).slice(0, 3);
-  const url = `${location.origin}${location.pathname}#/map/${route.slug}`;
+  const url = `${location.origin}${location.pathname}#/map/${route.slug}?${{ water: "mode=story&f=lakes", motion: "mode=single&pol=motion&f=slope", crops: "mode=story", flood: "mode=story&cu=1&cv=swipe&f=flood" }[route.slug]}`;
 
   return (
     <div className="rep">

@@ -240,11 +240,11 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
 
             {/* labels */}
             <g className="rv-lab">
-              <text x={X((head + rd.km) / 2)} y={Y(level) - 34} textAnchor="middle" className="t">{t("res_rogun")}</text>
+              <text x={X((head + rd.km) / 2)} y={Y(level) - 34} textAnchor="middle" className="t go" onClick={() => onOpen("water", "mode=story&f=rogun")}>{t("res_rogun")} ↗</text>
               <text x={X((head + rd.km) / 2)} y={Y(level) - 16} textAnchor="middle" className="v">{Math.round(level).toLocaleString("ru-RU")} {t("rvMUnit")}</text>
-              <text x={X((nk.from_km + nk.to_km) / 2)} y={Y(nk.level_m) - 46} textAnchor="middle" className="t">{t("res_nurek")}</text>
+              <text x={X((nk.from_km + nk.to_km) / 2)} y={Y(nk.level_m) - 46} textAnchor="middle" className="t go" onClick={() => onOpen("water", "mode=story&f=nurek")}>{t("res_nurek")} ↗</text>
               <text x={X((nk.from_km + nk.to_km) / 2)} y={Y(nk.level_m) - 28} textAnchor="middle" className="v">{num(nurek)} {t("uKm2")}</text>
-              <text x={X(fieldKm)} y={Y(fieldZ) - 58} textAnchor="middle" className="t g">{t("rvFields")}</text>
+              <text x={X(fieldKm)} y={Y(fieldZ) - 58} textAnchor="middle" className="t g go" onClick={() => onOpen("crops", "mode=story")}>{t("rvFields")} ↗</text>
               <text x={X(fieldKm)} y={Y(fieldZ) - 40} textAnchor="middle" className="v g">HV {num(hv, 2)} {t("uDb")}</text>
               {rough && <text x={X(nd.km) + 18} y={Y(760)} className="note">≈ {t("rvRough")}</text>}
             </g>
@@ -317,7 +317,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
           <p className="rv-big">{s.level != null ? Math.round(s.level).toLocaleString("ru-RU") : "–"}<small>{t("rvMUnit")}</small></p>
           <p className="rv-sub">{s.level != null && level0 != null ? tr("rvC1", { d: sgn(s.level - base, 0), a: num(s.rogun), d0: fmtDate(s.other && D.o2 ? D.o2.d0 : s0.date, true) }) : t("rvNoData")}</p>
           <Spark values={S.map((x) => x.level)} k={k} color="#3ce1ff" onPick={(i) => { setPlaying(false); go(i); }} />
-          <button className="rv-link" onClick={() => onOpen("water", "mode=story")}>{t("rvSeeMap")} →</button>
+          <button className="rv-link" onClick={() => onOpen("water", "mode=story&f=rogun")}>{t("rvSeeMap")} →</button>
         </article>
         <article className="rv-card c2">
           <span className="lp-chip">② {t("rvStep2")}</span>
@@ -325,7 +325,7 @@ export default function River({ sites, lang, chooseLang, onHome, onOpen, onRepor
           <p className="rv-big">{num(s.nurek)}<small>{t("uKm2")}</small></p>
           <p className="rv-sub">{tr("rvC2", { d: sgn(s.nurek - S[first].nurek), pk: num(nkHi), dpk: fmtDate(S[peak].date, true), d0: fmtDate(S[first].date, true) })}{rough && <> {t("rvRough")}.</>}</p>
           <Spark values={nks} k={k} color="#7aa7ff" onPick={(i) => { setPlaying(false); go(i); }} />
-          <button className="rv-link" onClick={() => onOpen("water", "mode=single&pol=rgb")}>{t("rvSeeMap")} →</button>
+          <button className="rv-link" onClick={() => onOpen("water", "mode=story&f=nurek")}>{t("rvSeeMap")} →</button>
         </article>
         <article className="rv-card c3">
           <span className="lp-chip">③ {t("rvStep3")}</span>

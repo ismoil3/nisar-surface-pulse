@@ -94,3 +94,5 @@
   .rv-sound span { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .rv-flow.on { animation: none; } }
+.rv-lab .go { cursor: pointer; }
+.rv-lab .go:hover { fill: #c6ff3d; text-decoration: underline; }

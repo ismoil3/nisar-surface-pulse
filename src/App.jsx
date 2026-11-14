@@ -26,7 +26,7 @@ import { LayerHelp } from "./components/Controls.jsx";
 import { storyFor } from "./lib/stories.js";
 import { LANGS, fmtInt, initialLang, placeName, rich, saveLang, setLang, t, tr } from "./lib/i18n.jsx";
 import { placeList } from "./components/StoryCard.jsx";
-import { harvestRange, areaStats, changeProduct, fmtDate, loadDataset, lonLatToPixel, probeSites, opticalTiles, placesNearWater, polCompare, radarUrl, signed, siteBounds, waterDiff, PITCH_KM2 } from "./lib/nisar.js";
+import { focusView, defaultFocus, harvestRange, areaStats, changeProduct, fmtDate, loadDataset, lonLatToPixel, probeSites, opticalTiles, placesNearWater, polCompare, radarUrl, signed, siteBounds, waterDiff, PITCH_KM2 } from "./lib/nisar.js";
 
 const DEFAULTS = {
   mode: "story", pol: "hh", cpol: "hh", k: 0, kA: 0, kB: 0, thr: 3,
@@ -156,6 +156,12 @@ export default function App() {
           return (n2.pol === "insar" && !loaded.insar) || (n2.pol === "motion" && !loaded.motion) ? { ...n2, pol: "hh" } : n2;
         });
         setDs(loaded);
+        // fly from the whole picture to the place the visitor came to see (?f=… or the story's default)
+        const fv = r?.site === siteId ? focusView(loaded, new URLSearchParams(query).get("f") ?? defaultFocus(r.slug, view)) : null;
+        if (fv) {
+          setView({ ...fv, duration: 2000, n: Date.now() });
+          if (fv.point) { setPoint(fv.point); setOutside(false); }
+        }
         setProgress(null);
         setTab("what");
         applying.current = false;
@@ -900,7 +906,7 @@ export default function App() {
         </main>
       </div>
 
-      <Dashboard open={dialog === "dash"} onClose={() => setDialog(null)} sites={sites} onOpenSite={(id) => enterApp(slugFor(id))} />
+      <Dashboard open={dialog === "dash"} onClose={() => setDialog(null)} sites={sites} onOpenSite={(slug, q) => enterApp(slug, q)} />
       {m && <AboutDialog open={dialog === "about"} onClose={() => setDialog(null)} m={m} story={story} insar={ds.insar} closeup={ds.event?.closeup} motion={ds.motion} />}
     </>
   );

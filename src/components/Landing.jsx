@@ -143,10 +143,10 @@ export default function Landing({ sites, lang, chooseLang, onOpen, onTour, onRiv
   const name = (id) => storyFor(id, lang).name;
 
   const stories = [
-    { id: "water", site: "vakhsh_cascade", hash: "mode=story", img: IMG.water, kind: "lpKindWater", title: name("vakhsh_cascade"), n: gained, unit: t("uKm2"), digits: 1, sign: true, label: "lpWaterNum", line: "lpWaterLine" },
-    { id: "motion", site: "vakhsh_cascade", hash: "mode=single&pol=motion", img: IMG.motion, kind: "lpKindMotion", title: t("lpMotionTitle"), n: spot?.total_cm ?? null, unit: t("uCm"), digits: 1, sign: true, label: "lpMotionNum", line: "lpMotionLine" },
+    { id: "water", site: "vakhsh_cascade", hash: "mode=story&f=lakes", img: IMG.water, kind: "lpKindWater", title: name("vakhsh_cascade"), n: gained, unit: t("uKm2"), digits: 1, sign: true, label: "lpWaterNum", line: "lpWaterLine" },
+    { id: "motion", site: "vakhsh_cascade", hash: "mode=single&pol=motion&f=slope", img: IMG.motion, kind: "lpKindMotion", title: t("lpMotionTitle"), n: spot?.total_cm ?? null, unit: t("uCm"), digits: 1, sign: true, label: "lpMotionNum", line: "lpMotionLine" },
     { id: "crops", site: "vakhsh", hash: "mode=story", img: IMG.crops, kind: "lpKindCrops", title: name("vakhsh"), n: rise, unit: t("uDb"), digits: 1, sign: true, label: "lpCropsNum", line: "lpCropsLine" },
-    { id: "flood", site: "nepal", hash: "mode=story&cu=1&cv=swipe", img: IMG.flood, kind: "lpKindFlood", title: name("nepal"), n: wet, unit: t("uKm2"), digits: 1, label: "lpFloodNum", line: "lpFloodLine" },
+    { id: "flood", site: "nepal", hash: "mode=story&cu=1&cv=swipe&f=flood", img: IMG.flood, kind: "lpKindFlood", title: name("nepal"), n: wet, unit: t("uKm2"), digits: 1, label: "lpFloodNum", line: "lpFloodLine" },
   ];
 
   return (
@@ -238,7 +238,7 @@ export default function Landing({ sites, lang, chooseLang, onOpen, onTour, onRiv
           <p className="lp-k" data-reveal>{t("lpSlideK")}</p>
           <h2 data-reveal>{t("lpSlideT")}</h2>
           <p className="lp-lead" data-reveal>{rich(t("lpSlideS"))}</p>
-          <button className="lp-btn ghost" data-reveal onClick={() => onOpen("flood", "mode=story&cu=1&cv=swipe")}>{t("lpSlideBtn")} →</button>
+          <button className="lp-btn ghost" data-reveal onClick={() => onOpen("flood", "mode=story&cu=1&cv=swipe&f=flood")}>{t("lpSlideBtn")} →</button>
         </div>
         <div data-reveal><FloodSlider /></div>
       </section>
