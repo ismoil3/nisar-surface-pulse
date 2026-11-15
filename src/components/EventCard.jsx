@@ -166,7 +166,6 @@ export function EventPolCard({ ds, onView }) {
           <div className="bar ctl"><i style={{ width: `${Math.max(2, (p.control_km2 / max) * 100)}%` }} /></div>
           <div className="polnums">
             <span>{tr("evPolRow", { f: f1(p.flood_km2), c: f1(p.control_km2) })}</span>
-            <span>{tr("evPolRatio", { r: f1(p.signal_to_noise) })}</span>
           </div>
         </div>
       ))}
@@ -204,7 +203,8 @@ export function CloseupCard({ ds, s, set, story, onPlace, onExit }) {
         <h2>{t("cuTitle")}</h2>
         <button className="ghost tiny" onClick={onExit}>{t("cuExit")}</button>
       </div>
-      <p className="lead">{tr("cuLead", { px: cu.pixel_m, nb: cu.before_dates.length, na: cu.after_dates.length })}</p>
+      <p className="lead">{tr("cuPlain")}</p>
+      <p className="hint">{tr("cuLead", { px: cu.pixel_m, nb: cu.before_dates.length, na: cu.after_dates.length })}</p>
       <div className="seg" role="tablist" aria-label={t("cuTitle")}>
         {CU_VIEWS.map(([id, label]) => (
           <button key={id} className={s.cuView === id ? "on" : ""} onClick={() => set({ cuView: id })} role="tab" aria-selected={s.cuView === id}>{t(label)}</button>

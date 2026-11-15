@@ -801,7 +801,7 @@ export default function App() {
           </section>
         );
       })()}
-      <p className="hint big clickme">{t(ds.event ? "clickHintEv" : ds.farm ? "clickHintFarm" : "clickHint")}</p>
+      {!mo && <p className="hint big clickme">{t(ds.event ? "clickHintEv" : ds.farm ? "clickHintFarm" : "clickHint")}</p>}
     </div>
   );
   const trustTab = !ds ? null : (
@@ -861,7 +861,7 @@ export default function App() {
             <button className={guideIdx >= 0 ? "primary on" : "primary"} onClick={() => (guideIdx >= 0 ? closeTour() : goGuide(0))} disabled={!chapters.length}>
               {guideIdx >= 0 ? <>×<span className="tb-l"> {t("guideClose")}</span></> : <>▶<span className="tb-l"> {t("btnGuide")}</span></>}
             </button>
-            <button className="ghost" onClick={() => setDialog("dash")} disabled={!sites}>▦<span className="tb-l"> {t("btnDash")}</span></button>
+            <button className="ghost tb-dash" onClick={() => setDialog("dash")} disabled={!sites}>▦<span className="tb-l"> {t("btnDash")}</span></button>
             <button className="ghost" onClick={() => setDialog("about")} disabled={!ds}>ⓘ<span className="tb-l"> {t("btnAbout")}</span></button>
             <div className="seg small level lang" role="group" aria-label={t("language")}>
               {LANGS.map((l) => (

@@ -402,7 +402,12 @@ export function focusView(ds, focus) {
     }
     return null;
   }
-  if (focus === "slope" && ds.motion?.spots?.[0]) { const sp = ds.motion.spots[0]; return { center: [sp.lon, sp.lat], zoom: 11.6 }; }
+  if (focus === "slope" && ds.motion?.spots?.[0]) {
+    // the slope together with the Rogun dam and town, so a visitor sees where it is
+    const sp = ds.motion.spots[0], dam = ds.context?.dams?.find((x) => /rogun/i.test(x.name ?? ""))?.lonlat ?? [sp.lon, sp.lat];
+    const pad = 0.035;
+    return { bounds: [[Math.min(sp.lon, dam[0]) - pad, Math.min(sp.lat, dam[1]) - pad], [Math.max(sp.lon, dam[0]) + pad, Math.max(sp.lat, dam[1]) + pad]] };
+  }
   if (focus === "motion" && ds.motion) return { bounds: cornersBounds(ds.motion.corners) };
   if (focus === "dam") { const d = ds.context?.dams?.find((x) => /rogun/i.test(x.name ?? "")); return d ? { center: d.lonlat, zoom: 13 } : null; }
   const cu = ds.event?.closeup;
