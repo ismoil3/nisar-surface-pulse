@@ -1,10 +1,10 @@
 # Project log
 
 What has been built, why, and what is still open. Newest decisions first within each section.
-Last updated: 2026-11-13.
+Last updated: 2026-11-15.
 
 ## What the app does
-- Two stories, each in English, Russian and Tajik:
+- Four stories (lakes, ground movement, crops, flood), each in English, Russian and Tajik:
   - **Rogun and Nurek, Tajikistan.** A gradual change: two reservoirs fill in summer.
     - Nurek grew from 74.3 to 89.7 km² and Rogun from 13.9 to 20.0 km².
     - Rogun's estimated water level rose from 1,115 to 1,128 m (±10 m).

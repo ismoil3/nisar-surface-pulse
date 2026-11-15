@@ -37,6 +37,9 @@ function Modal({ open, onClose, children }) {
   );
 }
 
+/** Which processing versions a site's passes come from (X = experimental, P05023 = PROVISIONAL, P05036+ = VALIDATED). */
+export const statusKey = (m) => (m.dates.some((d) => /_X\d{5}_/.test(d.granule ?? "")) ? "l1x" : "l1");
+
 export function AboutDialog({ open, onClose, m, story, insar, closeup, motion }) {
   const rows = [
     ["rSite", `${story.name || m.name}, ${story.region || m.region}`],
@@ -97,7 +100,7 @@ export function AboutDialog({ open, onClose, m, story, insar, closeup, motion })
       </ul>
       <h3>{t("limits")}</h3>
       <ul>
-        <li>{tr("l1")}</li>
+        <li>{tr(statusKey(m))}</li>
         <li>{t(m.farmland ? "lFarm" : ev ? "lEvent" : "l2")}</li>
         <li>{t("l3", { px: m.pixel_m })}</li>
         <li>{t("lRes", { px: m.pixel_m })}</li>

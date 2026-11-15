@@ -145,7 +145,7 @@
   }
  ],
  "sources": {
-  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "radar": "NISAR L2 GCOV (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1: PROVISIONAL P05023 to 2026-10-13, VALIDATED P05036 from 2026-10-25",
   "dem": "Copernicus DEM GLO-30 (ESA/Copernicus), used for the slope<2 deg farmland mask"
  },
  "farmland": {

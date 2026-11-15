@@ -3,7 +3,7 @@ import MapView, { WATER_A_COLOR, WATER_COLOR } from "./components/MapView.jsx";
 import Controls from "./components/Controls.jsx";
 import AreaCard from "./components/AreaCard.jsx";
 import PointCard from "./components/PointCard.jsx";
-import { AboutDialog } from "./components/Dialogs.jsx";
+import { AboutDialog, statusKey } from "./components/Dialogs.jsx";
 import PolCard from "./components/PolCard.jsx";
 import StoryCard from "./components/StoryCard.jsx";
 import EventCard, { CloseupCard, EventPolCard, ZoneCard, cornerBounds } from "./components/EventCard.jsx";
@@ -799,7 +799,7 @@ export default function App() {
       <section className="card">
         <h2>{t("qSure")}</h2>
         <ul className="caveats">
-          <li>{tr("l1")}</li>
+          <li>{tr(statusKey(m))}</li>
           {story.caveats.map((c) => <li key={c}>{c}</li>)}
           {mo && ["moC1", "moC2", "moC5"].map((k) => <li key={k}>{t(k)}</li>)}
         </ul>

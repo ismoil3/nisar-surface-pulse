@@ -353,7 +353,7 @@ export const STORIES = {
       river: "Bhote Koshi–Trishuli",
       actions: [
         ["🚑", "Emergency teams", "After the very next pass, list the river stretches that changed most (here near Devighat and Galchhi) and send inspections there first."],
-        ["🏗️", "Engineers and hydropower operators", "Check bridges, roads and water intakes along the wider, wetter channel."],
+        ["🏗️", "Engineers and hydropower operators", "Check bridges, roads and water intakes along the wider, smoother channel."],
         ["🔬", "Scientists", "Separate flood scars from the season and the rice harvest, as this page does, before counting damage."],
         ["🎓", "Teachers and the public", "Show why a flood in a gorge leaves scars, not a lake, and why radar can see them through monsoon cloud."],
       ],
@@ -381,10 +381,10 @@ export const STORIES = {
         ["Small things", "One radar pixel is 60 m wide (10 m in the close-up). A damaged bridge or house is about that size or smaller and cannot be seen reliably."],
       ],
       cuWhy:
-        "A flood in a narrow Himalayan gorge does not leave a big lake for a radar to see: the water passes in hours, NISAR returns only every 12 days, the river is a few pixels wide, and steep walls hide parts of the valley. What stays are scars: a wider channel full of wet sand and mud, debris and eroded banks. The close-up looks for those scars along the Trishuli, from Betrawati down to Galchhi.",
+        "A flood in a narrow Himalayan gorge does not leave a big lake for a radar to see: the water passes in hours, NISAR returns only every 12 days, the river is a few pixels wide, and steep walls hide parts of the valley. What stays are scars: a wider channel full of smooth sand and mud, debris and eroded banks. The close-up looks for those scars along the Trishuli, from Betrawati down to Galchhi.",
       cuPlaces: { Betrawati: "Betrawati", "Trishuli Bazar (Bidur)": "Trishuli Bazar (Bidur)", Devighat: "Devighat", Galchhi: "Galchhi" },
       caveats: [
-        "At 60 m the flood signal we are sure of is small: about 0.3 km² of mud near Betrawati. The 10 m close-up shows more: 1.9 km² of wider, wetter river channel from Betrawati to Galchhi, against 0.8 km² of the same kind of change in the quiet test before the flood.",
+        "At 60 m the flood signal we are sure of is small: about 0.3 km² of mud near Betrawati. The 10 m close-up shows more: 1.9 km² of wider, smoother river channel from Betrawati to Galchhi, against 0.8 km² of the same kind of change in the quiet test before the flood.",
         "Most of the red (brighter) area is the river shrinking after the monsoon, not the flood: it started before 26 Aug and also happens on rivers the flood never reached.",
         "The upper gorge is hidden by layover and shadow, so the map does not show the whole flood path.",
       ],
@@ -396,7 +396,7 @@ export const STORIES = {
       river: "Бхоте-Коси — Тришули",
       actions: [
         ["🚑", "Спасатели", "Уже после следующего пролёта составьте список участков реки, которые изменились сильнее всего (здесь у Девигхата и Галчхи), и отправьте проверку туда в первую очередь."],
-        ["🏗️", "Инженеры и операторы ГЭС", "Проверьте мосты, дороги и водозаборы вдоль расширившегося, более мокрого русла."],
+        ["🏗️", "Инженеры и операторы ГЭС", "Проверьте мосты, дороги и водозаборы вдоль расширившегося, более гладкого русла."],
         ["🔬", "Учёные", "Перед подсчётом ущерба отделите следы паводка от сезона и уборки риса, как это сделано на этой странице."],
         ["🎓", "Учителя и все желающие", "Покажите, почему паводок в ущелье оставляет шрамы, а не озеро, и почему радар видит их сквозь муссонные облака."],
       ],
@@ -424,10 +424,10 @@ export const STORIES = {
         ["Мелкие объекты", "Один радарный пиксель — 60 м (10 м в крупном плане). Повреждённый мост или дом примерно такого размера или меньше, и надёжно его не увидеть."],
       ],
       cuWhy:
-        "Паводок в узком гималайском ущелье не оставляет большого озера, которое увидел бы радар: вода проходит за часы, NISAR возвращается лишь раз в 12 дней, река шириной в несколько пикселей, а крутые склоны скрывают часть долины. Остаются шрамы: расширившееся русло с мокрым песком и грязью, обломки и размытые берега. Крупный план ищет эти шрамы вдоль Тришули, от Бетравати до Галчхи.",
+        "Паводок в узком гималайском ущелье не оставляет большого озера, которое увидел бы радар: вода проходит за часы, NISAR возвращается лишь раз в 12 дней, река шириной в несколько пикселей, а крутые склоны скрывают часть долины. Остаются шрамы: расширившееся русло с гладким песком и грязью, обломки и размытые берега. Крупный план ищет эти шрамы вдоль Тришули, от Бетравати до Галчхи.",
       cuPlaces: { Betrawati: "Бетравати", "Trishuli Bazar (Bidur)": "Тришули-Базар (Бидур)", Devighat: "Девигхат", Galchhi: "Галчхи" },
       caveats: [
-        "При пикселе 60 м сигнал паводка, в котором мы уверены, небольшой: около 0,3 км² грязи у Бетравати. Крупный план 10 м показывает больше: 1,9 км² расширившегося, более мокрого русла от Бетравати до Галчхи — против 0,8 км² такого же изменения в контрольной проверке до паводка.",
+        "При пикселе 60 м сигнал паводка, в котором мы уверены, небольшой: около 0,3 км² грязи у Бетравати. Крупный план 10 м показывает больше: 1,9 км² расширившегося, более гладкого русла от Бетравати до Галчхи — против 0,8 км² такого же изменения в контрольной проверке до паводка.",
         "Большая часть красной (более светлой) области — это обмеление реки после муссона, а не паводок: оно началось до 26 августа и происходит и на реках, куда паводок не дошёл.",
         "Верхнее ущелье скрыто наложением и тенью, поэтому карта показывает не весь путь паводка.",
       ],
@@ -439,7 +439,7 @@ export const STORIES = {
       river: "Бхоте-Коси — Тришулӣ",
       actions: [
         ["🚑", "Наҷотдиҳандагон", "Пас аз гузариши навбатӣ рӯйхати қисматҳои дарёро, ки бештар тағйир ёфтанд (дар ин ҷо назди Девигҳат ва Галчҳӣ), тартиб диҳед ва санҷишро аввал ба он ҷо фиристед."],
-        ["🏗️", "Муҳандисон ва нерӯгоҳҳо", "Пулҳо, роҳҳо ва обгирҳоро дар қади маҷрои васеътар ва тартар санҷед."],
+        ["🏗️", "Муҳандисон ва нерӯгоҳҳо", "Пулҳо, роҳҳо ва обгирҳоро дар қади маҷрои васеътар ва ҳамвортар санҷед."],
         ["🔬", "Олимон", "Пеш аз ҳисоб кардани зарар нишонаҳои обхезиро аз фасл ва ҳосилғундории шолӣ ҷудо кунед, чунон ки ин саҳифа мекунад."],
         ["🎓", "Омӯзгорон ва ҳама", "Нишон диҳед, ки чаро обхезӣ дар дара на кӯл, балки нишонаҳо мегузорад ва чаро радар онҳоро аз байни абрҳои муссон мебинад."],
       ],
@@ -467,10 +467,10 @@ export const STORIES = {
         ["Чизҳои хурд", "Як пиксели радар 60 м аст (дар наздик-намо 10 м). Пул ё хонаи вайроншуда тақрибан ҳамин андоза ё хурдтар аст ва онро боэътимод дидан мумкин нест."],
       ],
       cuWhy:
-        "Обхезӣ дар дараи танги Ҳимолой кӯли калоне намегузорад, ки радар бубинад: об дар чанд соат мегузарад, NISAR танҳо ҳар 12 рӯз бармегардад, дарё ҳамагӣ чанд пиксел паҳно дорад ва нишебиҳои тез қисми водиро пинҳон мекунанд. Он чи мемонад, нишонаҳост: маҷрои васеъшуда бо реги тар ва лой, партовҳо ва соҳилҳои шусташуда. Наздик-намо ин нишонаҳоро дар қади Тришулӣ, аз Бетравати то Галчҳӣ, меҷӯяд.",
+        "Обхезӣ дар дараи танги Ҳимолой кӯли калоне намегузорад, ки радар бубинад: об дар чанд соат мегузарад, NISAR танҳо ҳар 12 рӯз бармегардад, дарё ҳамагӣ чанд пиксел паҳно дорад ва нишебиҳои тез қисми водиро пинҳон мекунанд. Он чи мемонад, нишонаҳост: маҷрои васеъшуда бо реги ҳамвор ва лой, партовҳо ва соҳилҳои шусташуда. Наздик-намо ин нишонаҳоро дар қади Тришулӣ, аз Бетравати то Галчҳӣ, меҷӯяд.",
       cuPlaces: { Betrawati: "Бетравати", "Trishuli Bazar (Bidur)": "Тришулӣ-Бозор (Бидур)", Devighat: "Девигҳат", Galchhi: "Галчҳӣ" },
       caveats: [
-        "Бо пиксели 60 м сигнали обхезӣ, ки мо ба он боварӣ дорем, хурд аст: тақрибан 0,3 км² лой назди Бетравати. Наздик-намои 10 м бештар нишон медиҳад: 1,9 км² маҷрои васеътар ва тартар аз Бетравати то Галчҳӣ, дар муқобили 0,8 км² ҳамин гуна тағйирот дар санҷиши назоратии пеш аз обхезӣ.",
+        "Бо пиксели 60 м сигнали обхезӣ, ки мо ба он боварӣ дорем, хурд аст: тақрибан 0,3 км² лой назди Бетравати. Наздик-намои 10 м бештар нишон медиҳад: 1,9 км² маҷрои васеътар ва ҳамвортар аз Бетравати то Галчҳӣ, дар муқобили 0,8 км² ҳамин гуна тағйирот дар санҷиши назоратии пеш аз обхезӣ.",
         "Қисми зиёди минтақаи сурх (равшантар) кам шудани дарё пас аз муссон аст, на обхезӣ: он пеш аз 26 август сар шуд ва дар дарёҳое, ки обхезӣ ба онҳо нарасид, низ рӯй медиҳад.",
         "Дараи болоӣ бо «афтидан» ва соя пинҳон аст, бинобар ин харита тамоми роҳи обхезиро нишон намедиҳад.",
       ],

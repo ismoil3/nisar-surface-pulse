@@ -249,7 +249,7 @@
   }
  ],
  "sources": {
-  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "radar": "NISAR L2 GCOV (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1: PROVISIONAL P05023 to 2026-10-13, VALIDATED P05036 from 2026-10-25",
   "dem": "Copernicus DEM GLO-30 (ESA/Copernicus)"
  },
  "notes": "One box with both reservoirs. Each water_<date>.geojson is a FeatureCollection with up to two features (properties.reservoir = Nurek / Rogun). Per-date areas are in dates[].reservoirs. Nurek: dark in HH+HV, elevation 850–920 m, connected to a point in the lake. Rogun: dark in HH+HV inside the valley below 1,170 m upstream of the dam; level_m_est from the pre-filling Copernicus DEM (estimate, ~10 m uncertainty). null = reservoir not fully covered that date.",

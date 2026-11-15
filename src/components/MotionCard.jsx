@@ -41,7 +41,8 @@ export default function MotionCard({ ds, onSpot, onDam }) {
   const damKey = Object.keys(mo.series).find((k) => /dam/i.test(k));
   const damMax = damKey ? Math.max(...mo.series[damKey].map(Math.abs)) : null;
   const a = fmtDate(mo.dates[0], true), b = fmtDate(mo.dates.at(-1), true);
-  const perStep = spot ? spot.total_cm / mo.pairs.length : null;
+  // rate per 12 days over the real time span (one of the pairs spans 24 days, across NISAR's data gap)
+  const perStep = spot ? (spot.total_cm / ((Date.parse(mo.dates.at(-1)) - Date.parse(mo.dates[0])) / 864e5)) * 12 : null;
   return (
     <section className="card story">
       <h2>{t("moTitle")}</h2>

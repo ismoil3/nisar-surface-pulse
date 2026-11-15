@@ -115,7 +115,7 @@
  "story_en": "NISAR compared 6 radar images before and 5 after the flood of 26 Aug 2026. Along the Trishuli river from Betrawati to Galchhi it shows the flood's path: 1.9 km² of river channel became wider and filled with wet sand and mud (blue), and 0.3 km² next to it became rougher with debris (red). Farther from the river, 4.3 km² of fields also changed, but that is the rice harvest of the monsoon season, so we show it separately and do not count it.",
  "why_not_obvious_en": "A flood in a narrow Himalayan gorge does not leave a big lake for a radar to see: the water passes in hours, NISAR returns every 12 days, the river is only a few pixels wide, and steep walls hide parts of the valley. What remains are scars: debris, eroded banks and new channels. That is what this layer shows.",
  "sources": {
-  "radar": "NISAR L2 GCOV, PROVISIONAL (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1",
+  "radar": "NISAR L2 GCOV (NASA/JPL/ISRO, ASF DAAC), DOI 10.5067/NIL2GCOV-P1: experimental release X05026 (all before-flood passes) and PROVISIONAL P05023",
   "dem": "Copernicus DEM GLO-30 (ESA/Copernicus)"
  },
  "note": "10 m close-up of the lower valley (Betrawati to Galchhi) from the data team's nepal_lower package. Before/after are means of all passes; colours: cyan = smoother/wetter channel (HH down >=3 dB), orange = rougher debris (HH up >=3 dB), grey = layover/shadow, yellow = seasonal (rice harvest, not counted)."

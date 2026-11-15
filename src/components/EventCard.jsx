@@ -170,7 +170,10 @@ export function EventPolCard({ ds, onView }) {
           </div>
         </div>
       ))}
-      <p className="insight"><b>{t("polWinner", { pol: win.pol })}</b> {hh && t("evPolWhy", { r: Math.round(hh.signal_to_noise) })}</p>
+      <p className="insight"><b>{t("polWinner", { pol: win.pol })}</b> {hh && tr("evPolWhy2", {
+        all: f1(hh.flood_km2), season: f1(ds.event.hh_valley_brighter_km2 ?? 0),
+        d: f1(ds.event.hh_valley_darker_km2 ?? 0), dc: f1(ds.event.hh_valley_control_darker_km2 ?? 0),
+        x: ds.event.hh_valley_control_darker_km2 ? Math.round(ds.event.hh_valley_darker_km2 / ds.event.hh_valley_control_darker_km2) : "–" })}</p>
       <p className="hint">{t("polNasa")} <a href="https://storymaps.arcgis.com/stories/c00d7691b8004b20a14f28df710d05fd" target="_blank" rel="noreferrer">{t("polNasaLink")}</a></p>
     </section>
   );
