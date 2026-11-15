@@ -47,6 +47,6 @@
   html.rep-on .shell, .rep-bar { display: none !important; }
   .rep { position: static; overflow: visible; background: #fff; }
   /* one sheet: lay the page out wider and shrink it, so every language fits on a single A4 */
-  .rep-page { margin: 0; box-shadow: none; zoom: .78; width: calc(210mm / .78); min-height: 0; }
+  .rep-page { margin: 0; box-shadow: none; zoom: .74; width: calc(210mm / .74); min-height: 0; }
   .rep * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }

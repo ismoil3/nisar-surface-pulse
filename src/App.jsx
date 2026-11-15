@@ -123,9 +123,9 @@ export default function App() {
     if (navType === "POP" && route) { applying.current = true; setNav((x) => x + 1); }
   }, [location.key, navType, route]);
 
-  // load the selected site
+  // load the selected site, only when the map is open (the landing, river and report pages use small files only)
   useEffect(() => {
-    if (!sites || !siteId) return;
+    if (!sites || !siteId || screen !== "app") return;
     let cancelled = false;
     const site = sites.find((x) => x.id === siteId);
     applying.current = true;
@@ -171,7 +171,7 @@ export default function App() {
       })
       .catch((e) => !cancelled && setError(t("errLoad", { msg: e.message })));
     return () => { cancelled = true; };
-  }, [sites, siteId, nav]);
+  }, [sites, siteId, nav, screen === "app"]);
 
   const n = ds?.m.dates.length ?? 0;
   const kMain = s.mode === "single" ? s.k : s.kB;
@@ -384,7 +384,11 @@ export default function App() {
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ds, stats, wdFull, story, set, lang, openCloseup]);
-  const closeTour = useCallback(() => { setGuideIdx(-1); setPlaying(false); }, []);
+  // leaving the guide also leaves the expert views it opened (signal change, HV, interferogram)
+  const closeTour = useCallback(() => {
+    setGuideIdx(-1); setPlaying(false);
+    setS((o) => (o.expert ? { ...o, expert: false, mode: o.mode === "change" ? "story" : o.mode, pol: o.pol === "hv" || o.pol === "insar" ? "hh" : o.pol } : o));
+  }, []);
 
   // ---------- answers to the challenge questions, measured on this site ----------
   const pc = useMemo(() => (ds && s.mode === "story" ? polCompare(ds, s.kA, s.kB) : null), [ds, s.mode, s.kA, s.kB]);
@@ -661,10 +665,12 @@ export default function App() {
     (ll) => {
       if (!ds) return;
       const inside = !!lonLatToPixel(ds, ll);
-      setOutside(!inside);
+      // the 10 m close-up reaches a little beyond the 60 m picture: there is a picture but no pass-by-pass series
+      const c = cu?.corners, inCu = c && ll[0] >= Math.min(...c.map((p) => p[0])) && ll[0] <= Math.max(...c.map((p) => p[0])) && ll[1] >= Math.min(...c.map((p) => p[1])) && ll[1] <= Math.max(...c.map((p) => p[1]));
+      setOutside(inside ? false : inCu ? "cu" : true);
       setPoint(inside ? ll : null);
     },
-    [ds]
+    [ds, cu]
   );
 
   const onAreaPick = useCallback(
@@ -908,7 +914,7 @@ export default function App() {
                   {ds.event && (cu || eventStory) && <EventDock ds={ds} cu={cu} onPick={(i) => { setPlaying(false); set({ mode: "single", pol: "rgb", k: i }); if (cu) fitSite(); }} />}
                 </div>
               )}
-              {outside && <div className="toast" role="status">{t("outside")}</div>}
+              {outside && <div className="toast" role="status">{t(outside === "cu" ? "outsideCu" : "outside")}</div>}
             </MapView>
             {(progress || error || !ds) && (
               <div className="loader">

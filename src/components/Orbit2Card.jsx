@@ -30,7 +30,7 @@ export default function Orbit2Card({ ds }) {
       legend: { position: "top", align: "start", labels: { boxWidth: 10, boxHeight: 10 } },
       tooltip: { callbacks: {
         title: (c) => fmtDate(c[0].raw.date),
-        label: (c) => ` ${c.dataset.label}: ${c.parsed.y.toFixed(1)} ${t("uKm2")}${c.raw.v ? " · VALIDATED" : ""}${c.raw.flag ? " · " + t("o2Flag") : ""}`,
+        label: (c) => ` ${c.dataset.label}: ${c.parsed.y.toFixed(1)} ${t("uKm2")}${c.raw.v ? " · " + t("valTag") : ""}${c.raw.flag ? " · " + t("o2Flag") : ""}`,
       } },
     },
     scales: {

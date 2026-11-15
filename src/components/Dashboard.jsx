@@ -20,8 +20,10 @@ export async function summarize({ id, m }) {
     out.res = Object.keys(m.dates.find((d) => d.reservoirs).reservoirs).map((r) => {
       // a value flagged by the data check (e.g. rough water after rain) is not used for the season's change
       const v = m.dates.map((d) => (d.reservoirs?.[r]?.flag ? null : d.reservoirs?.[r]?.area_km2 ?? null));
-      const ok = v.filter((x) => x != null);
-      return { r, series: v, a: ok[0], b: ok.at(-1) };
+      // start and end = first and last pass on which every lake was measured (the map uses the same two dates)
+      const all = m.dates.map((d) => Object.values(d.reservoirs ?? {}).every((x) => x.area_km2 != null && !x.flag));
+      const i0 = all.indexOf(true), i1 = all.lastIndexOf(true);
+      return { r, series: v, a: v[i0], b: v[i1] };
     });
   }
   if (m.motion) out.motion = await safe(async () => {
