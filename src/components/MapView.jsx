@@ -149,11 +149,18 @@ export default function MapView({ popup, ds, mainUrl, radarCorners, changeUrl, w
   useEffect(() => {
     const map = mapRef.current;
     if (!loaded || !ds) return;
-    addOverlayLayers(map, ds.m.corners, opacity);
-    const xs = ds.m.corners.map((c) => c[0]), ys = ds.m.corners.map((c) => c[1]);
-    map.stop();
-    map.fitBounds([[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]], { padding: 30, duration: 0 });
-    setReadyId(ds.id);
+    let off = false;
+    const run = () => {
+      if (off) return;
+      try { addOverlayLayers(map, ds.m.corners, opacity); }
+      catch { map.once("idle", run); return; } // the style was still loading: try again when the map is idle
+      const xs = ds.m.corners.map((c) => c[0]), ys = ds.m.corners.map((c) => c[1]);
+      map.stop();
+      map.fitBounds([[Math.min(...xs), Math.min(...ys)], [Math.max(...xs), Math.max(...ys)]], { padding: 30, duration: 0 });
+      setReadyId(ds.id);
+    };
+    if (map.isStyleLoaded()) run(); else map.once("idle", run);
+    return () => { off = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loaded, ds]);
 

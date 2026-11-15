@@ -122,7 +122,7 @@ export default function Dashboard({ open, onClose, sites, onOpenSite }) {
                         <div><b>+{f1(Math.max(...s.farm.hv_median_db) - s.farm.hv_median_db[0])} {t("uDb")}</b><small>{t("dashCrops", { km: Math.round(s.m.farmland.farmland_km2) })}</small><Spark values={s.farm.hv_median_db} color="#a3e635" /></div>
                       )}
                       {s.farm && (
-                        <div><b>{harvestRange(s.m.farmland).km} km²</b><small>{t("dashHarvest")}</small></div>
+                        <div><b>{harvestRange(s.m.farmland).km} {t("uKm2")}</b><small>{t("dashHarvest")}</small></div>
                       )}
                       {s.closeup && (
                         <>

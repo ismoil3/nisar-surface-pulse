@@ -84,7 +84,7 @@ export default function FarmCard({ ds, story, kMain, onPick, onGrowth, onHarvest
           <em>{t("farmRiseEm")}</em>
         </div>
         <div className="cut">
-          <b>{harvestRange(f).km} km²</b>
+          <b>{harvestRange(f).km} {t("uKm2")}</b>
           <small>{t("farmCut", { pct: pct != null ? harvestRange(f).pct : "–" })}</small>
           <em>{t("farmCutEm")}</em>
         </div>

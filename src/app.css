@@ -333,3 +333,15 @@ dialog h2 { font-size: 26px; font-weight: 800; }
 .evd-key b { display: flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
 .evdock .dock-ticks small { font-size: 10px; }
 @media (max-width: 760px) { .evd-key { display: none; } }
+
+/* phone header: icons only, so the language switch stays on screen; the guide leaves the top half of the map visible */
+@media (max-width: 860px) {
+  .topbar { flex-wrap: nowrap; gap: 8px; padding: 8px 10px; }
+  .top-actions { gap: 6px; flex-wrap: nowrap; }
+  .top-actions .tb-l { display: none; }
+  .top-actions > button { padding: 7px 11px; }
+  .brand { max-width: none; }
+  .brand h1 { font-size: 15px; }
+  .answer.open.guide-on { height: 50dvh; }
+}
+@media (max-width: 860px) { .brand h1 { display: none; } }

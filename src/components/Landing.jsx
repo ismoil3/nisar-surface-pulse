@@ -135,7 +135,9 @@ export default function Landing({ sites, lang, chooseLang, onOpen, onTour, onRiv
   useReveal(root);
   const by = (id) => sum?.find((s) => s.id === id);
   const water = by("vakhsh_cascade"), crops = by("vakhsh"), flood = by("nepal");
-  const gained = water?.res ? water.res.reduce((a, r) => a + (r.b - r.a), 0) : null;
+  // the same number as the map's "What changed" panel: total lake area, first to last date with both outlines
+  const both = (water?.m.dates ?? []).map((d) => Object.values(d.reservoirs ?? {})).filter((r) => r.length && r.every((x) => x.area_km2 != null && !x.flag)).map((r) => r.reduce((a, x) => a + x.area_km2, 0));
+  const gained = both.length > 1 ? both.at(-1) - both[0] : null;
   const spot = water?.motion?.spots?.[0];
   const rise = crops?.farm ? Math.max(...crops.farm.hv_median_db) - crops.farm.hv_median_db[0] : null;
   const wet = flood?.closeup?.stats_km2.flood_darker_km2 ?? null;

@@ -149,6 +149,8 @@ export default function App() {
           : loaded.farm ? { k: loaded.farm.peak, kA: 0, kB: loaded.farm.peak, pol: "rgb" } : { k: n - 1, kA: areaStats(loaded.m)?.ia ?? 0, kB: areaStats(loaded.m)?.ib ?? n - 1 };
         const fromUrl = r?.site === siteId ? readParams(query, n, def) : { ...def };
         const view = { ...(def.pol ? { pol: def.pol } : {}), mode: "story", xray: false, ...(r?.site === siteId ? r.preset ?? {} : {}), ...fromUrl };
+        // a flood story opened without a view starts on the 10 m close-up, where the flood is visible at once
+        if (r?.site === siteId && loaded.event?.closeup && !/(^|&)mode=/.test(query)) Object.assign(view, { cu: true, cuView: "swipe", cuFlood: true, cuHidden: true });
         // the interferogram picture exists only for some sites
         setS((o) => {
           const n2 = { ...o, cu: false, clearRef: false, ...view };
@@ -390,6 +392,13 @@ export default function App() {
   const near = useMemo(() => (ds && stats ? placesNearWater(ds, stats.ib, 3) : []), [ds, stats]);
 
   // ---------- scroll story: the same steps as the tour, plus the three questions ----------
+  // guide step "which channel shows it best": the answer in plain words; the measurements stay in the "Can we trust it?" tab
+  const polPlain = (pol, what) => (
+    <>
+      <p>{tr("gPol", { pol: pol.toUpperCase(), what: t(what) })}</p>
+      <button className="ghost" onClick={() => { setGuideIdx(-1); setPlaying(false); setTab("trust"); }}>{t("gPolMore")} →</button>
+    </>
+  );
   const chapters = useMemo(() => {
     if (!tour.length) return [];
     if (ds.farm) {
@@ -434,7 +443,7 @@ export default function App() {
           </> },
         { id: "pol", title: t("c7title"),
           apply: () => { set({ mode: "single", expert: true, pol: "hv", k: P }); fit(); },
-          body: <FarmPol ds={ds} onView={(pol) => set({ mode: "single", expert: true, pol, k: P })} /> },
+          body: polPlain("hv", "gPolCrops") },
         { id: "future", title: t("c8title"),
           apply: ds.insar ? () => { set({ mode: "single", expert: true, pol: "insar", k: P }); fit(); } : tour[4].apply,
           body: <>
@@ -503,7 +512,7 @@ export default function App() {
           </> },
         { id: "pol", title: t("c7title"),
           apply: () => { set({ mode: "single", expert: true, pol: "hh", k: A0 }); fit(); },
-          body: <EventPolCard ds={ds} onView={(pol) => set({ mode: "single", expert: true, pol, k: A0 })} /> },
+          body: polPlain(ds.event.polarization_test?.length ? ds.event.polarization_test.reduce((a, b) => (b.signal_to_noise > a.signal_to_noise ? b : a)).pol : "hh", "gPolFlood") },
         { id: "future", title: t("c8title"),
           apply: ds.insar ? () => { set({ mode: "single", expert: true, pol: "insar", k: A0 }); fit(); } : tour.at(-1).apply,
           body: <>
@@ -565,9 +574,7 @@ export default function App() {
         </> },
       { id: "pol", title: t("c7title"),
         apply: () => { set({ mode: "single", expert: true, pol: pcFull?.winner ?? "hh", k: B, showWater: true }); fit(); },
-        body: pcFull
-          ? <PolCard ds={ds} kA={A} kB={B} pc={pcFull} onView={(pol) => set({ mode: "single", expert: true, pol, k: B })} />
-          : <P>{t("c7none")}</P> },
+        body: pcFull ? polPlain(pcFull.winner, "gPolWater") : <P>{t("c7none")}</P> },
       ...(ds.motion ? [{ id: "motion", title: t("moTitle"),
         apply: () => { set({ mode: "single", pol: "motion", k: B }); setView({ bounds: [[ds.motion.corners[3][0], ds.motion.corners[2][1]], [ds.motion.corners[1][0], ds.motion.corners[0][1]]], n: Math.random() }); },
         body: <>
@@ -846,10 +853,10 @@ export default function App() {
           </Link>
           <div className="top-actions">
             <button className={guideIdx >= 0 ? "primary on" : "primary"} onClick={() => (guideIdx >= 0 ? closeTour() : goGuide(0))} disabled={!chapters.length}>
-              {guideIdx >= 0 ? `× ${t("guideClose")}` : `▶ ${t("btnGuide")}`}
+              {guideIdx >= 0 ? <>×<span className="tb-l"> {t("guideClose")}</span></> : <>▶<span className="tb-l"> {t("btnGuide")}</span></>}
             </button>
-            <button className="ghost" onClick={() => setDialog("dash")} disabled={!sites}>▦ {t("btnDash")}</button>
-            <button className="ghost" onClick={() => setDialog("about")} disabled={!ds}>ⓘ {t("btnAbout")}</button>
+            <button className="ghost" onClick={() => setDialog("dash")} disabled={!sites}>▦<span className="tb-l"> {t("btnDash")}</span></button>
+            <button className="ghost" onClick={() => setDialog("about")} disabled={!ds}>ⓘ<span className="tb-l"> {t("btnAbout")}</span></button>
             <div className="seg small level lang" role="group" aria-label={t("language")}>
               {LANGS.map((l) => (
                 <button key={l.id} className={lang === l.id ? "on" : ""} onClick={() => chooseLang(l.id)} title={l.name} lang={l.id}>{l.label}</button>
@@ -911,7 +918,7 @@ export default function App() {
             )}
           </div>
 
-          <aside className={`answer${sheet ? " open" : ""}`} aria-label={t("tabWhat")}>
+          <aside className={`answer${sheet ? " open" : ""}${guideIdx >= 0 ? " guide-on" : ""}`} aria-label={t("tabWhat")}>
             <button className="sheet-handle" onClick={() => setSheet((v) => !v)} aria-expanded={sheet} aria-label={t(sheet ? "sheetDown" : "sheetUp")}><i /></button>
             {ds && (guideIdx >= 0
               ? <Guide chapters={chapters} idx={guideIdx} onStep={goGuide} onClose={closeTour} />

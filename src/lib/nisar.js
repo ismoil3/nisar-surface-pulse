@@ -389,7 +389,12 @@ const cornersBounds = (c) => [[Math.min(...c.map((p) => p[0])), Math.min(...c.ma
  */
 export function focusView(ds, focus) {
   if (!ds || !focus) return null;
-  if (focus === "lakes" || focus === "rogun" || focus === "nurek") {
+  if (focus === "lakes") {
+    // all dates together: the newest outlines have Nurek only (Rogun is measured from another orbit then)
+    const b = featureBounds(ds.water.flatMap((g) => g?.features ?? []));
+    return b ? { bounds: b } : null;
+  }
+  if (focus === "rogun" || focus === "nurek") {
     for (let k = ds.water.length - 1; k >= 0; k--) {
       const fs = (ds.water[k]?.features ?? []).filter((f) => focus === "lakes" || (f.properties?.reservoir ?? "").toLowerCase() === focus);
       const b = fs.length && featureBounds(fs);
@@ -397,7 +402,7 @@ export function focusView(ds, focus) {
     }
     return null;
   }
-  if (focus === "slope" && ds.motion?.spots?.[0]) { const sp = ds.motion.spots[0]; return { center: [sp.lon, sp.lat], zoom: 12.2, point: [sp.lon, sp.lat] }; }
+  if (focus === "slope" && ds.motion?.spots?.[0]) { const sp = ds.motion.spots[0]; return { center: [sp.lon, sp.lat], zoom: 11.6 }; }
   if (focus === "motion" && ds.motion) return { bounds: cornersBounds(ds.motion.corners) };
   if (focus === "dam") { const d = ds.context?.dams?.find((x) => /rogun/i.test(x.name ?? "")); return d ? { center: d.lonlat, zoom: 13 } : null; }
   const cu = ds.event?.closeup;
@@ -412,7 +417,7 @@ export function focusView(ds, focus) {
 /** The focus a story opens with when the link does not name one. */
 export function defaultFocus(slug, view) {
   if (slug === "motion") return "slope";
-  if (slug === "flood") return view?.cu ? "flood" : null;
+  if (slug === "flood") return view?.cu ? "flood" : null; // the flood story opens on the 10 m close-up (see App)
   if (slug === "water") return "lakes";
   return null;
 }

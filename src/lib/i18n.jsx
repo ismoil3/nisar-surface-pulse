@@ -22,6 +22,8 @@ export function initialLang() {
   const h = location.hash.slice(1);
   const fromHash = new URLSearchParams(h.includes("?") ? h.split("?")[1] : h).get("lang");
   if (DICT[fromHash]) return fromHash;
+  const fromSearch = new URLSearchParams(location.search).get("lang");
+  if (DICT[fromSearch]) return fromSearch;
   try {
     const saved = localStorage.getItem("nsp_lang");
     if (DICT[saved]) return saved;
@@ -245,7 +247,7 @@ const DICT = {
     vShoreHead: "Right on the shoreline", vShoreText: "Sometimes water, sometimes land (water on {w} of {n} dates). The lake edge moves back and forth here.",
     water: "water", land: "land",
     stripLabel: "Water or land on each date",
-    backscatter: "backscatter (dB)",
+    backscatter: "radar echo (dB)",
     pixelMean: "(3×3 pixel mean)",
     // tour
     tourBack: "← Back", tourNext: "Next →", tourEnd: "Explore on my own", tourClose: "Close tour", tourLabel: "Guided tour",
@@ -436,7 +438,7 @@ const DICT = {
     vShoreHead: "Прямо на берегу", vShoreText: "То вода, то суша (вода в {w} из {n} дат). Край озера здесь двигается туда-сюда.",
     water: "вода", land: "суша",
     stripLabel: "Вода или суша в каждую дату",
-    backscatter: "обратное рассеяние (дБ)",
+    backscatter: "радарное эхо (дБ)",
     pixelMean: "(среднее 3×3 пикселя)",
     tourBack: "← Назад", tourNext: "Далее →", tourEnd: "Исследовать самому", tourClose: "Закрыть экскурсию", tourLabel: "Экскурсия",
     t1title: "Знакомьтесь: {name}",
@@ -623,7 +625,7 @@ const DICT = {
     vShoreHead: "Рост дар соҳил", vShoreText: "Гоҳ об, гоҳ хушкӣ (дар {w} сана аз {n} об). Канори кӯл дар ин ҷо пасу пеш меравад.",
     water: "об", land: "хушкӣ",
     stripLabel: "Об ё хушкӣ дар ҳар сана",
-    backscatter: "пароканиши баръакс (dB)",
+    backscatter: "акси садои радар (дБ)",
     pixelMean: "(миёнаи 3×3 пиксел)",
     tourBack: "← Ба қафо", tourNext: "Минбаъд →", tourEnd: "Худам меомӯзам", tourClose: "Бастани саёҳат", tourLabel: "Саёҳати кӯтоҳ",
     t1title: "Шинос шавед: {name}",

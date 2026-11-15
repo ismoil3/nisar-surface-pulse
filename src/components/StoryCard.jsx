@@ -28,7 +28,9 @@ export default function StoryCard({ ds, story, kA, kB, wd, near = [], onZoomHots
     );
   }
 
-  const net = wd.gained - wd.lost;
+  // the measured lake areas when both dates have them (the same number as the area chart and the landing page);
+  // the pixel difference of the two outlines can differ by about 0.1 km² from rounding at the edges
+  const net = dA.water_km2 != null && dB.water_km2 != null ? dB.water_km2 - dA.water_km2 : wd.gained - wd.lost;
   const pct = dA.water_km2 ? (net / dA.water_km2) * 100 : null;
   const grew = net > 0.05, shrank = net < -0.05;
   const lvA = dA.level_m_est, lvB = dB.level_m_est;
@@ -45,7 +47,7 @@ export default function StoryCard({ ds, story, kA, kB, wd, near = [], onZoomHots
     <section className="card story has-more">
       <div className="row between">
         <h2>{t("whatChanged")}</h2>
-        <span className={`pill ${shrank ? "neg" : ""}`}>{signed(net)} km²</span>
+        <span className={`pill ${shrank ? "neg" : ""}`}>{signed(net)} {t("uKm2")}</span>
       </div>
 
       {!order && (

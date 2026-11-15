@@ -64,6 +64,8 @@ export const RIVER = {
     evdBefore: "{n} passes before", evdAfter: "{n} passes after",
     evdHint: "The map compares the average of all passes before the flood with the average after it. Click a pass to see it alone.",
     pairNote: "Clearest photos of the valley before and after the flood of {ev} (NASA HLS, searched from March to November); the monsoon photos next to the radar passes are mostly cloud.", pairOff: "show the photos next to the radar dates", cuPhotos: "Real photos",
+    gPol: "Short answer: **{pol}**. The radar sends its wave flat and listens in two ways. **HH** hears the wave come back flat: it reacts to smooth surfaces such as water and mud. **HV** hears the part that plants twist sideways: it reacts to leaves and stems. For {what}, {pol} shows the change most clearly. The measured numbers are in the \"Can we trust it?\" tab.",
+    gPolMore: "See the numbers", gPolWater: "the lakes", gPolCrops: "the crops", gPolFlood: "the flood",
     rClimate: "Weather",
   },
 
@@ -129,6 +131,8 @@ export const RIVER = {
     evdBefore: "{n} пролётов до", evdAfter: "{n} пролётов после",
     evdHint: "Карта сравнивает среднее всех пролётов до паводка со средним после него. Нажмите на пролёт, чтобы увидеть его отдельно.",
     pairNote: "Самые ясные фото долины до и после паводка {ev} (NASA HLS, поиск с марта по ноябрь); фото муссона рядом с датами радара почти все в облаках.", pairOff: "показать фото рядом с датами радара", cuPhotos: "Настоящие фото",
+    gPol: "Коротко: **{pol}**. Радар посылает волну «плашмя» и слушает двумя способами. **HH** слышит волну, вернувшуюся так же: он реагирует на гладкие поверхности — воду и грязь. **HV** слышит ту часть, которую растения поворачивают вбок: он реагирует на листья и стебли. Для {what} изменение лучше всего видно в {pol}. Измеренные числа — во вкладке «Можно ли верить?».",
+    gPolMore: "Посмотреть числа", gPolWater: "озёр", gPolCrops: "посевов", gPolFlood: "паводка",
     rClimate: "Погода",
   },
 
@@ -194,6 +198,8 @@ export const RIVER = {
     evdBefore: "{n} гузариш пеш", evdAfter: "{n} гузариш пас",
     evdHint: "Харита миёнаи ҳамаи гузаришҳои пеш аз обхезиро бо миёнаи пас аз он муқоиса мекунад. Барои дидани як гузариш онро пахш кунед.",
     pairNote: "Софтарин аксҳои водӣ пеш ва пас аз обхезии {ev} (NASA HLS, ҷустуҷӯ аз март то ноябр); аксҳои муссон дар наздикии санаҳои радар қариб ҳама абрнок мебошанд.", pairOff: "аксҳои наздик ба санаҳои радарро нишон диҳед", cuPhotos: "Аксҳои воқеӣ",
+    gPol: "Ҷавоби кӯтоҳ: **{pol}**. Радар мавҷро «ҳамвор» мефиристад ва бо ду роҳ гӯш мекунад. **HH** мавҷеро мешунавад, ки ҳамон тавр бармегардад: ба сатҳҳои ҳамвор, мисли об ва лой, ҳассос аст. **HV** қисмеро мешунавад, ки растаниҳо ба паҳлӯ мегардонанд: ба барг ва поя ҳассос аст. Барои {what} тағйирот дар {pol} беҳтар намоён аст. Рақамҳои ченшуда дар ҷадвалаи «Оё бовар кардан мумкин?» ҳастанд.",
+    gPolMore: "Рақамҳоро бинед", gPolWater: "кӯлҳо", gPolCrops: "зироат", gPolFlood: "обхезӣ",
     rClimate: "Обу ҳаво",
   },
 };
