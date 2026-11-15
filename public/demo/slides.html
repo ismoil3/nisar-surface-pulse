@@ -6,152 +6,141 @@
 <title>NISAR Surface Pulse — Team CIFARSOFT — demo slides</title>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;800&family=Onest:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
-  :root { --ink: #04060b; --card: #0d1426; --line: rgba(160,176,220,.18); --txt: #eef2ff; --mut: #9aa6c8; --sig: #c6ff3d; --cy: #3ce1ff; --or: #ff8a3d; }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; background: #000; color: var(--txt); font: 22px/1.4 Onest, system-ui, sans-serif; }
-  .slide { width: 1280px; height: 720px; margin: 16px auto; background: var(--ink); position: relative; overflow: hidden; padding: 54px 64px; display: flex; flex-direction: column; }
-  h1, h2 { font-family: Geologica, Onest, sans-serif; margin: 0; letter-spacing: -.01em; }
-  h1 { font-size: 84px; line-height: 1; font-weight: 800; }
-  h2 { font-size: 46px; line-height: 1.05; font-weight: 800; margin-bottom: 18px; }
+  :root { --ink: #04060b; --txt: #eef2ff; --mut: #a3aecd; --sig: #c6ff3d; --cy: #3ce1ff; --or: #ff8a3d; --bl: #7aa7ff; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: #000; color: var(--txt); font: 24px/1.35 Onest, system-ui, sans-serif; }
+  .slide { width: 1280px; height: 720px; margin: 16px auto; background: var(--ink); position: relative; overflow: hidden; }
+  .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .shade { position: absolute; inset: 0; }
+  .in { position: absolute; inset: 0; padding: 56px 68px; display: flex; flex-direction: column; }
+  h1, h2, .num { font-family: Geologica, Onest, sans-serif; letter-spacing: -.015em; }
+  h1 { font-size: 112px; line-height: .95; font-weight: 800; }
+  h2 { font-size: 60px; line-height: 1; font-weight: 800; }
   em { font-style: normal; color: var(--sig); }
-  .k { color: var(--sig); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; margin: 0 0 12px; }
-  p { margin: 0 0 12px; } .mut { color: var(--mut); } .sm { font-size: 17px; }
-  .foot { position: absolute; left: 64px; right: 64px; bottom: 22px; display: flex; justify-content: space-between; font-size: 13px; color: var(--mut); }
-  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; flex: 1; min-height: 0; align-items: center; }
-  .pic { border-radius: 18px; border: 1px solid var(--line); overflow: hidden; background: #000; }
-  .pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  ul { margin: 0; padding-left: 22px; } li { margin-bottom: 9px; }
-  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; flex: 1; min-height: 0; }
-  .st { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
-  .st img { width: 100%; height: 270px; object-fit: cover; object-position: 20% 40%; }
-  .st div { padding: 14px 16px; } .st b { font: 800 40px/1 Geologica, sans-serif; display: block; }
-  .st small { color: var(--mut); font-size: 15px; display: block; margin-top: 6px; line-height: 1.3; }
-  .st span { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--sig); }
-  .team { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 26px; }
-  .team div { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--card); }
-  .team b { display: block; font-size: 21px; } .team small { color: var(--mut); font-size: 14px; }
-  .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1; }
-  .box { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; font-size: 18px; }
-  .box h3 { margin: 0 0 8px; font: 700 22px Geologica, sans-serif; color: var(--cy); }
-  .warn { border-color: #ff8a3d66; } .warn h3 { color: var(--or); }
-  .glow { position: absolute; inset: 0; background: radial-gradient(60% 80% at 80% 110%, #c6ff3d26, transparent 70%); pointer-events: none; }
+  .k { color: var(--sig); font-size: 16px; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+  .mut { color: var(--mut); } .sm { font-size: 18px; }
+  .pg { position: absolute; right: 30px; bottom: 20px; font-size: 13px; color: #ffffff80; }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chips span { padding: 9px 16px; border-radius: 999px; background: #04060bb0; border: 1px solid #ffffff3d; font-size: 18px; backdrop-filter: blur(6px); }
+  .chips b { font-weight: 700; } .chips i { font-style: normal; color: var(--mut); }
+  .tiles { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .tile { position: relative; overflow: hidden; border-right: 2px solid var(--ink); }
+  .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .tile .ov { position: absolute; inset: 0; background: linear-gradient(180deg, #04060b99 0, transparent 30%, transparent 42%, #04060bf2 72%); }
+  .tile .tx { position: absolute; left: 22px; right: 18px; bottom: 26px; }
+  .tile .tag { position: absolute; left: 22px; top: 96px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+  .num { font-size: 62px; font-weight: 800; line-height: 1; white-space: nowrap; }
+  .num small { font-size: 26px; font-weight: 600; margin-left: 4px; }
+  .tile p { font-size: 17px; line-height: 1.3; color: #d6dcf0; margin-top: 8px; }
+  .flow { display: grid; grid-template-columns: 1fr 60px 1fr 60px 1fr; align-items: stretch; margin-top: 44px; }
+  .step { border: 1px solid #ffffff2a; border-radius: 24px; padding: 30px 28px 34px; background: linear-gradient(180deg, #101a33, #0a0f1c); }
+  .step .n { font: 800 20px Geologica; color: var(--ink); background: var(--sig); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 14px; }
+  .step h3 { font: 800 30px/1.05 Geologica; margin-bottom: 10px; }
+  .step p { font-size: 19px; color: #cfd6ec; margin-bottom: 8px; }
+  .arr { display: grid; place-items: center; font-size: 40px; color: var(--sig); }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+  .fact { border-radius: 24px; padding: 30px 28px 36px; background: linear-gradient(180deg, #101a33, #0a0f1c); border: 1px solid #ffffff2a; }
+  .fact .num { font-size: 84px; } .fact h3 { font: 700 24px Geologica; margin: 10px 0 8px; } .fact p { font-size: 19px; color: #cfd6ec; }
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; margin-top: 26px; }
+  .who div { font-size: 22px; } .who b { color: var(--sig); }
   @page { size: 1280px 720px; margin: 0; }
-  @media print { html, body { background: var(--ink); } .slide { margin: 0; page-break-after: always; break-after: page; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  @media print { html, body { background: var(--ink); } .slide { margin: 0; break-after: page; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
   @media screen and (max-width: 1300px) { .slide { zoom: .6; } }
   @media screen and (max-width: 800px) { .slide { zoom: .28; } }
 </style>
 </head>
 <body>
 
-<section class="slide"><div class="glow"></div>
-  <p class="k">NASA Space Apps Challenge 2026 · Challenge: Dancing with the SARs</p>
-  <h1>NISAR<br /><em>Surface Pulse</em></h1>
-  <p style="font-size:30px;margin-top:22px;max-width:900px">Radar from space, turned into a story anyone can read: <b>what changed, where and why.</b></p>
-  <p class="mut">Team <b style="color:#fff">CIFARSOFT</b> · Tajikistan · Live app: ismoil3.github.io/nisar-surface-pulse</p>
-  <div class="team">
-    <div><b>Amsurur</b><small>Team lead</small></div>
-    <div><b>Murodbek</b><small>Data lead (NISAR, InSAR)</small></div>
-    <div><b>Ismoil</b><small>Frontend, map</small></div>
-    <div><b>Abuumar</b><small>Data support, content</small></div>
-    <div><b>Ahmad</b><small>Video, design</small></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>1 / 7</span></div>
-</section>
-
 <section class="slide">
-  <p class="k">The problem and our idea</p>
-  <h2>Radar sees through cloud and night.<br />Most people cannot read it.</h2>
-  <div class="two">
-    <div>
-      <ul>
-        <li>NISAR (NASA–ISRO) passes every 12 days and measures the ground with a 24 cm radar wave.</li>
-        <li>Its pictures are grey, grainy and full of jargon: dB, HH, HV, backscatter.</li>
-        <li><b>Our app answers three plain questions</b> for each place: what changed, why, and can we trust it.</li>
-        <li>Four real stories, in <b>English, Russian and Tajik</b>, on a phone or a laptop.</li>
-      </ul>
+  <img class="bg" src="../data/vakhsh_cascade/2026-09-07_RGB.webp" alt="" />
+  <div class="shade" style="background: linear-gradient(90deg, #04060bf5 0, #04060bd0 46%, #04060b40 100%)"></div>
+  <div class="in">
+    <p class="k">NASA Space Apps Challenge 2026 · Dancing with the SARs</p>
+    <h1 style="margin-top:40px">NISAR<br /><em>Surface Pulse</em></h1>
+    <p style="font-size:32px;margin-top:26px;max-width:720px">Radar from space, told as a story anyone can read.</p>
+    <div style="margin-top:auto">
+      <p class="mut sm" style="margin-bottom:10px">Team <b style="color:#fff">CIFARSOFT</b> · Tajikistan</p>
+      <div class="chips"><span><b>Amsurur</b> <i>team lead</i></span><span><b>Murodbek</b> <i>data lead</i></span><span><b>Ismoil</b> <i>frontend, map</i></span><span><b>Abuumar</b> <i>data, content</i></span><span><b>Ahmad</b> <i>video, design</i></span></div>
     </div>
-    <div class="pic" style="height:400px"><img src="s1.jpg" alt="Landing page: a radar beam sweeps the clouds away" style="object-position: left center" /></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>2 / 7</span></div>
+  </div><span class="pg">1 / 7</span>
 </section>
 
 <section class="slide">
-  <p class="k">Our signature view</p>
-  <h2>One river, one pulse</h2>
-  <div class="two" style="grid-template-columns: 5fr 7fr">
-    <div>
-      <p>The Vakhsh river seen from the side, <b>257 km</b> from the mountains to the cotton fields.</p>
-      <ul>
-        <li>One timeline moves the Rogun lake level, the Nurek lake area and the crop signal together.</li>
-        <li>Mountain temperature from NASA POWER shows the melt that feeds the river.</li>
-        <li>Every satellite pass is a heartbeat you can hear.</li>
-      </ul>
-      <p class="mut sm">River line: OpenStreetMap. Heights: Copernicus DEM. Lakes and fields: NISAR.</p>
+  <img class="bg" src="../data/nepal/closeup/after.webp" alt="" style="object-position: 60% 60%; left: 50%; width: 50%" />
+  <div class="shade" style="background: linear-gradient(90deg, #04060b 50%, #04060b80 62%, transparent 80%)"></div>
+  <div class="in" style="justify-content:center">
+    <p class="k">The problem</p>
+    <h2 style="max-width:640px">Radar sees through cloud and night.<br /><span class="mut">People can't read radar.</span></h2>
+    <p style="max-width:560px;margin-top:26px">NISAR measures the ground every 12 days. Its pictures are grey, grainy and full of jargon.</p>
+    <p style="max-width:560px;margin-top:22px;font-size:30px;font-weight:700">We answer three plain questions:<br /><em>What changed? Where? Why?</em></p>
+  </div>
+  <div class="chips" style="position:absolute;right:40px;bottom:54px"><span>dB</span><span>HH / HV</span><span>backscatter</span><span>speckle</span></div>
+  <span class="pg">2 / 7</span>
+</section>
+
+<section class="slide">
+  <div class="in">
+    <p class="k">Our signature view</p>
+    <h2>One river, <em>one pulse</em></h2>
+    <p style="margin-top:12px;max-width:1060px" class="mut">The Vakhsh from the side, 257 km: one timeline moves the Rogun level, the Nurek area and the cotton fields together. You can even hear it beat.</p>
+    <img src="river.jpg" alt="Side view of the Vakhsh river with the Rogun and Nurek lakes and the fields" style="margin-top:22px;width:100%;border-radius:20px;border:1px solid #ffffff2a;flex:1;min-height:0;object-fit:contain;object-position:center top;background:#0a1226" />
+  </div><span class="pg">3 / 7</span>
+</section>
+
+<section class="slide">
+  <div class="tiles">
+    <div class="tile"><img src="../data/vakhsh_cascade/2026-10-13_RGB.webp" alt="" style="object-position: 20% 85%" /><div class="ov"></div><span class="tag" style="color:var(--cy)">Water</span><div class="tx"><div class="num" style="color:var(--cy)">+21.5<small>km²</small></div><p>Rogun and Nurek lakes, Tajikistan, June → October 2026</p></div></div>
+    <div class="tile"><img src="../data/vakhsh_cascade/motion/coherence.png" alt="" style="image-rendering:pixelated;object-position: 70% 30%" /><div class="ov"></div><span class="tag" style="color:var(--or)">Ground movement</span><div class="tx"><div class="num" style="color:var(--or)">+11.6<small>cm</small></div><p>One slope near the Rogun dam crept in 3.5 months; the dam is stable (InSAR, preliminary)</p></div></div>
+    <div class="tile"><img src="../data/vakhsh/2026-09-07_RGB.webp" alt="" /><div class="ov"></div><span class="tag" style="color:var(--sig)">Crops</span><div class="tx"><div class="num" style="color:var(--sig)">+1.3<small>dB</small></div><p>Stronger plant echo over 696 km² of cotton fields as the crops grew</p></div></div>
+    <div class="tile" style="border:0"><img src="../data/nepal/closeup/after.webp" alt="" style="object-position: 62% 62%; transform: scale(2.2)" /><img src="../data/nepal/closeup/flood.png" alt="" style="object-position: 62% 62%; transform: scale(2.2)" /><div class="ov"></div><span class="tag" style="color:var(--bl)">Flood</span><div class="tx"><div class="num" style="color:var(--bl)">1.9<small>km²</small></div><p>River channel changed by the 26 Aug flood in Nepal, mapped under monsoon cloud</p></div></div>
+  </div>
+  <div class="in" style="pointer-events:none;padding-top:34px"><h2 style="font-size:44px">Four stories, measured with NISAR</h2></div>
+  <span class="pg">4 / 7</span>
+</section>
+
+<section class="slide">
+  <div class="in">
+    <p class="k">How it works</p>
+    <h2>Real data in, plain answers out</h2>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><h3>NASA and partner data</h3><p><b>NISAR</b> radar (GCOV, GUNW), 35 pictures to 11 Nov 2026</p><p><b>NASA HLS</b> photos, <b>NASA POWER</b> weather</p><p class="mut sm">ISRO · ESA Copernicus DEM · OpenStreetMap</p></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">2</div><h3>Open, repeatable scripts</h3><p>Lakes, crops, flood and movement follow written rules.</p><p>Each script first reproduces a known date and prints the agreement.</p></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">3</div><h3>A web app for everyone</h3><p>Guide, time-lapse, before / after, place-by-place answers, printable one-page reports.</p><p class="mut sm">English · Русский · Тоҷикӣ · MIT licence</p></div>
     </div>
-    <div class="pic" style="height:420px"><img src="s2.jpg" alt="Side view of the Vakhsh river with two lakes and the fields" style="object-fit: contain; object-position: center bottom; background:#04060b" /></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>3 / 7</span></div>
+  </div><span class="pg">5 / 7</span>
 </section>
 
 <section class="slide">
-  <p class="k">Four kinds of surface change, measured</p>
-  <h2>Four stories from NISAR data</h2>
-  <div class="grid4">
-    <div class="st"><img src="s3.jpg" alt="" /><div><span>Water</span><b style="color:var(--cy)">+21.5 km²</b><small>Rogun and Nurek lakes, Tajikistan, 27 Jun → 13 Oct 2026. Rogun level about +13 m (estimate, ±10 m).</small></div></div>
-    <div class="st"><img src="s4.jpg" alt="" style="object-position: 30% 30%" /><div><span>Ground movement</span><b style="color:var(--or)">+11.6 cm</b><small>One slope near Rogun crept along the radar's line of sight in 3.5 months; the dam stays within ±3 cm (InSAR, preliminary).</small></div></div>
-    <div class="st"><img src="s5.jpg" alt="" /><div><span>Crops</span><b style="color:var(--sig)">+1.3 dB</b><small>Plant echo over 696 km² of Vakhsh valley fields rose from June to September, as expected when crops grow.</small></div></div>
-    <div class="st"><img src="s6.jpg" alt="" style="object-position: 45% 60%" /><div><span>Flood</span><b style="color:#7aa7ff">1.9 km²</b><small>River channel changed after the 26 Aug 2026 flood in Nepal, mapped under monsoon cloud; about 2.5× a quiet test.</small></div></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>4 / 7</span></div>
-</section>
-
-<section class="slide">
-  <p class="k">How it works</p>
-  <h2>Real NASA data, reproducible, in the browser</h2>
-  <div class="cols3">
-    <div class="box"><h3>Data</h3>
-      <ul><li><b>NISAR L2 GCOV</b> (HH, HV) and <b>GUNW</b> interferograms, ASF DAAC: 35 pictures to 11 Nov 2026</li><li><b>NASA HLS</b> photos (GIBS), <b>NASA POWER</b> weather</li><li>Partners and others: ISRO (NISAR), ESA Copernicus DEM, OpenStreetMap</li></ul></div>
-    <div class="box"><h3>Method</h3>
-      <ul><li>Open Python scripts cut each pass to a 60 m grid; lakes, farmland and flood maps follow written rules</li><li>Each script first reproduces an existing date and prints the agreement</li><li>Change maps and place-by-place answers are computed live in the browser</li></ul></div>
-    <div class="box"><h3>App</h3>
-      <ul><li>React, MapLibre, Chart.js; static site on GitHub Pages; MIT licence</li><li>Guide, before/after slider, time-lapse, dashboard with alerts</li><li>One-page printable report per story for people who decide</li></ul></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>5 / 7</span></div>
-</section>
-
-<section class="slide">
-  <p class="k">Scientific validity</p>
-  <h2>Honest about what the radar can and cannot say</h2>
-  <div class="cols3">
-    <div class="box"><h3>Checked</h3>
-      <ul><li>Pictures match ASF's own browse images of the same passes</li><li>Rogun confirmed from a second orbit</li><li>Flood compared with a quiet test before the event</li><li>Processing versions tracked: experimental, PROVISIONAL, VALIDATED</li></ul></div>
-    <div class="box warn"><h3>Flagged, not hidden</h3>
-      <ul><li>Nurek's last value follows rain: probably rough water, not less water</li><li>"Harvested" fields are a range, 28–54 km², candidates only</li><li>Most brightening in Nepal is the season, not the flood</li><li>The creeping slope needs a second orbit and a field check</li></ul></div>
-    <div class="box"><h3>Answers the challenge</h3>
-      <ul><li><b>Why:</b> melt, dams, irrigation, flood deposits, with weather data</li><li><b>Which polarization:</b> HH for water and mud, HV for plants, measured</li><li><b>What radar misses:</b> shadow, layover, wind, hand-picked cotton</li></ul></div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>6 / 7</span></div>
-</section>
-
-<section class="slide"><div class="glow"></div>
-  <p class="k">Impact and next steps</p>
-  <h2>Our river, our mountains, open to everyone</h2>
-  <div class="two">
-    <div>
-      <ul>
-        <li><b>Water and energy managers:</b> follow both lakes every 12 days, at night and through cloud.</li>
-        <li><b>Decision-makers:</b> a slope to inspect near the country's largest dam project.</li>
-        <li><b>Emergency teams:</b> where a flood changed the valley, without waiting for clear sky.</li>
-        <li><b>Teachers and the public:</b> radar explained in Tajik, Russian and English.</li>
-      </ul>
-      <p class="mut sm" style="margin-top:14px">Next: new passes added automatically, more rivers of Central Asia, confirmation of the slope from a second orbit.</p>
+  <div class="in">
+    <p class="k">Scientific validity</p>
+    <h2>Honest about what radar <em>can't</em> say</h2>
+    <div class="three">
+      <div class="fact"><div class="num" style="color:var(--cy)">2</div><h3>orbits agree</h3><p>Rogun's rise is confirmed from a second NISAR orbit, and our pictures match ASF's own browse images.</p></div>
+      <div class="fact"><div class="num" style="color:var(--bl)">2.5×</div><h3>more than a quiet test</h3><p>Every change is compared with dates when nothing happened. In Nepal most brightening is the season, so we do not count it.</p></div>
+      <div class="fact"><div class="num" style="color:var(--or)">28–54</div><h3>km², a range, not a claim</h3><p>Harvested fields are candidates only. A lake value after rain is flagged as rough water. The slope needs a field check.</p></div>
     </div>
-    <div>
-      <div class="box" style="margin-bottom:14px"><h3>Try it</h3><p style="margin:0">Live: <b>ismoil3.github.io/nisar-surface-pulse</b><br />Code: github.com/ismoil3/nisar-surface-pulse (MIT)</p></div>
-      <div class="box"><h3>Use of AI</h3><p style="margin:0" class="sm">We used Claude (Anthropic) as a coding and writing assistant. No data, measurement or picture was generated by AI: every number comes from NASA and partner data through scripts in the repository.</p></div>
+  </div><span class="pg">6 / 7</span>
+</section>
+
+<section class="slide">
+  <img class="bg" src="../data/vakhsh/2026-09-07_RGB.webp" alt="" style="opacity:.35" />
+  <div class="shade" style="background: radial-gradient(70% 90% at 80% 110%, #c6ff3d33, transparent 70%), linear-gradient(90deg, #04060bf0, #04060bb0)"></div>
+  <div class="in">
+    <p class="k">Impact</p>
+    <h2>Our river, our mountains,<br /><em>open to everyone</em></h2>
+    <div class="who">
+      <div><b>Water and energy managers</b><br />both lakes every 12 days, through cloud</div>
+      <div><b>Decision-makers</b><br />a slope to inspect near the largest dam project</div>
+      <div><b>Emergency teams</b><br />where a flood changed a valley, without clear sky</div>
+      <div><b>Teachers and the public</b><br />radar explained in three languages</div>
     </div>
-  </div>
-  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT · Amsurur, Murodbek, Ismoil, Abuumar, Ahmad</span><span>7 / 7</span></div>
+    <div style="margin-top:auto">
+      <p style="font-size:26px;font-weight:700">ismoil3.github.io/nisar-surface-pulse</p>
+      <p class="mut sm" style="margin-top:6px;max-width:1000px">Use of AI: Claude (Anthropic) assisted with code and text. No data, measurement or image was generated by AI. Team CIFARSOFT: Amsurur, Murodbek, Ismoil, Abuumar, Ahmad.</p>
+    </div>
+  </div><span class="pg">7 / 7</span>
 </section>
 
 </body>
