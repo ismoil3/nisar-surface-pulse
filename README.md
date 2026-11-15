@@ -14,7 +14,9 @@ The app tells four stories from NISAR L-band radar, in English, Russian and Taji
 
 Built by team **CIFARSOFT** (Tajikistan) for the 2026 NASA Space Apps Challenge, challenge "Dancing with the SARs".
 
-**Team:** _(add member names and roles before submitting)_
+**Team:** Amsurur (team lead), Murodbek (data lead: NISAR, InSAR), Ismoil (frontend, map), Abuumar (data support, content), Ahmad (video, design).
+
+**Demo:** [30-second video](https://ismoil3.github.io/nisar-surface-pulse/demo/demo.mp4) (screen recording of the app with English captions) · [7 slides](https://ismoil3.github.io/nisar-surface-pulse/demo/slides.html) ([PDF](https://ismoil3.github.io/nisar-surface-pulse/demo/slides.pdf))
 
 ## How the app answers the challenge
 

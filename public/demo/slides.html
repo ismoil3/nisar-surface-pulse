@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NISAR Surface Pulse — Team CIFARSOFT — demo slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;800&family=Onest:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --ink: #04060b; --card: #0d1426; --line: rgba(160,176,220,.18); --txt: #eef2ff; --mut: #9aa6c8; --sig: #c6ff3d; --cy: #3ce1ff; --or: #ff8a3d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #000; color: var(--txt); font: 22px/1.4 Onest, system-ui, sans-serif; }
+  .slide { width: 1280px; height: 720px; margin: 16px auto; background: var(--ink); position: relative; overflow: hidden; padding: 54px 64px; display: flex; flex-direction: column; }
+  h1, h2 { font-family: Geologica, Onest, sans-serif; margin: 0; letter-spacing: -.01em; }
+  h1 { font-size: 84px; line-height: 1; font-weight: 800; }
+  h2 { font-size: 46px; line-height: 1.05; font-weight: 800; margin-bottom: 18px; }
+  em { font-style: normal; color: var(--sig); }
+  .k { color: var(--sig); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; margin: 0 0 12px; }
+  p { margin: 0 0 12px; } .mut { color: var(--mut); } .sm { font-size: 17px; }
+  .foot { position: absolute; left: 64px; right: 64px; bottom: 22px; display: flex; justify-content: space-between; font-size: 13px; color: var(--mut); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; flex: 1; min-height: 0; align-items: center; }
+  .pic { border-radius: 18px; border: 1px solid var(--line); overflow: hidden; background: #000; }
+  .pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  ul { margin: 0; padding-left: 22px; } li { margin-bottom: 9px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; flex: 1; min-height: 0; }
+  .st { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+  .st img { width: 100%; height: 270px; object-fit: cover; object-position: 20% 40%; }
+  .st div { padding: 14px 16px; } .st b { font: 800 40px/1 Geologica, sans-serif; display: block; }
+  .st small { color: var(--mut); font-size: 15px; display: block; margin-top: 6px; line-height: 1.3; }
+  .st span { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--sig); }
+  .team { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 26px; }
+  .team div { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--card); }
+  .team b { display: block; font-size: 21px; } .team small { color: var(--mut); font-size: 14px; }
+  .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; font-size: 18px; }
+  .box h3 { margin: 0 0 8px; font: 700 22px Geologica, sans-serif; color: var(--cy); }
+  .warn { border-color: #ff8a3d66; } .warn h3 { color: var(--or); }
+  .glow { position: absolute; inset: 0; background: radial-gradient(60% 80% at 80% 110%, #c6ff3d26, transparent 70%); pointer-events: none; }
+  @page { size: 1280px 720px; margin: 0; }
+  @media print { html, body { background: var(--ink); } .slide { margin: 0; page-break-after: always; break-after: page; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  @media screen and (max-width: 1300px) { .slide { zoom: .6; } }
+  @media screen and (max-width: 800px) { .slide { zoom: .28; } }
+</style>
+</head>
+<body>
+
+<section class="slide"><div class="glow"></div>
+  <p class="k">NASA Space Apps Challenge 2026 · Challenge: Dancing with the SARs</p>
+  <h1>NISAR<br /><em>Surface Pulse</em></h1>
+  <p style="font-size:30px;margin-top:22px;max-width:900px">Radar from space, turned into a story anyone can read: <b>what changed, where and why.</b></p>
+  <p class="mut">Team <b style="color:#fff">CIFARSOFT</b> · Tajikistan · Live app: ismoil3.github.io/nisar-surface-pulse</p>
+  <div class="team">
+    <div><b>Amsurur</b><small>Team lead</small></div>
+    <div><b>Murodbek</b><small>Data lead (NISAR, InSAR)</small></div>
+    <div><b>Ismoil</b><small>Frontend, map</small></div>
+    <div><b>Abuumar</b><small>Data support, content</small></div>
+    <div><b>Ahmad</b><small>Video, design</small></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>1 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="k">The problem and our idea</p>
+  <h2>Radar sees through cloud and night.<br />Most people cannot read it.</h2>
+  <div class="two">
+    <div>
+      <ul>
+        <li>NISAR (NASA–ISRO) passes every 12 days and measures the ground with a 24 cm radar wave.</li>
+        <li>Its pictures are grey, grainy and full of jargon: dB, HH, HV, backscatter.</li>
+        <li><b>Our app answers three plain questions</b> for each place: what changed, why, and can we trust it.</li>
+        <li>Four real stories, in <b>English, Russian and Tajik</b>, on a phone or a laptop.</li>
+      </ul>
+    </div>
+    <div class="pic" style="height:400px"><img src="s1.jpg" alt="Landing page: a radar beam sweeps the clouds away" style="object-position: left center" /></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>2 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="k">Our signature view</p>
+  <h2>One river, one pulse</h2>
+  <div class="two" style="grid-template-columns: 5fr 7fr">
+    <div>
+      <p>The Vakhsh river seen from the side, <b>257 km</b> from the mountains to the cotton fields.</p>
+      <ul>
+        <li>One timeline moves the Rogun lake level, the Nurek lake area and the crop signal together.</li>
+        <li>Mountain temperature from NASA POWER shows the melt that feeds the river.</li>
+        <li>Every satellite pass is a heartbeat you can hear.</li>
+      </ul>
+      <p class="mut sm">River line: OpenStreetMap. Heights: Copernicus DEM. Lakes and fields: NISAR.</p>
+    </div>
+    <div class="pic" style="height:420px"><img src="s2.jpg" alt="Side view of the Vakhsh river with two lakes and the fields" style="object-fit: contain; object-position: center bottom; background:#04060b" /></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>3 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="k">Four kinds of surface change, measured</p>
+  <h2>Four stories from NISAR data</h2>
+  <div class="grid4">
+    <div class="st"><img src="s3.jpg" alt="" /><div><span>Water</span><b style="color:var(--cy)">+21.5 km²</b><small>Rogun and Nurek lakes, Tajikistan, 27 Jun → 13 Oct 2026. Rogun level about +13 m (estimate, ±10 m).</small></div></div>
+    <div class="st"><img src="s4.jpg" alt="" style="object-position: 30% 30%" /><div><span>Ground movement</span><b style="color:var(--or)">+11.6 cm</b><small>One slope near Rogun crept along the radar's line of sight in 3.5 months; the dam stays within ±3 cm (InSAR, preliminary).</small></div></div>
+    <div class="st"><img src="s5.jpg" alt="" /><div><span>Crops</span><b style="color:var(--sig)">+1.3 dB</b><small>Plant echo over 696 km² of Vakhsh valley fields rose from June to September, as expected when crops grow.</small></div></div>
+    <div class="st"><img src="s6.jpg" alt="" style="object-position: 45% 60%" /><div><span>Flood</span><b style="color:#7aa7ff">1.9 km²</b><small>River channel changed after the 26 Aug 2026 flood in Nepal, mapped under monsoon cloud; about 2.5× a quiet test.</small></div></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>4 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="k">How it works</p>
+  <h2>Real NASA data, reproducible, in the browser</h2>
+  <div class="cols3">
+    <div class="box"><h3>Data</h3>
+      <ul><li><b>NISAR L2 GCOV</b> (HH, HV) and <b>GUNW</b> interferograms, ASF DAAC: 35 pictures to 11 Nov 2026</li><li><b>NASA HLS</b> photos (GIBS), <b>NASA POWER</b> weather</li><li>Partners and others: ISRO (NISAR), ESA Copernicus DEM, OpenStreetMap</li></ul></div>
+    <div class="box"><h3>Method</h3>
+      <ul><li>Open Python scripts cut each pass to a 60 m grid; lakes, farmland and flood maps follow written rules</li><li>Each script first reproduces an existing date and prints the agreement</li><li>Change maps and place-by-place answers are computed live in the browser</li></ul></div>
+    <div class="box"><h3>App</h3>
+      <ul><li>React, MapLibre, Chart.js; static site on GitHub Pages; MIT licence</li><li>Guide, before/after slider, time-lapse, dashboard with alerts</li><li>One-page printable report per story for people who decide</li></ul></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>5 / 7</span></div>
+</section>
+
+<section class="slide">
+  <p class="k">Scientific validity</p>
+  <h2>Honest about what the radar can and cannot say</h2>
+  <div class="cols3">
+    <div class="box"><h3>Checked</h3>
+      <ul><li>Pictures match ASF's own browse images of the same passes</li><li>Rogun confirmed from a second orbit</li><li>Flood compared with a quiet test before the event</li><li>Processing versions tracked: experimental, PROVISIONAL, VALIDATED</li></ul></div>
+    <div class="box warn"><h3>Flagged, not hidden</h3>
+      <ul><li>Nurek's last value follows rain: probably rough water, not less water</li><li>"Harvested" fields are a range, 28–54 km², candidates only</li><li>Most brightening in Nepal is the season, not the flood</li><li>The creeping slope needs a second orbit and a field check</li></ul></div>
+    <div class="box"><h3>Answers the challenge</h3>
+      <ul><li><b>Why:</b> melt, dams, irrigation, flood deposits, with weather data</li><li><b>Which polarization:</b> HH for water and mud, HV for plants, measured</li><li><b>What radar misses:</b> shadow, layover, wind, hand-picked cotton</li></ul></div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT</span><span>6 / 7</span></div>
+</section>
+
+<section class="slide"><div class="glow"></div>
+  <p class="k">Impact and next steps</p>
+  <h2>Our river, our mountains, open to everyone</h2>
+  <div class="two">
+    <div>
+      <ul>
+        <li><b>Water and energy managers:</b> follow both lakes every 12 days, at night and through cloud.</li>
+        <li><b>Decision-makers:</b> a slope to inspect near the country's largest dam project.</li>
+        <li><b>Emergency teams:</b> where a flood changed the valley, without waiting for clear sky.</li>
+        <li><b>Teachers and the public:</b> radar explained in Tajik, Russian and English.</li>
+      </ul>
+      <p class="mut sm" style="margin-top:14px">Next: new passes added automatically, more rivers of Central Asia, confirmation of the slope from a second orbit.</p>
+    </div>
+    <div>
+      <div class="box" style="margin-bottom:14px"><h3>Try it</h3><p style="margin:0">Live: <b>ismoil3.github.io/nisar-surface-pulse</b><br />Code: github.com/ismoil3/nisar-surface-pulse (MIT)</p></div>
+      <div class="box"><h3>Use of AI</h3><p style="margin:0" class="sm">We used Claude (Anthropic) as a coding and writing assistant. No data, measurement or picture was generated by AI: every number comes from NASA and partner data through scripts in the repository.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>NISAR Surface Pulse · Team CIFARSOFT · Amsurur, Murodbek, Ismoil, Abuumar, Ahmad</span><span>7 / 7</span></div>
+</section>
+
+</body>
+</html>
